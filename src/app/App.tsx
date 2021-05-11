@@ -1,7 +1,17 @@
-import React from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
+/**
+ * configure App elements and layout
+ *
+ * @summary configure App elements and layout
+ * @author Thuan <nguyenbuiducthuan@gmail.com>
+ *
+ * Created at     : 2021-05-11 15:34:58
+ * Last modified  : 2021-05-11 15:35:15
+ */
 
-import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
+import { StatusBar, useColorScheme } from 'react-native';
+
+import { NavigationContainer } from '@react-navigation/native';
 import RootStack from '../routes/stacks/RootStack';
 
 const App = () => {
