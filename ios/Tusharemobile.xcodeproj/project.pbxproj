@@ -106,6 +106,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		781CAE01B8DB462FB155E665 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +129,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				C8714E8813F3938EF7D15A0A /* Pods */,
+				781CAE01B8DB462FB155E665 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -145,7 +153,6 @@
 				BD96DC11EDE4256D21C88A86 /* Pods-Tusharemobile-TusharemobileTests.debug.xcconfig */,
 				7BF1F5EC06BD376564047522 /* Pods-Tusharemobile-TusharemobileTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
