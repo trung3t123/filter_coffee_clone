@@ -8,8 +8,10 @@ const ROUTES = {
   MODAL_STACK: 'MODAL_STACK',
   // HOME
   HOME: 'HOME',
+  BASE: 'BASE',
   PROFILE: 'PROFILE',
   CHART: 'CHART',
+  LOGIN: 'LOGIN',
   PROMO: 'PROMO',
 };
 

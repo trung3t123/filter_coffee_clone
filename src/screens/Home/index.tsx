@@ -1,12 +1,12 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import ROUTES, {ROUTES_TYPES} from 'src/routes/names';
+import { Text, TouchableOpacity, View } from 'react-native';
+import ROUTES, { ROUTES_TYPES } from 'routes/names';
 
-import {StackNavigationProp} from '@react-navigation/stack';
-import {MainStackParamsList} from 'src/routes/stacks/MainStack';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamsList } from 'routes/stacks/RootStack';
 
 type ProfileScreenNavigationProp = StackNavigationProp<
-  MainStackParamsList,
+  RootStackParamsList,
   ROUTES_TYPES.HOME
 >;
 
@@ -14,7 +14,7 @@ type PropTypes = {
   navigation: ProfileScreenNavigationProp;
 };
 
-const Home: React.FC<PropTypes> = ({navigation}) => {
+const Home: React.FC<PropTypes> = ({ navigation }) => {
   return (
     <View
       style={{
@@ -27,9 +27,9 @@ const Home: React.FC<PropTypes> = ({navigation}) => {
 
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate(ROUTES.PROMO);
+          navigation.navigate(ROUTES.LOGIN);
         }}>
-        <Text>show modal</Text>
+        <Text>LOGIN NOW</Text>
       </TouchableOpacity>
 
       <TouchableOpacity

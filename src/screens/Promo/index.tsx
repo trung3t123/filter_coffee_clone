@@ -1,12 +1,12 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import ROUTES from 'src/routes/names';
+import { Text, TouchableOpacity, View } from 'react-native';
+import ROUTES from 'routes/names';
 
 type PropTypes = {};
 
-const Promo: React.FC<PropTypes> = ({navigation}) => {
+const Promo: React.FC<PropTypes> = ({ navigation }) => {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Promo modal</Text>
 
       <TouchableOpacity
