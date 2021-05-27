@@ -20,14 +20,14 @@ type MetadataTypes = {
 function handleFunctionError(
   error: HttpException,
   title: string,
-  options: {
+  options?: {
     log?: boolean;
     breadCrumb?: boolean;
     notify?: boolean;
   },
-  metaData: Object,
+  metaData?: Object,
 ) {
-  const { log = true, breadCrumb = false, notify = false } = options || {};
+  const { log = true, breadCrumb = false, notify = false } = options ?? {};
   const errorTitle = typeof title === 'string' ? `${title} Error` : 'Error';
 
   if (log) {
@@ -35,7 +35,7 @@ function handleFunctionError(
   }
 
   if (breadCrumb) {
-    const _metaData: MetadataTypes = { ...(metaData || {}), error: {} };
+    const _metaData: MetadataTypes = { ...(metaData ?? {}), error: {} };
     if (typeof error.status === 'number') {
       _metaData.error.status = error.status;
     }

@@ -1,22 +1,30 @@
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import ROUTES from 'routes/names';
+import { logout } from 'data/session/actions';
+import { ActionDispatcher } from 'data/types';
+import React, { useCallback } from 'react';
+import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { useDispatch } from 'react-redux';
+import CommonStyles from 'theme/CommonStyles';
 
 type PropTypes = {
   navigation: any;
 };
 
-const Profile: React.FC<PropTypes> = ({ navigation }) => {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
+const Profile: React.FC<PropTypes> = ({}) => {
+  const dispatch: ActionDispatcher = useDispatch();
 
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate(ROUTES.CHART);
-        }}>
-        <Text>Click me</Text>
-      </TouchableOpacity>
+  const onPressLogout = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
+  return (
+    <View style={CommonStyles.container}>
+      <SafeAreaView style={CommonStyles.flex1}>
+        <Text>Profile Screen</Text>
+
+        <TouchableOpacity onPress={onPressLogout}>
+          <Text>Log out</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
     </View>
   );
 };

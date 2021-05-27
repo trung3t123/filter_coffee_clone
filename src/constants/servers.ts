@@ -1,4 +1,4 @@
 export const SERVERS = {
-  PRODUCTION: 'http://localhost:3000',
-  DEVELOPMENT: 'http://localhost:3000',
+  PRODUCTION: 'https://ancient-ravine-01251.herokuapp.com',
+  DEVELOPMENT: 'https://ancient-ravine-01251.herokuapp.com',
 };

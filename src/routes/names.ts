@@ -12,6 +12,7 @@ const ROUTES = {
   PROFILE: 'PROFILE',
   CHART: 'CHART',
   LOGIN: 'LOGIN',
+  REGISTER: 'REGISTER',
   PROMO: 'PROMO',
 };
 

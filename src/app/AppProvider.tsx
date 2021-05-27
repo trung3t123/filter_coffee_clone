@@ -11,27 +11,37 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
+PersistGate;
 
 import App from './App';
 import SetupAPI from 'api/config';
 import ErrorBoundary from './ErrorBoundary';
+import { configStore } from 'data/store';
+
+const { store, persistor } = configStore();
 
 class AppProvider extends React.PureComponent {
   UNSAFE_componentWillMount() {
     SetupAPI.init();
     SetupAPI.setBaseUrl();
-    SetupAPI.setupOnResponseInterceptors();
   }
 
   render() {
     return (
-      <PaperProvider>
-        <SafeAreaProvider>
-          <ErrorBoundary>
-            <App />
-          </ErrorBoundary>
-        </SafeAreaProvider>
-      </PaperProvider>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <PaperProvider>
+            <SafeAreaProvider>
+              <ErrorBoundary>
+                <App />
+              </ErrorBoundary>
+            </SafeAreaProvider>
+          </PaperProvider>
+        </PersistGate>
+      </Provider>
     );
   }
 }

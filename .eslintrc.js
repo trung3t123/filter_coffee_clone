@@ -13,4 +13,7 @@ module.exports = {
     __DEV__: true,
     GLOBAL: true,
   },
+  rules: {
+    // 'no-console': 'warn',
+  },
 };

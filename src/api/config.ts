@@ -12,8 +12,6 @@ import HttpException from 'utils/error-handler/error';
 const TIMEOUT = 1 * 30 * 1000;
 Axios.defaults.timeout = TIMEOUT;
 
-let axiosSetupCompleted = false;
-
 const l10n = {
   unknown_error: 'unknown error',
   no_internet_connection: 'no internet connection',
@@ -33,6 +31,7 @@ const init = () => {
     headers.Authorization = auth;
     console.log('-------- Axios INIT with AUTH');
   }
+
   Axios.defaults.headers = headers;
 };
 
@@ -144,97 +143,73 @@ const getErrorMessagesFromServer = (
   return getUnhandledErrorMessage(error);
 };
 
-const setupOnResponseInterceptors = (options?: {
-  onReceivedToken: Function;
-  onUnAuthorized: Function;
-  onBlacklist: Function;
-}) => {
-  const {
-    //
-    onReceivedToken = doNothing,
-    onUnAuthorized = doNothing,
-    onBlacklist = doNothing,
-  } = options ?? {};
-
-  /**
-   * avoid duplicated setup interceptors
-   */
-  if (axiosSetupCompleted) {
-    return;
+const onResponseSuccess = (response: AxiosResponse) => {
+  const authorization = response?.headers?.authorization ?? '';
+  if (authorization) {
+    setHeaderToken(authorization, `onReceivedToken:${response?.config.url}`);
+    // onReceivedToken(authorization);
   }
-  axiosSetupCompleted = true;
+  return response;
+};
 
-  /**
-   * handle success response
-   */
-  const onResponseSuccess = (response: AxiosResponse) => {
-    const authorization = response?.headers?.authorization ?? '';
-    if (authorization) {
-      setHeaderToken(authorization, `onReceivedToken:${response?.config.url}`);
-      onReceivedToken(authorization);
-    }
-    return response.data;
-  };
+/**
+ * handle error response
+ */
+const onResponseError = (error: AxiosError) => {
+  console.log('axios Error', { error });
+  let alertMessage = l10n.unknown_error;
 
-  /**
-   * handle error response
-   */
-  const onResponseError = (error: AxiosError) => {
-    console.log('axios Error', { error });
-    let alertMessage = l10n.unknown_error;
-
-    if (!error.response) {
-      switch (error.message) {
-        case 'Network Error':
-          alertMessage = l10n.no_internet_connection;
-          break;
-
-        default:
-          alertMessage = getUnhandledErrorMessage(error);
-          break;
-      }
-      throw new Error(alertMessage);
-    }
-
-    const {
-      response: { status, data },
-    } = error;
-    const errorDataFromServer = data || {};
-
-    /**
-     * handle error by http error code
-     */
-    switch (status) {
-      case HTTP_ERROR_CODES.UNAUTHORIZED:
-        ApiErrorHandler.handleApiResponseError(
-          error,
-          '-----> HTTP_ERROR_CODES.UNAUTHORIZED',
-          {
-            breadCrumb: true,
-            handler: doNothing,
-          },
-        );
-        onUnAuthorized({ url: error?.config?.url });
-        break;
-
-      case HTTP_ERROR_CODES.BLACKLIST:
-        onBlacklist();
+  if (!error.response) {
+    switch (error.message) {
+      case 'Network Error':
+        alertMessage = l10n.no_internet_connection;
         break;
 
       default:
-        alertMessage = getErrorMessagesFromServer(errorDataFromServer, error);
+        alertMessage = getUnhandledErrorMessage(error);
         break;
     }
+    throw new Error(alertMessage);
+  }
 
-    const finalError = new HttpException(status, alertMessage, {
-      response: error.response,
-    });
+  const {
+    response: { status, data },
+  } = error;
+  const errorDataFromServer = data || {};
 
-    throw finalError;
-  };
+  /**
+   * handle error by http error code
+   */
+  switch (status) {
+    case HTTP_ERROR_CODES.UNAUTHORIZED:
+      ApiErrorHandler.handleApiResponseError(
+        error,
+        '-----> HTTP_ERROR_CODES.UNAUTHORIZED',
+        {
+          breadCrumb: true,
+          handler: doNothing,
+        },
+      );
+      // onUnAuthorized({ url: error?.config?.url });
+      break;
 
-  Axios.interceptors.response.use(onResponseSuccess, onResponseError);
+    case HTTP_ERROR_CODES.BLACKLIST:
+      // onBlacklist();
+      break;
+
+    default:
+      alertMessage = getErrorMessagesFromServer(errorDataFromServer, error);
+      break;
+  }
+
+  const finalError = new HttpException(status, alertMessage, {
+    response: error.response,
+  });
+
+  throw finalError;
 };
+
+Axios.interceptors.response.use(onResponseSuccess, onResponseError);
 
 const SetupAPI = {
   init,
@@ -242,7 +217,6 @@ const SetupAPI = {
   clearBaseUrl,
   setHeaderToken,
   clearHeaderToken,
-  setupOnResponseInterceptors,
 };
 
 export default SetupAPI;
