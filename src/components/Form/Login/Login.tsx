@@ -24,6 +24,7 @@ import SessionSelector from 'data/session/selectors';
 import styles from '../styles';
 import FormTextInput from '../FormTextInput';
 import ROUTES from 'routes/names';
+import ActionButton from 'components/Theme/ActionButton';
 
 const FormSchema = Yup.object().shape({
   email: Yup.string()
@@ -161,17 +162,12 @@ const Login = () => {
             <Text style={styles.errorMessage}>{errorMessage}</Text>
           )}
           {/* submit button */}
-          <Button
+          <ActionButton
             loading={loginLoading}
             disabled={!isValid}
-            onPress={handleSubmit}
-            mode="contained"
-            color={Colors.main}
-            labelStyle={FormStyles.buttonLabel}
-            contentStyle={FormStyles.buttonContent}
-            style={[FormStyles.button, styles.buttonSubmit]}>
+            onPress={handleSubmit}>
             {'LOGIN'}
-          </Button>
+          </ActionButton>
 
           {/* register navigate */}
           <View style={CommonStyles.rowSpaceBetween}>
