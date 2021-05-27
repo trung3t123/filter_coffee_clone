@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
-target 'Tusharemobile' do
+target 'FilterCoffee' do
   config = use_native_modules!
 
   use_react_native!(
@@ -12,7 +12,7 @@ target 'Tusharemobile' do
     :hermes_enabled => true
   )
 
-  target 'TusharemobileTests' do
+  target 'FilterCoffeeTests' do
     inherit! :complete
     # Pods for testing
   end

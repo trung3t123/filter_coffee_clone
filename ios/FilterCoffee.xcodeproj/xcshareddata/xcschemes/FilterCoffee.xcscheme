@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Tusharemobile.app"
-               BlueprintName = "Tusharemobile"
-               ReferencedContainer = "container:Tusharemobile.xcodeproj">
+               BuildableName = "FilterCoffee.app"
+               BlueprintName = "FilterCoffee"
+               ReferencedContainer = "container:FilterCoffee.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "TusharemobileTests.xctest"
-               BlueprintName = "TusharemobileTests"
-               ReferencedContainer = "container:Tusharemobile.xcodeproj">
+               BuildableName = "FilterCoffeeTests.xctest"
+               BlueprintName = "FilterCoffeeTests"
+               ReferencedContainer = "container:FilterCoffee.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Tusharemobile.app"
-            BlueprintName = "Tusharemobile"
-            ReferencedContainer = "container:Tusharemobile.xcodeproj">
+            BuildableName = "FilterCoffee.app"
+            BlueprintName = "FilterCoffee"
+            ReferencedContainer = "container:FilterCoffee.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Tusharemobile.app"
-            BlueprintName = "Tusharemobile"
-            ReferencedContainer = "container:Tusharemobile.xcodeproj">
+            BuildableName = "FilterCoffee.app"
+            BlueprintName = "FilterCoffee"
+            ReferencedContainer = "container:FilterCoffee.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

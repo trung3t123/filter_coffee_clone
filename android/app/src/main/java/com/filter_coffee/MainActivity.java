@@ -1,4 +1,4 @@
-package com.tushare_mobile;
+package com.filter_coffee;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "Tusharemobile";
+    return "FilterCoffee";
   }
 }

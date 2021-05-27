@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* TusharemobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TusharemobileTests.m */; };
+		00E356F31AD99517003FC87E /* FilterCoffeeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FilterCoffeeTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		6ED3B285E55259AE01E07BB4 /* libPods-Tusharemobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E553BABBAFA999BBC78D6E17 /* libPods-Tusharemobile.a */; };
-		6FCDDB81D9586B1B871E8E7D /* libPods-Tusharemobile-TusharemobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47E320B31E9C3CDB5B4FB0CB /* libPods-Tusharemobile-TusharemobileTests.a */; };
+		6ED3B285E55259AE01E07BB4 /* libPods-FilterCoffee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E553BABBAFA999BBC78D6E17 /* libPods-FilterCoffee.a */; };
+		6FCDDB81D9586B1B871E8E7D /* libPods-FilterCoffee-FilterCoffeeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47E320B31E9C3CDB5B4FB0CB /* libPods-FilterCoffee-FilterCoffeeTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -22,27 +22,27 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = Tusharemobile;
+			remoteInfo = FilterCoffee;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* TusharemobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TusharemobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* FilterCoffeeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FilterCoffeeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* TusharemobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TusharemobileTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Tusharemobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tusharemobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Tusharemobile/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Tusharemobile/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Tusharemobile/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tusharemobile/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Tusharemobile/main.m; sourceTree = "<group>"; };
-		47E320B31E9C3CDB5B4FB0CB /* libPods-Tusharemobile-TusharemobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tusharemobile-TusharemobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6887D5085F2FC6A020457A59 /* Pods-Tusharemobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tusharemobile.debug.xcconfig"; path = "Target Support Files/Pods-Tusharemobile/Pods-Tusharemobile.debug.xcconfig"; sourceTree = "<group>"; };
-		7BF1F5EC06BD376564047522 /* Pods-Tusharemobile-TusharemobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tusharemobile-TusharemobileTests.release.xcconfig"; path = "Target Support Files/Pods-Tusharemobile-TusharemobileTests/Pods-Tusharemobile-TusharemobileTests.release.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Tusharemobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		96A595AA18406EFB9D02AD48 /* Pods-Tusharemobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tusharemobile.release.xcconfig"; path = "Target Support Files/Pods-Tusharemobile/Pods-Tusharemobile.release.xcconfig"; sourceTree = "<group>"; };
-		BD96DC11EDE4256D21C88A86 /* Pods-Tusharemobile-TusharemobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tusharemobile-TusharemobileTests.debug.xcconfig"; path = "Target Support Files/Pods-Tusharemobile-TusharemobileTests/Pods-Tusharemobile-TusharemobileTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E553BABBAFA999BBC78D6E17 /* libPods-Tusharemobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tusharemobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356F21AD99517003FC87E /* FilterCoffeeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterCoffeeTests.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* FilterCoffee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilterCoffee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = FilterCoffee/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = FilterCoffee/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FilterCoffee/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FilterCoffee/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FilterCoffee/main.m; sourceTree = "<group>"; };
+		47E320B31E9C3CDB5B4FB0CB /* libPods-FilterCoffee-FilterCoffeeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FilterCoffee-FilterCoffeeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6887D5085F2FC6A020457A59 /* Pods-FilterCoffee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilterCoffee.debug.xcconfig"; path = "Target Support Files/Pods-FilterCoffee/Pods-FilterCoffee.debug.xcconfig"; sourceTree = "<group>"; };
+		7BF1F5EC06BD376564047522 /* Pods-FilterCoffee-FilterCoffeeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilterCoffee-FilterCoffeeTests.release.xcconfig"; path = "Target Support Files/Pods-FilterCoffee-FilterCoffeeTests/Pods-FilterCoffee-FilterCoffeeTests.release.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FilterCoffee/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		96A595AA18406EFB9D02AD48 /* Pods-FilterCoffee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilterCoffee.release.xcconfig"; path = "Target Support Files/Pods-FilterCoffee/Pods-FilterCoffee.release.xcconfig"; sourceTree = "<group>"; };
+		BD96DC11EDE4256D21C88A86 /* Pods-FilterCoffee-FilterCoffeeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilterCoffee-FilterCoffeeTests.debug.xcconfig"; path = "Target Support Files/Pods-FilterCoffee-FilterCoffeeTests/Pods-FilterCoffee-FilterCoffeeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E553BABBAFA999BBC78D6E17 /* libPods-FilterCoffee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FilterCoffee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FCDDB81D9586B1B871E8E7D /* libPods-Tusharemobile-TusharemobileTests.a in Frameworks */,
+				6FCDDB81D9586B1B871E8E7D /* libPods-FilterCoffee-FilterCoffeeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,20 +59,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ED3B285E55259AE01E07BB4 /* libPods-Tusharemobile.a in Frameworks */,
+				6ED3B285E55259AE01E07BB4 /* libPods-FilterCoffee.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* TusharemobileTests */ = {
+		00E356EF1AD99517003FC87E /* FilterCoffeeTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* TusharemobileTests.m */,
+				00E356F21AD99517003FC87E /* FilterCoffeeTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = TusharemobileTests;
+			path = FilterCoffeeTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -83,7 +83,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* Tusharemobile */ = {
+		13B07FAE1A68108700A75B9A /* FilterCoffee */ = {
 			isa = PBXGroup;
 			children = (
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -93,15 +93,15 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = Tusharemobile;
+			name = FilterCoffee;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				E553BABBAFA999BBC78D6E17 /* libPods-Tusharemobile.a */,
-				47E320B31E9C3CDB5B4FB0CB /* libPods-Tusharemobile-TusharemobileTests.a */,
+				E553BABBAFA999BBC78D6E17 /* libPods-FilterCoffee.a */,
+				47E320B31E9C3CDB5B4FB0CB /* libPods-FilterCoffee-FilterCoffeeTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,9 +123,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* Tusharemobile */,
+				13B07FAE1A68108700A75B9A /* FilterCoffee */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* TusharemobileTests */,
+				00E356EF1AD99517003FC87E /* FilterCoffeeTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				C8714E8813F3938EF7D15A0A /* Pods */,
@@ -139,8 +139,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Tusharemobile.app */,
-				00E356EE1AD99517003FC87E /* TusharemobileTests.xctest */,
+				13B07F961A680F5B00A75B9A /* FilterCoffee.app */,
+				00E356EE1AD99517003FC87E /* FilterCoffeeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,10 +148,10 @@
 		C8714E8813F3938EF7D15A0A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6887D5085F2FC6A020457A59 /* Pods-Tusharemobile.debug.xcconfig */,
-				96A595AA18406EFB9D02AD48 /* Pods-Tusharemobile.release.xcconfig */,
-				BD96DC11EDE4256D21C88A86 /* Pods-Tusharemobile-TusharemobileTests.debug.xcconfig */,
-				7BF1F5EC06BD376564047522 /* Pods-Tusharemobile-TusharemobileTests.release.xcconfig */,
+				6887D5085F2FC6A020457A59 /* Pods-FilterCoffee.debug.xcconfig */,
+				96A595AA18406EFB9D02AD48 /* Pods-FilterCoffee.release.xcconfig */,
+				BD96DC11EDE4256D21C88A86 /* Pods-FilterCoffee-FilterCoffeeTests.debug.xcconfig */,
+				7BF1F5EC06BD376564047522 /* Pods-FilterCoffee-FilterCoffeeTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -159,9 +159,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* TusharemobileTests */ = {
+		00E356ED1AD99517003FC87E /* FilterCoffeeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "TusharemobileTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "FilterCoffeeTests" */;
 			buildPhases = (
 				013C9E821F69BCA9D221B566 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -175,14 +175,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = TusharemobileTests;
-			productName = TusharemobileTests;
-			productReference = 00E356EE1AD99517003FC87E /* TusharemobileTests.xctest */;
+			name = FilterCoffeeTests;
+			productName = FilterCoffeeTests;
+			productReference = 00E356EE1AD99517003FC87E /* FilterCoffeeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* Tusharemobile */ = {
+		13B07F861A680F5B00A75B9A /* FilterCoffee */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Tusharemobile" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "FilterCoffee" */;
 			buildPhases = (
 				E8F3050D60ECB82B53730E37 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -197,9 +197,9 @@
 			);
 			dependencies = (
 			);
-			name = Tusharemobile;
-			productName = Tusharemobile;
-			productReference = 13B07F961A680F5B00A75B9A /* Tusharemobile.app */;
+			name = FilterCoffee;
+			productName = FilterCoffee;
+			productReference = 13B07F961A680F5B00A75B9A /* FilterCoffee.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -219,7 +219,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Tusharemobile" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "FilterCoffee" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -232,8 +232,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* Tusharemobile */,
-				00E356ED1AD99517003FC87E /* TusharemobileTests */,
+				13B07F861A680F5B00A75B9A /* FilterCoffee */,
+				00E356ED1AD99517003FC87E /* FilterCoffeeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -287,7 +287,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Tusharemobile-TusharemobileTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-FilterCoffee-FilterCoffeeTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -300,15 +300,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile-TusharemobileTests/Pods-Tusharemobile-TusharemobileTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee-FilterCoffeeTests/Pods-FilterCoffee-FilterCoffeeTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile-TusharemobileTests/Pods-Tusharemobile-TusharemobileTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee-FilterCoffeeTests/Pods-FilterCoffee-FilterCoffeeTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile-TusharemobileTests/Pods-Tusharemobile-TusharemobileTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee-FilterCoffeeTests/Pods-FilterCoffee-FilterCoffeeTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9D018BEEAEE7DFE74DA036D9 /* [CP] Copy Pods Resources */ = {
@@ -317,15 +317,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile/Pods-Tusharemobile-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee/Pods-FilterCoffee-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile/Pods-Tusharemobile-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee/Pods-FilterCoffee-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile/Pods-Tusharemobile-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee/Pods-FilterCoffee-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B457DAF5545E7D87D5C92DE0 /* [CP] Embed Pods Frameworks */ = {
@@ -334,15 +334,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile-TusharemobileTests/Pods-Tusharemobile-TusharemobileTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee-FilterCoffeeTests/Pods-FilterCoffee-FilterCoffeeTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile-TusharemobileTests/Pods-Tusharemobile-TusharemobileTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee-FilterCoffeeTests/Pods-FilterCoffee-FilterCoffeeTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile-TusharemobileTests/Pods-Tusharemobile-TusharemobileTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee-FilterCoffeeTests/Pods-FilterCoffee-FilterCoffeeTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E8F3050D60ECB82B53730E37 /* [CP] Check Pods Manifest.lock */ = {
@@ -360,7 +360,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Tusharemobile-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-FilterCoffee-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -373,15 +373,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile/Pods-Tusharemobile-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee/Pods-FilterCoffee-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile/Pods-Tusharemobile-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee/Pods-FilterCoffee-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tusharemobile/Pods-Tusharemobile-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FilterCoffee/Pods-FilterCoffee-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -410,7 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* TusharemobileTests.m in Sources */,
+				00E356F31AD99517003FC87E /* FilterCoffeeTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,7 +428,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* Tusharemobile */;
+			target = 13B07F861A680F5B00A75B9A /* FilterCoffee */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -436,14 +436,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD96DC11EDE4256D21C88A86 /* Pods-Tusharemobile-TusharemobileTests.debug.xcconfig */;
+			baseConfigurationReference = BD96DC11EDE4256D21C88A86 /* Pods-FilterCoffee-FilterCoffeeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = TusharemobileTests/Info.plist;
+				INFOPLIST_FILE = FilterCoffeeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -457,17 +457,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tusharemobile.app/Tusharemobile";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FilterCoffee.app/FilterCoffee";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7BF1F5EC06BD376564047522 /* Pods-Tusharemobile-TusharemobileTests.release.xcconfig */;
+			baseConfigurationReference = 7BF1F5EC06BD376564047522 /* Pods-FilterCoffee-FilterCoffeeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = TusharemobileTests/Info.plist;
+				INFOPLIST_FILE = FilterCoffeeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -481,20 +481,20 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tusharemobile.app/Tusharemobile";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FilterCoffee.app/FilterCoffee";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6887D5085F2FC6A020457A59 /* Pods-Tusharemobile.debug.xcconfig */;
+			baseConfigurationReference = 6887D5085F2FC6A020457A59 /* Pods-FilterCoffee.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9NYJ2X5648;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = Tusharemobile/Info.plist;
+				INFOPLIST_FILE = FilterCoffee/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -505,7 +505,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Tusharemobile;
+				PRODUCT_NAME = FilterCoffee;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -514,13 +514,13 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96A595AA18406EFB9D02AD48 /* Pods-Tusharemobile.release.xcconfig */;
+			baseConfigurationReference = 96A595AA18406EFB9D02AD48 /* Pods-FilterCoffee.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9NYJ2X5648;
-				INFOPLIST_FILE = Tusharemobile/Info.plist;
+				INFOPLIST_FILE = FilterCoffee/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -531,7 +531,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Tusharemobile;
+				PRODUCT_NAME = FilterCoffee;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -663,7 +663,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "TusharemobileTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "FilterCoffeeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -672,7 +672,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Tusharemobile" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "FilterCoffee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -681,7 +681,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Tusharemobile" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "FilterCoffee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

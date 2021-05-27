@@ -77,7 +77,7 @@ const AuthStore = new MMKVStorage.Loader()
   .initialize();
 
 const persistConfig: PersistConfig<any> = {
-  key: 'TUSHARE@session',
+  key: 'COFFEE@session',
   storage: AuthStore,
   timeout: undefined,
   whitelist: ['auth'],
