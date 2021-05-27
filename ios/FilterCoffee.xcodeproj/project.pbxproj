@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		3D51256B265FF34F0085E315 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D51256A265FF34F0085E315 /* BootSplash.storyboard */; };
 		6ED3B285E55259AE01E07BB4 /* libPods-FilterCoffee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E553BABBAFA999BBC78D6E17 /* libPods-FilterCoffee.a */; };
 		6FCDDB81D9586B1B871E8E7D /* libPods-FilterCoffee-FilterCoffeeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47E320B31E9C3CDB5B4FB0CB /* libPods-FilterCoffee-FilterCoffeeTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -36,6 +37,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FilterCoffee/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FilterCoffee/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FilterCoffee/main.m; sourceTree = "<group>"; };
+		3D51256A265FF34F0085E315 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = FilterCoffee/BootSplash.storyboard; sourceTree = "<group>"; };
 		47E320B31E9C3CDB5B4FB0CB /* libPods-FilterCoffee-FilterCoffeeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FilterCoffee-FilterCoffeeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6887D5085F2FC6A020457A59 /* Pods-FilterCoffee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilterCoffee.debug.xcconfig"; path = "Target Support Files/Pods-FilterCoffee/Pods-FilterCoffee.debug.xcconfig"; sourceTree = "<group>"; };
 		7BF1F5EC06BD376564047522 /* Pods-FilterCoffee-FilterCoffeeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilterCoffee-FilterCoffeeTests.release.xcconfig"; path = "Target Support Files/Pods-FilterCoffee-FilterCoffeeTests/Pods-FilterCoffee-FilterCoffeeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		13B07FAE1A68108700A75B9A /* FilterCoffee */ = {
 			isa = PBXGroup;
 			children = (
+				3D51256A265FF34F0085E315 /* BootSplash.storyboard */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -250,6 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D51256B265FF34F0085E315 /* BootSplash.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
