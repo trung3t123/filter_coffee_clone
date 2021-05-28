@@ -7,6 +7,8 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import CommonHeights from 'theme/CommonHeights';
+import Colors from 'utils/colors';
 
 var styles = StyleSheet.create({
   linearGradient: {
@@ -16,8 +18,6 @@ var styles = StyleSheet.create({
     fontSize: 18,
     // fontFamily: 'Metropolis',
     textAlign: 'center',
-    marginVertical: 20,
-    marginHorizontal: 10,
     color: '#ffffff',
     backgroundColor: 'transparent',
     zIndex: 1,
@@ -27,6 +27,8 @@ var styles = StyleSheet.create({
     borderRadius: 15,
     overflow: 'hidden',
     margin: 10,
+    height: CommonHeights.res56,
+    justifyContent: 'center',
   },
 });
 
@@ -48,7 +50,7 @@ const ActionButton: React.FC<PropTypes> = ({
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          colors={['#00AEFF', '#875BFF']}
+          colors={[Colors.mainGradientStart, Colors.mainGradientEnd]}
           style={styles.linearGradient}
         />
         <Text style={styles.buttonText}>{text}</Text>

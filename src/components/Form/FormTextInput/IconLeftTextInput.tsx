@@ -11,19 +11,14 @@ interface PropTypes extends TextInputProps {
   nameIconLeft: string;
 }
 
-export interface PasswordInput extends React.FC<PropTypes> {}
+export interface IconLeftProps extends React.FC<PropTypes> {}
 
-const Password: PasswordInput = props => {
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
+const IconLeftTextInput: IconLeftProps = props => {
   const [isEnableGradient, setEnableGradient] = useState(false);
 
   const onSetEnableGradient = useCallback(
     () => setEnableGradient(state => !state),
     [setEnableGradient],
-  );
-  const toggleSecureTextEntry = useCallback(
-    () => setSecureTextEntry(state => !state),
-    [setSecureTextEntry],
   );
 
   const onFocus = useCallback(() => {
@@ -44,38 +39,22 @@ const Password: PasswordInput = props => {
           style={styles.linearGradient}
         />
       ) : null}
-      {props.nameIconLeft && (
-        <Icon
-          name={props.nameIconLeft}
-          size={18}
-          color={Colors.gray}
-          style={styles.iconLeft}
-          onPress={toggleSecureTextEntry}
-        />
-      )}
       <Icon
-        name={secureTextEntry ? 'eye' : 'eye-off'}
+        name={props.nameIconLeft}
         size={18}
         color={Colors.gray}
-        style={styles.icon}
-        onPress={toggleSecureTextEntry}
+        style={styles.iconLeft}
       />
       <TextInput
         onFocus={onFocus}
         onEndEditing={onEndEditing}
-        style={[
-          styles.input,
-          styles.passwordInput,
-          props.nameIconLeft ? styles.paddingLeft : {},
-        ]}
+        style={[styles.input, styles.paddingLeft]}
         {...props}
-        secureTextEntry={secureTextEntry}
-        blurOnSubmit={false}
       />
     </View>
   );
 };
 
-Password.displayName = 'Password';
+IconLeftTextInput.displayName = 'IconLeftTextInput';
 
-export default memo(Password);
+export default memo(IconLeftTextInput);

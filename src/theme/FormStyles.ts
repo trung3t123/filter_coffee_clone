@@ -9,7 +9,7 @@ const FormStyles = {
     marginTop: 50,
   },
   field: {
-    marginBottom: 15,
+    marginTop: 5,
   },
   label: {
     marginBottom: 10,
