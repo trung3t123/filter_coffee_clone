@@ -22,8 +22,7 @@ const RootStack = () => {
     <Stack.Navigator
       initialRouteName={ROUTES.INTRODUCE}
       screenOptions={{
-        stackPresentation: 'push',
-        stackAnimation: 'slide_from_left',
+        stackPresentation: 'modal',
         headerShown: false,
         gestureEnabled: true,
       }}>

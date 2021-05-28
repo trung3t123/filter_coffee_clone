@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useCallback } from 'react';
 import { TextInputProps, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { TextInput } from 'react-native-gesture-handler';
@@ -16,15 +16,18 @@ export interface IconLeftProps extends React.FC<PropTypes> {}
 const IconLeftTextInput: IconLeftProps = props => {
   const [isEnableGradient, setEnableGradient] = useState(false);
 
-  const onSetEnableGradient = () => setEnableGradient(state => !state);
+  const onSetEnableGradient = useCallback(
+    () => setEnableGradient(state => !state),
+    [setEnableGradient],
+  );
 
-  const onFocus = () => {
+  const onFocus = useCallback(() => {
     onSetEnableGradient();
-  };
+  }, [onSetEnableGradient]);
 
-  const onEndEditing = () => {
+  const onEndEditing = useCallback(() => {
     onSetEnableGradient();
-  };
+  }, [onSetEnableGradient]);
 
   return (
     <View style={styles.container}>
@@ -32,7 +35,7 @@ const IconLeftTextInput: IconLeftProps = props => {
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          colors={['#00AEFF', '#875BFF']}
+          colors={[Colors.mainGradientStart, Colors.mainGradientEnd]}
           style={styles.linearGradient}
         />
       ) : null}
