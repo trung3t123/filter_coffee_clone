@@ -4,5 +4,13 @@ export type LoginAPIParameters = {
 };
 
 export type LoginResponse = {
-  access_token: string;
+  token: string;
+  status: number;
+};
+
+export type SignUpAPIParameters = LoginAPIParameters;
+
+export type SignUpResponse = {
+  token: string;
+  status: number;
 };

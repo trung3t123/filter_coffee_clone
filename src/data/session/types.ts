@@ -15,3 +15,5 @@ export type LoginResultType = {
   success: boolean;
   error?: string;
 };
+
+export type SignUpResultType = LoginResultType;
