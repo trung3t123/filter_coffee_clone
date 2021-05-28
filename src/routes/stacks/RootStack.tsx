@@ -20,8 +20,9 @@ const Stack = createNativeStackNavigator<Record<string, any>>();
 const RootStack = () => {
   return (
     <Stack.Navigator
+      initialRouteName={ROUTES.LOGIN}
       screenOptions={{
-        stackPresentation: 'modal',
+        stackPresentation: 'push',
         headerShown: false,
         gestureEnabled: true,
       }}>

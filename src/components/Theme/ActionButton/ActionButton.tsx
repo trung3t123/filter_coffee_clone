@@ -7,6 +7,7 @@ import {
   GestureResponderEvent,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import CommonHeights from 'theme/CommonHeights';
 
 var styles = StyleSheet.create({
   linearGradient: {
@@ -16,8 +17,6 @@ var styles = StyleSheet.create({
     fontSize: 18,
     // fontFamily: 'Metropolis',
     textAlign: 'center',
-    marginVertical: 20,
-    marginHorizontal: 10,
     color: '#ffffff',
     backgroundColor: 'transparent',
     zIndex: 1,
@@ -27,6 +26,8 @@ var styles = StyleSheet.create({
     borderRadius: 15,
     overflow: 'hidden',
     margin: 10,
+    height: CommonHeights.res56,
+    justifyContent: 'center',
   },
 });
 

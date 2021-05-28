@@ -13,19 +13,28 @@ export default StyleSheet.create({
     borderTopRightRadius: 30,
     position: 'relative',
   },
+  contentContainerStyleFlatList: {
+    flex: 1,
+    backgroundColor: Colors.black,
+  },
+  buttonLogin: { flex: 2 },
   form: {
     paddingHorizontal: 20,
-    paddingBottom: 20,
+    paddingBottom: 50,
+
     paddingTop: 5,
+    flex: 8,
+    justifyContent: 'center',
   },
   header: {
     marginBottom: 20,
   },
   titleText: {
-    fontSize: 32,
-    fontWeight: 'bold',
+    fontSize: 48,
+    fontWeight: '600',
     textAlign: 'left',
     marginBottom: 5,
+    color: Colors.white,
   },
   subtitleText: {
     textAlign: 'left',
@@ -63,10 +72,8 @@ export default StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     color: Colors.danger,
-    padding: 10,
     borderColor: Colors.danger,
     borderWidth: 1,
-    marginBottom: 20,
   },
   closeButtonWrapper: {
     position: 'absolute',
@@ -77,11 +84,13 @@ export default StyleSheet.create({
   closeButton: {
     marginHorizontal: 20,
   },
-  mb20: {
-    marginBottom: 20,
+  forgotPassword: {
+    marginTop: 10,
+    alignSelf: 'flex-end',
   },
   forgotPasswordTxt: {
     color: Colors.porpoise,
-    fontSize: CommonFonts.res12,
+    fontSize: CommonFonts.res15,
+    fontWeight: '400',
   },
 });

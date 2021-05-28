@@ -43,8 +43,10 @@ function mixColor(color1: string, color2: string, value = 1) {
  * rgba colors will not appear in colors set
  */
 const Colors = {
+  mainBlack: '#E5E5E5',
   black40: 'rgba(0, 0, 0, 0.4)',
   black70: 'rgba(0, 0, 0, 0.7)',
+  black60: 'rgba(0, 0, 0, 0.6)',
   black75: 'rgba(0, 0, 0, 0.75)',
   black15: 'rgba(0, 0, 0, 0.15)',
   black: 'rgb(0, 0, 0)',

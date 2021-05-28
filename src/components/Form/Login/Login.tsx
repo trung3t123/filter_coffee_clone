@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'react-native-paper';
 import { useFormik } from 'formik';
 import { useNavigation } from '@react-navigation/core';
 
@@ -16,14 +15,13 @@ import Colors from 'utils/colors';
 import FormStyles from 'theme/FormStyles';
 import { login } from 'data/session/actions';
 import { ActionDispatcher } from 'data/types';
-import CommonStyles from 'theme/CommonStyles';
 import { doNothing } from 'constants/default-values';
 import { passwordValidator } from 'utils/validators';
 import SessionSelector from 'data/session/selectors';
 
 import styles from '../styles';
 import FormTextInput from '../FormTextInput';
-import ROUTES from 'routes/names';
+// import ROUTES from 'routes/names';
 import ActionButton from 'components/Theme/ActionButton';
 
 const FormSchema = Yup.object().shape({
@@ -78,12 +76,9 @@ const Login = () => {
 
   const {
     values,
-    errors,
-    touched,
     handleChange,
     handleBlur,
     handleSubmit,
-    handleReset,
     // isSubmitting,
     isValid,
   } = formik;
@@ -92,35 +87,23 @@ const Login = () => {
     Keyboard.dismiss();
   }, []);
 
-  const onReset = useCallback(() => {
-    Keyboard.dismiss();
-    setTimeout(() => {
-      setErrorMessage('');
-      handleReset(null);
-      // handleRegisterClick();
-    }, 100);
-  }, [handleReset]);
-
-  const onNavigateToRegister = useCallback(() => {
-    onReset();
-    navigation.navigate(ROUTES.REGISTER);
-  }, [navigation, onReset]);
-
   return (
     <>
       <ScrollView
         bounces={false}
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="handled"
-        overScrollMode="always">
+        overScrollMode="always"
+        contentContainerStyle={styles.contentContainerStyleFlatList}>
         <View style={styles.form}>
           {/* header */}
           <View style={styles.header}>
-            <Text style={styles.titleText}>{'LOGIN'}</Text>
+            <Text style={styles.titleText}>{'Hey\nWelcome back'}</Text>
           </View>
           {/* email field */}
           <View style={FormStyles.field}>
-            <FormTextInput
+            <FormTextInput.IconLeftTextInput
+              nameIconLeft="mail"
               autoCapitalize="none"
               autoCorrect={false}
               value={values.email}
@@ -130,13 +113,11 @@ const Login = () => {
               placeholderTextColor={Colors.lightGrey}
               keyboardType="email-address"
             />
-            <Text style={FormStyles.errorText}>
-              {touched.email ? errors.email : null}
-            </Text>
           </View>
           {/* password field */}
           <View style={FormStyles.field}>
             <FormTextInput.Password
+              nameIconLeft="lock"
               autoCapitalize="none"
               autoCorrect={false}
               value={values.password}
@@ -148,40 +129,27 @@ const Login = () => {
               blurOnSubmit={false}
               onSubmitEditing={onSubmitEditing}
             />
-            <Text style={FormStyles.errorText}>
-              {touched.password ? errors.password : null}
-            </Text>
           </View>
+
           {/* forgot password */}
           <TouchableWithoutFeedback onPress={doNothing}>
-            <View style={styles.mb20}>
-              <Text style={styles.forgotPasswordTxt}>{'FORGOT PASSWORD'}</Text>
+            <View style={styles.forgotPassword}>
+              <Text style={styles.forgotPasswordTxt}>{'Forgot password?'}</Text>
             </View>
           </TouchableWithoutFeedback>
           {!!errorMessage && (
             <Text style={styles.errorMessage}>{errorMessage}</Text>
           )}
-          {/* submit button */}
+        </View>
+
+        {/* submit button */}
+        <View style={styles.buttonLogin}>
           <ActionButton
             loading={loginLoading}
             disabled={!isValid}
-            onPress={handleSubmit}>
-            {'LOGIN'}
-          </ActionButton>
-
-          {/* register navigate */}
-          <View style={CommonStyles.rowSpaceBetween}>
-            <Text>{"DON'T HAVE ACCOUNT?"}</Text>
-            <Button
-              onPress={onNavigateToRegister}
-              mode="contained"
-              color={Colors.lightGrey}
-              labelStyle={[FormStyles.buttonLabel, styles.buttonSecondaryLabel]}
-              contentStyle={FormStyles.buttonContent}
-              style={FormStyles.button}>
-              {'REGISTER'}
-            </Button>
-          </View>
+            onPress={handleSubmit}
+            text={'Login'}
+          />
         </View>
       </ScrollView>
     </>
