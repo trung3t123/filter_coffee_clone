@@ -35,7 +35,7 @@ const IconLeftTextInput: IconLeftProps = props => {
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          colors={['#00AEFF', '#875BFF']}
+          colors={[Colors.mainGradientStart, Colors.mainGradientEnd]}
           style={styles.linearGradient}
         />
       ) : null}
