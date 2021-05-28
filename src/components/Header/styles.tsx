@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import Colors from 'utils/colors';
 import Screen from 'utils/screen';
 import CommonWidths from 'theme/CommonWidths';
+import CommonHeights from 'theme/CommonHeights';
 
 export default StyleSheet.create({
   container: {
@@ -16,8 +17,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.black,
-    paddingVertical: 10,
+    minHeight: CommonHeights.res20,
   },
   leftIcon: {
     zIndex: 1,

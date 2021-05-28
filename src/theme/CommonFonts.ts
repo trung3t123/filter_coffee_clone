@@ -55,6 +55,7 @@ const CommonFonts = {
   res29: responsiveFontSize(29),
   res30,
   res40: responsiveFontSize(40),
+  res48: responsiveFontSize(48),
   res50,
   res55: responsiveFontSize(55),
   res60: responsiveFontSize(60),

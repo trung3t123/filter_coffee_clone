@@ -1,6 +1,7 @@
 import Colors from 'utils/colors';
 import { StyleSheet } from 'react-native';
 import CommonFonts from 'theme/CommonFonts';
+import CommonHeights from 'theme/CommonHeights';
 
 export default StyleSheet.create({
   container: {
@@ -19,73 +20,56 @@ export default StyleSheet.create({
   },
   buttonLogin: { flex: 2 },
   form: {
-    paddingHorizontal: 20,
-    paddingBottom: 50,
-
-    paddingTop: 5,
-    flex: 8,
+    paddingHorizontal: CommonHeights.res20,
+    flex: 10,
     justifyContent: 'center',
   },
+
   header: {
-    marginBottom: 20,
+    marginBottom: CommonHeights.res20,
   },
+
   titleText: {
-    fontSize: 48,
+    fontSize: CommonFonts.res48,
     fontWeight: '600',
     textAlign: 'left',
-    marginBottom: 5,
     color: Colors.white,
   },
+
   subtitleText: {
     textAlign: 'left',
-    fontSize: 14,
+    fontSize: CommonHeights.res14,
     color: Colors.black70,
   },
+
   button: {
     borderRadius: 5,
     justifyContent: 'center',
     shadowOpacity: 0,
   },
   buttonSubmit: {
-    marginBottom: 20,
+    marginBottom: CommonHeights.res20,
   },
-  buttonLabel: {
-    color: Colors.white,
-    fontSize: 18,
-    textTransform: 'uppercase',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  buttonSecondaryLabel: {
-    color: Colors.black70,
-  },
-  buttonContent: {
-    padding: 5,
-  },
+
   errorText: {
-    height: 30,
-    marginTop: 10,
+    height: CommonHeights.res30,
+    // marginTop: 10,
     color: Colors.danger,
     textAlign: 'left',
   },
   errorMessage: {
-    fontSize: 14,
+    fontSize: CommonFonts.res14,
     textAlign: 'center',
     color: Colors.danger,
     borderColor: Colors.danger,
     borderWidth: 1,
   },
-  closeButtonWrapper: {
-    position: 'absolute',
-    top: '6%',
-    right: 0,
-    zIndex: 1,
-  },
+
   closeButton: {
-    marginHorizontal: 20,
+    marginHorizontal: CommonHeights.res20,
   },
   forgotPassword: {
-    marginTop: 10,
+    marginTop: CommonHeights.res10,
     alignSelf: 'flex-end',
   },
   forgotPasswordTxt: {
