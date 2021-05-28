@@ -17,7 +17,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-    minHeight: CommonHeights.res20,
+    height: CommonHeights.res30,
   },
   leftIcon: {
     zIndex: 1,

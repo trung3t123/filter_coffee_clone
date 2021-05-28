@@ -3,9 +3,9 @@ import React from 'react';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 
 import IntroduceScreen from 'screens/IntroduceScreen';
-import Promo from 'screens/Promo';
 import LoginScreen from 'screens/LoginScreen';
-import RegisterScreen from 'screens/RegisterScreen';
+import RegisterScreen from 'screens/SignUpScreen';
+import CreateUserNameScreen from 'screens/CreateUserNameScreen';
 
 import ROUTES from '../names';
 import BottomTabBar from '../tab/BottomTabBar';
@@ -22,7 +22,7 @@ const RootStack = () => {
     <Stack.Navigator
       initialRouteName={ROUTES.INTRODUCE}
       screenOptions={{
-        stackPresentation: 'modal',
+        stackPresentation: 'push',
         headerShown: false,
         gestureEnabled: true,
       }}>
@@ -30,7 +30,10 @@ const RootStack = () => {
       <Stack.Screen name={ROUTES.LOGIN} component={LoginScreen} />
       <Stack.Screen name={ROUTES.REGISTER} component={RegisterScreen} />
       <Stack.Screen name={ROUTES.INTRODUCE} component={IntroduceScreen} />
-      <Stack.Screen name={ROUTES.PROMO} component={Promo} />
+      <Stack.Screen
+        name={ROUTES.CREATE_USER_NAME}
+        component={CreateUserNameScreen}
+      />
     </Stack.Navigator>
   );
 };

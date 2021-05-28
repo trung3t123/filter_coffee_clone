@@ -22,10 +22,10 @@ export default StyleSheet.create({
   form: {
     paddingHorizontal: CommonHeights.res20,
     flex: 10,
-    justifyContent: 'center',
   },
 
   header: {
+    marginTop: CommonHeights.res150,
     marginBottom: CommonHeights.res20,
   },
 
@@ -37,9 +37,9 @@ export default StyleSheet.create({
   },
 
   subtitleText: {
-    textAlign: 'left',
+    textAlign: 'center',
     fontSize: CommonHeights.res14,
-    color: Colors.black70,
+    color: Colors.white,
   },
 
   button: {

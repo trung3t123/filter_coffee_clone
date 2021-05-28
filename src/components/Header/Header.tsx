@@ -1,11 +1,14 @@
 import React, { ReactElement, memo, useCallback } from 'react';
 import { View, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+
 import styles from './styles';
 import Colors from 'utils/colors';
-import { useNavigation } from '@react-navigation/native';
+import { HIT_SLOP } from 'theme/touch';
+import CommonHeights from 'theme/CommonHeights';
 
 type PropTypes = {
   children?: ReactElement<any, any>;
@@ -25,13 +28,15 @@ const Header: React.FC<PropTypes> = ({ children, isGoBack }) => {
       <StatusBar barStyle="light-content" />
       <View style={styles.contentContainer}>
         {isGoBack && (
-          <Icon
-            size={20}
-            color={Colors.white}
-            name="arrow-left"
-            // style={styles.icon}
-            onPress={onGoBack}
-          />
+          <TouchableWithoutFeedback
+            hitSlop={HIT_SLOP.SIZE20}
+            onPress={onGoBack}>
+            <Icon
+              size={CommonHeights.res25}
+              color={Colors.white}
+              name="arrow-left"
+            />
+          </TouchableWithoutFeedback>
         )}
         {children}
       </View>

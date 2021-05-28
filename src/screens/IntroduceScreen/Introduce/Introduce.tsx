@@ -11,7 +11,7 @@ const Login = () => {
   const navigation = useNavigation();
 
   const navigateToSignUp = useCallback(() => {
-    navigation.navigate(ROUTES.LOGIN);
+    navigation.navigate(ROUTES.REGISTER);
   }, [navigation]);
 
   return (
@@ -32,12 +32,7 @@ const Login = () => {
 
         {/* submit button */}
         <View style={styles.buttonLogin}>
-          <ActionButton
-            // loading={loginLoading}
-            // disabled={!isValid}
-            onPress={navigateToSignUp}
-            text={'Get Started'}
-          />
+          <ActionButton onPress={navigateToSignUp} text={'Get Started'} />
         </View>
       </ScrollView>
     </>

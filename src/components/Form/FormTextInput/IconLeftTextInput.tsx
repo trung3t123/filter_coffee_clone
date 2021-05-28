@@ -6,6 +6,7 @@ import Colors from 'utils/colors';
 
 import styles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
+import CommonStyles from 'theme/CommonStyles';
 
 interface PropTypes extends TextInputProps {
   nameIconLeft: string;
@@ -35,7 +36,7 @@ const IconLeftTextInput: IconLeftProps = props => {
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          colors={[Colors.mainGradientStart, Colors.mainGradientEnd]}
+          colors={CommonStyles.mainLinerGradientColor}
           style={styles.linearGradient}
         />
       ) : null}
