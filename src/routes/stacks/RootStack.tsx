@@ -22,7 +22,7 @@ const RootStack = () => {
     <Stack.Navigator
       initialRouteName={ROUTES.LOGIN}
       screenOptions={{
-        stackPresentation: 'push',
+        stackPresentation: 'modal',
         headerShown: false,
         gestureEnabled: true,
       }}>

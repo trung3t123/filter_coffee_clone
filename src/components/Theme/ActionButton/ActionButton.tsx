@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import CommonHeights from 'theme/CommonHeights';
+import Colors from 'utils/colors';
 
 var styles = StyleSheet.create({
   linearGradient: {
@@ -49,7 +50,7 @@ const ActionButton: React.FC<PropTypes> = ({
         <LinearGradient
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          colors={['#00AEFF', '#875BFF']}
+          colors={[Colors.mainGradientStart, Colors.mainGradientEnd]}
           style={styles.linearGradient}
         />
         <Text style={styles.buttonText}>{text}</Text>
