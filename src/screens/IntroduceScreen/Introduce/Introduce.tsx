@@ -22,7 +22,7 @@ const Login = () => {
         keyboardShouldPersistTaps="handled"
         overScrollMode="always"
         contentContainerStyle={styles.contentContainerStyleFlatList}>
-        <View style={styles.contentScrollView}>
+        <View>
           <View style={styles.viewContent} />
           <Text style={styles.titleText}>{'Filter Coffee'}</Text>
           <Text style={styles.subtitleText}>
@@ -31,7 +31,7 @@ const Login = () => {
         </View>
 
         {/* submit button */}
-        <View style={styles.buttonLogin}>
+        <View style={styles.viewButton}>
           <ActionButton onPress={navigateToSignUp} text={'Get Started'} />
         </View>
       </ScrollView>

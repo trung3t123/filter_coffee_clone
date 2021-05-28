@@ -9,6 +9,7 @@ import CreateUserNameScreen from 'screens/CreateUserNameScreen';
 
 import ROUTES from '../names';
 import BottomTabBar from '../tab/BottomTabBar';
+import PickThemesScreen from 'screens/PickThemesScreen';
 
 export interface RootStackParamsList extends ParamListBase {
   LOGIN: undefined;
@@ -34,6 +35,7 @@ const RootStack = () => {
         name={ROUTES.CREATE_USER_NAME}
         component={CreateUserNameScreen}
       />
+      <Stack.Screen name={ROUTES.PICK_THEME} component={PickThemesScreen} />
     </Stack.Navigator>
   );
 };

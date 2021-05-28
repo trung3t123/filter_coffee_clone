@@ -95,61 +95,67 @@ const Login = () => {
         keyboardShouldPersistTaps="handled"
         overScrollMode="always"
         contentContainerStyle={styles.contentContainerStyleFlatList}>
-        <View style={styles.form}>
+        <View style={styles.content}>
           {/* header */}
           <View style={styles.header}>
             <Text style={styles.titleText}>{'Hey\nWelcome back'}</Text>
           </View>
-          {/* email field */}
-          <View style={FormStyles.field}>
-            <FormTextInput.IconLeftTextInput
-              nameIconLeft="mail"
-              autoCapitalize="none"
-              autoCorrect={false}
-              value={values.email}
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              placeholder={'your.email@gmail.com'}
-              placeholderTextColor={Colors.lightGrey}
-              keyboardType="email-address"
-            />
-          </View>
-          {/* password field */}
-          <View style={FormStyles.field}>
-            <FormTextInput.Password
-              nameIconLeft="lock"
-              autoCapitalize="none"
-              autoCorrect={false}
-              value={values.password}
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              placeholder={'password'}
-              placeholderTextColor={Colors.lightGrey}
-              textContentType="password"
-              blurOnSubmit={false}
-              onSubmitEditing={onSubmitEditing}
-            />
-          </View>
+          <View style={styles.contentForm}>
+            <View>
+              {/* email field */}
+              <View style={FormStyles.field}>
+                <FormTextInput.IconLeftTextInput
+                  nameIconLeft="mail"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  placeholder={'your.email@gmail.com'}
+                  placeholderTextColor={Colors.lightGrey}
+                  keyboardType="email-address"
+                />
+              </View>
+              {/* password field */}
+              <View style={FormStyles.field}>
+                <FormTextInput.Password
+                  nameIconLeft="lock"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  value={values.password}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  placeholder={'password'}
+                  placeholderTextColor={Colors.lightGrey}
+                  textContentType="password"
+                  blurOnSubmit={false}
+                  onSubmitEditing={onSubmitEditing}
+                />
+              </View>
 
-          {/* forgot password */}
-          <TouchableWithoutFeedback onPress={doNothing}>
-            <View style={styles.forgotPassword}>
-              <Text style={styles.forgotPasswordTxt}>{'Forgot password?'}</Text>
+              {/* forgot password */}
+              <TouchableWithoutFeedback onPress={doNothing}>
+                <View style={styles.forgotPassword}>
+                  <Text style={styles.forgotPasswordTxt}>
+                    {'Forgot password?'}
+                  </Text>
+                </View>
+              </TouchableWithoutFeedback>
+              {!!errorMessage && (
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
+              )}
             </View>
-          </TouchableWithoutFeedback>
-          {!!errorMessage && (
-            <Text style={styles.errorMessage}>{errorMessage}</Text>
-          )}
-        </View>
 
-        {/* submit button */}
-        <View style={styles.buttonLogin}>
-          <ActionButton
-            loading={loginLoading}
-            disabled={!isValid}
-            onPress={handleSubmit}
-            text={'Login'}
-          />
+            {/* submit button */}
+            <View style={styles.viewButton}>
+              <ActionButton
+                loading={loginLoading}
+                disabled={!isValid}
+                onPress={handleSubmit}
+                text={'Login'}
+              />
+            </View>
+          </View>
         </View>
       </ScrollView>
     </>

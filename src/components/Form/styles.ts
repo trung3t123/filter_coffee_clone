@@ -9,24 +9,22 @@ export default StyleSheet.create({
   },
   content: {
     flex: 1,
-    backgroundColor: Colors.white,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    position: 'relative',
+    paddingHorizontal: CommonHeights.res20,
   },
   contentContainerStyleFlatList: {
     flex: 1,
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.mainBackgroundColorContainer,
   },
-  buttonLogin: { flex: 2 },
-  form: {
-    paddingHorizontal: CommonHeights.res20,
-    flex: 10,
+
+  contentForm: {
+    flex: 2.5,
+    justifyContent: 'space-between',
   },
 
   header: {
-    marginTop: CommonHeights.res150,
-    marginBottom: CommonHeights.res20,
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingBottom: CommonHeights.res45,
   },
 
   titleText: {
@@ -40,15 +38,14 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: CommonHeights.res14,
     color: Colors.white,
+    position: 'absolute',
+    bottom: -CommonHeights.res20,
+    alignSelf: 'center',
+    paddingRight: 20,
   },
 
-  button: {
-    borderRadius: 5,
-    justifyContent: 'center',
-    shadowOpacity: 0,
-  },
-  buttonSubmit: {
-    marginBottom: CommonHeights.res20,
+  viewButton: {
+    marginBottom: CommonHeights.res70,
   },
 
   errorText: {

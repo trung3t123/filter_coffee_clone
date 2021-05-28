@@ -36,7 +36,8 @@ const CreateUserName = () => {
   };
 
   const navigateToCreateName = () => {
-    navigation.navigate(ROUTES.LOGIN);
+    // navigation.navigate(ROUTES.LOGIN);
+    navigation.navigate(ROUTES.PICK_THEME); // Text
   };
 
   const formik = useFormik({
@@ -66,50 +67,54 @@ const CreateUserName = () => {
         keyboardShouldPersistTaps="handled"
         overScrollMode="always"
         contentContainerStyle={styles.contentContainerStyleFlatList}>
-        <View style={styles.form}>
+        <View style={styles.content}>
           {/* header */}
           <View style={styles.header}>
             <Text style={styles.titleText}>
               {'Tell a bit about \nyourself'}
             </Text>
           </View>
-          {/* userName field */}
-          <View style={FormStyles.field}>
-            <FormTextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              value={values.userName}
-              onChangeText={handleChange('userName')}
-              onBlur={handleBlur('userName')}
-              placeholder={'Username'}
-              placeholderTextColor={Colors.lightGrey}
-            />
-          </View>
-          {/* fullName field */}
-          <View style={FormStyles.field}>
-            <FormTextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              value={values.fullName}
-              onChangeText={handleChange('fullName')}
-              onBlur={handleBlur('fullName')}
-              placeholder={'Full name'}
-              placeholderTextColor={Colors.lightGrey}
-              blurOnSubmit={false}
-              onSubmitEditing={onSubmitEditing}
-            />
+          <View style={styles.contentForm}>
+            {/* userName field */}
+            <View>
+              <View style={FormStyles.field}>
+                <FormTextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  value={values.userName}
+                  onChangeText={handleChange('userName')}
+                  onBlur={handleBlur('userName')}
+                  placeholder={'Username'}
+                  placeholderTextColor={Colors.lightGrey}
+                />
+              </View>
+              {/* fullName field */}
+              <View style={FormStyles.field}>
+                <FormTextInput
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  value={values.fullName}
+                  onChangeText={handleChange('fullName')}
+                  onBlur={handleBlur('fullName')}
+                  placeholder={'Full name'}
+                  placeholderTextColor={Colors.lightGrey}
+                  blurOnSubmit={false}
+                  onSubmitEditing={onSubmitEditing}
+                />
+              </View>
+            </View>
+            <View style={styles.viewButton}>
+              <ActionButton
+                loading={loginLoading}
+                disabled={!isValid}
+                onPress={navigateToCreateName}
+                text={'Next'}
+              />
+            </View>
           </View>
         </View>
 
         {/* submit button */}
-        <View style={styles.buttonLogin}>
-          <ActionButton
-            loading={loginLoading}
-            disabled={!isValid}
-            onPress={navigateToCreateName}
-            text={'Next'}
-          />
-        </View>
       </ScrollView>
     </>
   );

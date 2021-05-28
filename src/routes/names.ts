@@ -14,6 +14,7 @@ const ROUTES = {
   LOGIN: 'LOGIN',
   REGISTER: 'REGISTER',
   CREATE_USER_NAME: 'CREATE_USER_NAME',
+  PICK_THEME: 'PickThemesScreen',
 };
 
 export default ROUTES;

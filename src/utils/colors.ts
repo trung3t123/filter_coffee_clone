@@ -45,7 +45,9 @@ function mixColor(color1: string, color2: string, value = 1) {
 const Colors = {
   mainGradientStart: '#00AEFF',
   mainGradientEnd: '#875BFF',
-  mainBlack: '#E5E5E5',
+  mainBackgroundColorContainer: 'rgb(0, 0, 0)',
+  mainBackgroundColorComponent: '#1D1D1D',
+
   black40: 'rgba(0, 0, 0, 0.4)',
   black70: 'rgba(0, 0, 0, 0.7)',
   black60: 'rgba(0, 0, 0, 0.6)',

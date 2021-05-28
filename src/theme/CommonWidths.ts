@@ -76,6 +76,7 @@ const CommonWidths = {
   p90: Screen.width * 0.9,
   p95: Screen.width * 0.95,
   windowWidth: Screen.width,
+  baseSpaceHorizontal: responsiveWidth(20),
 };
 
 export default CommonWidths;

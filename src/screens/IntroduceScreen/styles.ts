@@ -6,20 +6,24 @@ import CommonFonts from 'theme/CommonFonts';
 export default StyleSheet.create({
   contentContainerStyleFlatList: {
     flex: 1,
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.mainBackgroundColorContainer,
+    paddingHorizontal: CommonHeights.res20,
+    justifyContent: 'space-between',
   },
-  buttonLogin: { flex: 2 },
+  viewButton: {
+    marginBottom: CommonHeights.res70,
+  },
   viewContent: {
     width: '100%',
     height: CommonHeights.res500,
-    backgroundColor: '#1D1D1D',
+    backgroundColor: Colors.mainBackgroundColorComponent,
     borderRadius: 30,
   },
 
   contentScrollView: {
     paddingHorizontal: CommonHeights.res20,
 
-    flex: 10,
+    flex: 1,
     alignItems: 'center',
   },
   header: {
@@ -29,12 +33,13 @@ export default StyleSheet.create({
     paddingTop: CommonHeights.res40,
     fontSize: CommonFonts.res48,
     fontWeight: '700',
-    textAlign: 'left',
+    textAlign: 'center',
     marginBottom: CommonHeights.res5,
     color: Colors.white,
   },
   subtitleText: {
     fontSize: CommonFonts.res20,
     color: Colors.white,
+    textAlign: 'center',
   },
 });

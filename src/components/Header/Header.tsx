@@ -9,6 +9,7 @@ import styles from './styles';
 import Colors from 'utils/colors';
 import { HIT_SLOP } from 'theme/touch';
 import CommonHeights from 'theme/CommonHeights';
+import CommonFonts from 'theme/CommonFonts';
 
 type PropTypes = {
   children?: ReactElement<any, any>;
@@ -24,7 +25,11 @@ const Header: React.FC<PropTypes> = ({ children, isGoBack }) => {
   }, [navigation]);
 
   return (
-    <View style={[styles.container, { paddingTop: Math.max(insets.top, 15) }]}>
+    <View
+      style={[
+        styles.container,
+        { paddingTop: Math.max(insets.top, CommonHeights.res40) },
+      ]}>
       <StatusBar barStyle="light-content" />
       <View style={styles.contentContainer}>
         {isGoBack && (
@@ -32,7 +37,7 @@ const Header: React.FC<PropTypes> = ({ children, isGoBack }) => {
             hitSlop={HIT_SLOP.SIZE20}
             onPress={onGoBack}>
             <Icon
-              size={CommonHeights.res25}
+              size={CommonFonts.res25}
               color={Colors.white}
               name="arrow-left"
             />

@@ -18,7 +18,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     height: CommonHeights.res56,
-    backgroundColor: '#1D1D1D',
+    backgroundColor: Colors.mainBackgroundColorComponent,
     borderRadius: 15,
   },
   passwordInput: {
