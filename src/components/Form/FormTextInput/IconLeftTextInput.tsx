@@ -7,6 +7,7 @@ import Colors from 'utils/colors';
 import styles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import CommonStyles from 'theme/CommonStyles';
+import CommonFonts from 'theme/CommonFonts';
 
 interface PropTypes extends TextInputProps {
   nameIconLeft: string;
@@ -42,7 +43,7 @@ const IconLeftTextInput: IconLeftProps = props => {
       ) : null}
       <Icon
         name={props.nameIconLeft}
-        size={18}
+        size={CommonFonts.res18}
         color={Colors.gray}
         style={styles.iconLeft}
       />
