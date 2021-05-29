@@ -24,6 +24,7 @@ import FormTextInput from '../FormTextInput';
 import ActionButton from 'components/Theme/ActionButton';
 import ROUTES from 'routes/names';
 import { HIT_SLOP } from 'theme/touch';
+import GradientText from 'components/Text/LinearGradientText/LinearGradientText';
 
 const FormSchema = Yup.object().shape({
   email: Yup.string()
@@ -145,13 +146,15 @@ const SignUp = () => {
                 onPress={navigateToCreateName}
                 text={'Sign Up'}
               />
-              <TouchableWithoutFeedback
-                hitSlop={HIT_SLOP.SIZE20}
-                onPress={() => console.log(123)}>
-                <Text style={styles.subtitleText}>
-                  Already an member? <Text>Login</Text>
-                </Text>
-              </TouchableWithoutFeedback>
+
+              <View style={styles.viewGoLogin}>
+                <Text style={styles.subtitleText}>Already an member?</Text>
+                <TouchableWithoutFeedback
+                  hitSlop={HIT_SLOP.SIZE20}
+                  onPress={() => console.log('Login')}>
+                  <GradientText style={styles.subtitleText}>Login</GradientText>
+                </TouchableWithoutFeedback>
+              </View>
             </View>
           </View>
         </View>

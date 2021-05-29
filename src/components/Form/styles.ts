@@ -38,10 +38,9 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontSize: CommonHeights.res14,
     color: Colors.white,
-    position: 'absolute',
-    bottom: -CommonHeights.res20,
+    marginHorizontal: 2,
+
     alignSelf: 'center',
-    paddingRight: 20,
   },
 
   viewButton: {
@@ -73,5 +72,12 @@ export default StyleSheet.create({
     color: Colors.porpoise,
     fontSize: CommonFonts.res15,
     fontWeight: '400',
+  },
+
+  viewGoLogin: {
+    position: 'absolute',
+    bottom: -CommonHeights.res20,
+    flexDirection: 'row',
+    alignSelf: 'center',
   },
 });
