@@ -1,13 +1,11 @@
 import React, { memo, useCallback } from 'react';
 import { Keyboard, ScrollView, Text, View } from 'react-native';
 import * as Yup from 'yup';
-import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import { useNavigation } from '@react-navigation/core';
 
 import Colors from 'utils/colors';
 import FormStyles from 'theme/FormStyles';
-import SessionSelector from 'data/session/selectors';
 
 import styles from '../styles';
 import FormTextInput from '../FormTextInput';
@@ -29,16 +27,13 @@ const loginFormInitialValues: LoginFormValues = { userName: '', fullName: '' };
 const CreateUserName = () => {
   const navigation = useNavigation();
 
-  const loginLoading = useSelector(SessionSelector.isOnLoginProcessSelector);
-
-  const onSubmit = async (values: LoginFormValues) => {
+  const onSubmit = useCallback((values: LoginFormValues) => {
     console.log('LoginFormValues', values);
-  };
+  }, []);
 
-  const navigateToCreateName = () => {
-    // navigation.navigate(ROUTES.LOGIN);
-    navigation.navigate(ROUTES.PICK_THEME); // Text
-  };
+  const navigateToCreateName = useCallback(() => {
+    navigation.navigate(ROUTES.PICK_THEME);
+  }, [navigation]);
 
   const formik = useFormik({
     validationSchema: FormSchema,
@@ -105,7 +100,7 @@ const CreateUserName = () => {
             </View>
             <View style={styles.viewButton}>
               <ActionButton
-                loading={loginLoading}
+                // loading={loginLoading} // waiting API
                 disabled={!isValid}
                 onPress={navigateToCreateName}
                 text={'Next'}
