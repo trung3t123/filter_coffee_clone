@@ -1,9 +1,8 @@
 import React, { ReactElement, memo, useCallback } from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import styles from './styles';
 import Colors from 'utils/colors';
