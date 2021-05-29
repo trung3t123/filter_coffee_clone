@@ -8,7 +8,6 @@ export default StyleSheet.create({
   container: {
     position: 'relative',
     justifyContent: 'center',
-    padding: 1,
   },
 
   icon: { position: 'absolute', right: CommonWidths.res15, zIndex: 10 },
@@ -22,6 +21,7 @@ export default StyleSheet.create({
     paddingVertical: CommonHeights.res10,
     minHeight: CommonHeights.res56,
     backgroundColor: Colors.mainBackgroundColorComponent,
+    margin: 1,
     borderRadius: 15,
   },
 
@@ -35,7 +35,6 @@ export default StyleSheet.create({
 
   linearGradient: {
     ...StyleSheet.absoluteFillObject,
-    height: CommonHeights.res56 + 2,
     borderRadius: 15,
   },
 });
