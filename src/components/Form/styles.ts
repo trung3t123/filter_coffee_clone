@@ -17,14 +17,14 @@ export default StyleSheet.create({
   },
 
   contentForm: {
-    flex: 2.5,
+    flex: 1,
     justifyContent: 'space-between',
   },
 
   header: {
-    flex: 1,
     justifyContent: 'flex-end',
-    paddingBottom: CommonHeights.res45,
+    height: CommonHeights.res260,
+    marginBottom: CommonHeights.res50,
   },
 
   titleText: {

@@ -15,7 +15,7 @@ export default StyleSheet.create({
     paddingHorizontal: CommonWidths.baseSpaceHorizontal,
 
     justifyContent: 'flex-end',
-    paddingBottom: CommonHeights.res45,
+    marginBottom: CommonHeights.res30,
     height: CommonHeights.res260,
   },
 

@@ -55,6 +55,7 @@ const CommonWidths = {
   res255: responsiveWidth(255),
   res280: responsiveWidth(280),
   res315: responsiveWidth(315),
+  res370: responsiveWidth(370),
   p05: Screen.width * 0.05,
   p07: Screen.width * 0.07,
   p09: Screen.width * 0.09,

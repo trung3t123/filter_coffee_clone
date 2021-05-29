@@ -13,14 +13,18 @@ const sizeViewOptionTheme =
   CommonWidths.windowWidth / 2 - CommonWidths.baseSpaceHorizontal * 1.5;
 
 const styles = StyleSheet.create({
-  container: {
-    width: sizeViewOptionTheme,
-    height: sizeViewOptionTheme,
-    margin: CommonWidths.res5,
+  content: {
+    flex: 1,
     backgroundColor: Colors.mainBackgroundColorComponent,
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  container: {
+    width: sizeViewOptionTheme,
+    height: sizeViewOptionTheme,
+    margin: CommonWidths.res5,
+    padding: 1,
   },
   text: {
     fontSize: CommonFonts.res15,
@@ -30,10 +34,9 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     ...StyleSheet.absoluteFillObject,
-    top: 3,
-    left: 3,
-    width: sizeViewOptionTheme + 3,
-    height: sizeViewOptionTheme + 3,
+
+    width: sizeViewOptionTheme,
+    height: sizeViewOptionTheme,
     borderRadius: 15,
   },
 });
@@ -52,7 +55,7 @@ const OptionTheme: React.FC<OptimeThemeProps> = ({
   title,
 }) => {
   return (
-    <View>
+    <View style={styles.container}>
       {isActive && (
         <LinearGradient
           start={{ x: 0, y: 0 }}
@@ -62,7 +65,7 @@ const OptionTheme: React.FC<OptimeThemeProps> = ({
         />
       )}
       <TouchableWithoutFeedback onPress={onPress}>
-        <View style={styles.container}>
+        <View style={styles.content}>
           <Icon
             name={nameIcon}
             size={CommonWidths.res27}
