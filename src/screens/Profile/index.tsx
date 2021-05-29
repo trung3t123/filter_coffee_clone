@@ -1,9 +1,10 @@
 import { logout } from 'data/session/actions';
 import { ActionDispatcher } from 'data/types';
 import React, { useCallback } from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, StyleSheet, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import CommonStyles from 'theme/CommonStyles';
+import Screen from 'utils/screen';
 
 type PropTypes = {
   navigation: any;
@@ -15,16 +16,26 @@ const Profile: React.FC<PropTypes> = ({}) => {
   const onPressLogout = useCallback(() => {
     dispatch(logout());
   }, [dispatch]);
-
+  console.log(Screen.height, Screen.width);
   return (
-    <View style={CommonStyles.container}>
-      <SafeAreaView style={CommonStyles.flex1}>
-        <Text>Profile Screen</Text>
+    <View style={{ height: Screen.height, width: Screen.width }}>
+      <Text style={{ color: 'white' }}>Profile Screen</Text>
 
-        <TouchableOpacity onPress={onPressLogout}>
-          <Text>Log out</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
+      <TouchableOpacity onPress={onPressLogout}>
+        <Text>Log out</Text>
+      </TouchableOpacity>
+      <View
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          height: Screen.height,
+          width: Screen.width,
+        }}>
+        <Image
+          resizeMode="cover"
+          source={require('../../../assets/Bitmap.png')}
+          style={{ height: Screen.height, width: '100%' }}
+        />
+      </View>
     </View>
   );
 };

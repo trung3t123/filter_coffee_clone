@@ -21,7 +21,8 @@ const Stack = createNativeStackNavigator<Record<string, any>>();
 const RootStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName={ROUTES.INTRODUCE}
+      // initialRouteName={ROUTES.INTRODUCE}
+      initialRouteName={ROUTES.BASE} // test
       screenOptions={{
         stackPresentation: 'push',
         headerShown: false,
