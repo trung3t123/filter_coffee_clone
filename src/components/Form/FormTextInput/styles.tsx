@@ -2,34 +2,39 @@ import Colors from 'utils/colors';
 import { StyleSheet } from 'react-native';
 import CommonHeights from 'theme/CommonHeights';
 import CommonFonts from 'theme/CommonFonts';
+import CommonWidths from 'theme/CommonWidths';
 
 export default StyleSheet.create({
   container: {
     position: 'relative',
     justifyContent: 'center',
-    padding: 1.5,
   },
-  icon: { position: 'absolute', right: 15, zIndex: 10 },
-  iconLeft: { position: 'absolute', left: 15, zIndex: 10 },
+
+  icon: { position: 'absolute', right: CommonWidths.res15, zIndex: 10 },
+
+  iconLeft: { position: 'absolute', left: CommonWidths.res15, zIndex: 10 },
+
   input: {
     fontSize: CommonFonts.res17,
-    // textAlign: 'right',
     color: Colors.white,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    height: CommonHeights.res56,
-    backgroundColor: '#1D1D1D',
+    paddingHorizontal: CommonWidths.res15,
+    paddingVertical: CommonHeights.res10,
+    minHeight: CommonHeights.res56,
+    backgroundColor: Colors.mainBackgroundColorComponent,
+    margin: 1,
     borderRadius: 15,
   },
+
   passwordInput: {
-    paddingRight: 48,
+    paddingRight: CommonWidths.res45,
   },
+
   paddingLeft: {
-    paddingLeft: 48,
+    paddingLeft: CommonWidths.res45,
   },
+
   linearGradient: {
     ...StyleSheet.absoluteFillObject,
-    height: CommonHeights.res56 + 3,
     borderRadius: 15,
   },
 });

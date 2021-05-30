@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback } from 'react';
 import {
   Keyboard,
   ScrollView,
@@ -15,7 +15,6 @@ import Colors from 'utils/colors';
 import FormStyles from 'theme/FormStyles';
 import { login } from 'data/session/actions';
 import { ActionDispatcher } from 'data/types';
-import { doNothing } from 'constants/default-values';
 import { passwordValidator } from 'utils/validators';
 import SessionSelector from 'data/session/selectors';
 
@@ -23,6 +22,9 @@ import styles from '../styles';
 import FormTextInput from '../FormTextInput';
 // import ROUTES from 'routes/names';
 import ActionButton from 'components/Theme/ActionButton';
+import ROUTES from 'routes/names';
+import { HIT_SLOP } from 'theme/touch';
+import GradientText from 'components/Text/LinearGradientText/LinearGradientText';
 
 const FormSchema = Yup.object().shape({
   email: Yup.string()
@@ -38,10 +40,10 @@ interface LoginFormValues {
 
 const loginFormInitialValues: LoginFormValues = { email: '', password: '' };
 
-const Login = () => {
+const SignUp = () => {
   const navigation = useNavigation();
-  const [errorMessage, setErrorMessage] = useState('');
   const dispatch: ActionDispatcher = useDispatch();
+
   const loginLoading = useSelector(SessionSelector.isOnLoginProcessSelector);
 
   const onSubmit = useCallback(
@@ -62,11 +64,14 @@ const Login = () => {
         }
       } catch (error) {
         console.warn('onSubmit LoginForm', { error });
-        setErrorMessage(error.message);
       }
     },
     [navigation, dispatch],
   );
+
+  const navigateToCreateName = () => {
+    navigation.navigate(ROUTES.CREATE_USER_NAME); // Real
+  };
 
   const formik = useFormik({
     validationSchema: FormSchema,
@@ -78,7 +83,7 @@ const Login = () => {
     values,
     handleChange,
     handleBlur,
-    handleSubmit,
+    // handleSubmit,
     // isSubmitting,
     isValid,
   } = formik;
@@ -98,11 +103,11 @@ const Login = () => {
         <View style={styles.content}>
           {/* header */}
           <View style={styles.header}>
-            <Text style={styles.titleText}>{'Hey\nWelcome back'}</Text>
+            <Text style={styles.titleText}>{'Let’s\nget started'}</Text>
           </View>
           <View style={styles.contentForm}>
+            {/* email field */}
             <View>
-              {/* email field */}
               <View style={FormStyles.field}>
                 <FormTextInput.IconLeftTextInput
                   nameIconLeft="mail"
@@ -132,28 +137,24 @@ const Login = () => {
                   onSubmitEditing={onSubmitEditing}
                 />
               </View>
-
-              {/* forgot password */}
-              <TouchableWithoutFeedback onPress={doNothing}>
-                <View style={styles.forgotPassword}>
-                  <Text style={styles.forgotPasswordTxt}>
-                    {'Forgot password?'}
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-              {!!errorMessage && (
-                <Text style={styles.errorMessage}>{errorMessage}</Text>
-              )}
             </View>
-
             {/* submit button */}
             <View style={styles.viewButton}>
               <ActionButton
                 loading={loginLoading}
                 disabled={!isValid}
-                onPress={handleSubmit}
-                text={'Login'}
+                onPress={navigateToCreateName}
+                text={'Sign Up'}
               />
+
+              <View style={styles.viewGoLogin}>
+                <Text style={styles.subtitleText}>Already an member?</Text>
+                <TouchableWithoutFeedback
+                  hitSlop={HIT_SLOP.SIZE20}
+                  onPress={() => console.log('Login')}>
+                  <GradientText style={styles.subtitleText}>Login</GradientText>
+                </TouchableWithoutFeedback>
+              </View>
             </View>
           </View>
         </View>
@@ -162,4 +163,4 @@ const Login = () => {
   );
 };
 
-export default memo(Login);
+export default memo(SignUp);

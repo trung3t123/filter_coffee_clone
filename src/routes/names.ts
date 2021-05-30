@@ -10,10 +10,11 @@ const ROUTES = {
   HOME: 'HOME',
   BASE: 'BASE',
   PROFILE: 'PROFILE',
-  CHART: 'CHART',
+  INTRODUCE: 'INTRODUCE',
   LOGIN: 'LOGIN',
   REGISTER: 'REGISTER',
-  PROMO: 'PROMO',
+  CREATE_USER_NAME: 'CREATE_USER_NAME',
+  PICK_THEME: 'PickThemesScreen',
 };
 
 export default ROUTES;

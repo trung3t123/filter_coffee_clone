@@ -2,13 +2,14 @@ import { ParamListBase } from '@react-navigation/routers';
 import React from 'react';
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 
-import Chart from 'screens/Chart';
-import Promo from 'screens/Promo';
+import IntroduceScreen from 'screens/IntroduceScreen';
 import LoginScreen from 'screens/LoginScreen';
-import RegisterScreen from 'screens/RegisterScreen';
+import RegisterScreen from 'screens/SignUpScreen';
+import CreateUserNameScreen from 'screens/CreateUserNameScreen';
 
 import ROUTES from '../names';
 import BottomTabBar from '../tab/BottomTabBar';
+import PickThemesScreen from 'screens/PickThemesScreen';
 
 export interface RootStackParamsList extends ParamListBase {
   LOGIN: undefined;
@@ -20,21 +21,21 @@ const Stack = createNativeStackNavigator<Record<string, any>>();
 const RootStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName={ROUTES.LOGIN}
+      initialRouteName={ROUTES.INTRODUCE}
       screenOptions={{
-        stackPresentation: 'modal',
+        stackPresentation: 'push',
         headerShown: false,
         gestureEnabled: true,
       }}>
       <Stack.Screen name={ROUTES.BASE} component={BottomTabBar} />
-      <Stack.Screen options={{}} name={ROUTES.LOGIN} component={LoginScreen} />
+      <Stack.Screen name={ROUTES.LOGIN} component={LoginScreen} />
+      <Stack.Screen name={ROUTES.REGISTER} component={RegisterScreen} />
+      <Stack.Screen name={ROUTES.INTRODUCE} component={IntroduceScreen} />
       <Stack.Screen
-        options={{}}
-        name={ROUTES.REGISTER}
-        component={RegisterScreen}
+        name={ROUTES.CREATE_USER_NAME}
+        component={CreateUserNameScreen}
       />
-      <Stack.Screen options={{}} name={ROUTES.CHART} component={Chart} />
-      <Stack.Screen options={{}} name={ROUTES.PROMO} component={Promo} />
+      <Stack.Screen name={ROUTES.PICK_THEME} component={PickThemesScreen} />
     </Stack.Navigator>
   );
 };

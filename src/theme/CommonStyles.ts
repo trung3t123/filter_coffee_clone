@@ -5,6 +5,8 @@ import CommonHeights from './CommonHeights';
 const CommonStyles = {
   flex1: { flex: 1 } as ViewStyle,
 
+  mainLinerGradientColor: [Colors.mainGradientStart, Colors.mainGradientEnd],
+
   container: {
     flex: 1,
     backgroundColor: Colors.white,

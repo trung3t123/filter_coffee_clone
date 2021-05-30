@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
 import Colors from 'utils/colors';
-import Screen from 'utils/screen';
 import CommonWidths from 'theme/CommonWidths';
+import CommonHeights from 'theme/CommonHeights';
 
 export default StyleSheet.create({
   container: {
     paddingHorizontal: CommonWidths.res23,
-    paddingTop: Screen.statusBarH,
+    paddingBottom: CommonHeights.res10,
     alignItems: 'center',
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.mainBackgroundColorContainer,
     flexDirection: 'row',
   },
   contentContainer: {
@@ -16,8 +16,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.black,
-    paddingVertical: 10,
+    minHeight: CommonHeights.res30,
   },
   leftIcon: {
     zIndex: 1,

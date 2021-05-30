@@ -6,7 +6,7 @@ const [shortDimension, longDimension] =
   width < height ? [width, height] : [height, width];
 const STANDARD_WINDOW = { width: 414, height: 896 };
 
-const STATUS_BAR_HEIGHT = Platform.isIos ? 34 : StatusBar.currentHeight;
+const STATUS_BAR_HEIGHT = Platform.isIos ? 34 : StatusBar.currentHeight || 0;
 const isLargeView = shortDimension >= 600;
 const isTabletMode = shortDimension / longDimension > 0.7;
 

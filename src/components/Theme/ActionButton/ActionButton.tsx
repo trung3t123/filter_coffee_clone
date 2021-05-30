@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import CommonHeights from 'theme/CommonHeights';
+import CommonWidths from 'theme/CommonWidths';
+import CommonFonts from 'theme/CommonFonts';
 import Colors from 'utils/colors';
 
 var styles = StyleSheet.create({
@@ -15,7 +17,7 @@ var styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: CommonFonts.res18,
     // fontFamily: 'Metropolis',
     textAlign: 'center',
     color: '#ffffff',
@@ -26,7 +28,8 @@ var styles = StyleSheet.create({
   container: {
     borderRadius: 15,
     overflow: 'hidden',
-    margin: 10,
+    marginVertical: CommonHeights.res10,
+    marginHorizontal: CommonWidths.res20,
     height: CommonHeights.res56,
     justifyContent: 'center',
   },
