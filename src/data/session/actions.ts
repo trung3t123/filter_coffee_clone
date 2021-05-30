@@ -4,11 +4,12 @@ import { SESSION_STATUS } from 'constants/session';
 import ActionErrorHandler from 'utils/error-handler/action';
 
 import SessionAPI from 'api/session';
-import { LoginAPIParameters } from 'api/session.types';
+import { LoginAPIParameters, SignUpAPIParameters } from 'api/session.types';
 
 import * as types from './action_types';
 import SessionSelector from './selectors';
-import { LoginResultType } from './types';
+import { LoginResultType, SignUpResultType } from './types';
+import { Alert } from 'react-native';
 
 export const setSessionStatus = (status: string) => ({
   type: types.SET_SESSION_STATUS,
@@ -85,17 +86,45 @@ export const login = (
     console.log('login response', response);
 
     const {
-      data: { access_token },
+      data: { token },
     } = response;
     // set token
-    await dispatch(authorize(access_token));
+    await dispatch(authorize(token));
     dispatch({ type: types.LOGIN_SUCCESS });
 
     result.success = true;
   } catch (error) {
-    result.error = error?.response?.data?.message || '';
+    result.error = error?.data?.response?.data?.message || '';
+    Alert.alert('error', result.error);
     dispatch({ type: types.LOGIN_FAILURE });
     ActionErrorHandler.handleFunction(error, 'handleLogin', {
+      breadCrumb: true,
+    });
+  }
+  return result;
+};
+
+export const signUp = (
+  params: SignUpAPIParameters,
+): AsyncAction<Promise<SignUpResultType>> => async dispatch => {
+  const result: SignUpResultType = { success: false, error: undefined };
+  try {
+    dispatch({ type: types.LOGIN_REQUEST });
+    const response = await SessionAPI.signUp(params);
+
+    const {
+      data: { token },
+    } = response;
+    // set token
+    await dispatch(authorize(token));
+    dispatch({ type: types.LOGIN_SUCCESS });
+
+    result.success = true;
+  } catch (error) {
+    result.error = error?.data?.response?.data?.message || '';
+    Alert.alert('error', result.error);
+    dispatch({ type: types.REGISTER_FAILURE });
+    ActionErrorHandler.handleFunction(error, 'handleSignUp', {
       breadCrumb: true,
     });
   }

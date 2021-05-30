@@ -1,4 +1,8 @@
+const versionApi = {
+  v1: 'api/v1/',
+};
+
 export const SERVERS = {
-  PRODUCTION: 'https://ancient-ravine-01251.herokuapp.com',
-  DEVELOPMENT: 'https://ancient-ravine-01251.herokuapp.com',
+  PRODUCTION: `https://filter-coffee.herokuapp.com/${versionApi.v1}`,
+  DEVELOPMENT: `https://filter-coffee.herokuapp.com/${versionApi.v1}`,
 };
