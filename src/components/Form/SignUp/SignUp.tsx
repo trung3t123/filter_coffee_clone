@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/core';
 
 import Colors from 'utils/colors';
 import FormStyles from 'theme/FormStyles';
-import { login } from 'data/session/actions';
+import { signUp } from 'data/session/actions';
 import { ActionDispatcher } from 'data/types';
 import { passwordValidator } from 'utils/validators';
 import SessionSelector from 'data/session/selectors';
@@ -33,25 +33,31 @@ const FormSchema = Yup.object().shape({
   password: passwordValidator,
 });
 
-interface LoginFormValues {
+interface SignUpValues {
   email: string;
   password: string;
 }
 
-const loginFormInitialValues: LoginFormValues = { email: '', password: '' };
+const loginFormInitialValues: SignUpValues = { email: '', password: '' };
 
 const SignUp = () => {
   const navigation = useNavigation();
   const dispatch: ActionDispatcher = useDispatch();
 
-  const loginLoading = useSelector(SessionSelector.isOnLoginProcessSelector);
+  const signUpLoading: boolean = useSelector(
+    SessionSelector.isOnRegisterProcessSelector,
+  );
+
+  const navigateToCreateName = useCallback(() => {
+    navigation.navigate(ROUTES.CREATE_USER_NAME); // Real
+  }, [navigation]);
 
   const onSubmit = useCallback(
-    async (values: LoginFormValues) => {
-      console.log('LoginFormValues', values);
+    async (values: SignUpValues) => {
+      console.log('SignUpValues', values);
       try {
         const { email = '', password = '' } = values ?? {};
-        const { error, success } = await dispatch(login({ email, password }));
+        const { error, success } = await dispatch(signUp({ email, password }));
 
         console.log('------->result', error, success);
 
@@ -60,18 +66,14 @@ const SignUp = () => {
         }
 
         if (success) {
-          navigation.goBack();
+          navigateToCreateName();
         }
       } catch (error) {
         console.warn('onSubmit LoginForm', { error });
       }
     },
-    [navigation, dispatch],
+    [navigateToCreateName, dispatch],
   );
-
-  const navigateToCreateName = () => {
-    navigation.navigate(ROUTES.CREATE_USER_NAME); // Real
-  };
 
   const formik = useFormik({
     validationSchema: FormSchema,
@@ -83,11 +85,10 @@ const SignUp = () => {
     values,
     handleChange,
     handleBlur,
-    // handleSubmit,
+    handleSubmit,
     // isSubmitting,
     isValid,
   } = formik;
-
   const onSubmitEditing = useCallback(() => {
     Keyboard.dismiss();
   }, []);
@@ -141,9 +142,9 @@ const SignUp = () => {
             {/* submit button */}
             <View style={styles.viewButton}>
               <ActionButton
-                loading={loginLoading}
+                loading={signUpLoading}
                 disabled={!isValid}
-                onPress={navigateToCreateName}
+                onPress={handleSubmit}
                 text={'Sign Up'}
               />
 

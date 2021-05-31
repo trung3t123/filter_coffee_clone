@@ -23,6 +23,7 @@ import styles from '../styles';
 import FormTextInput from '../FormTextInput';
 // import ROUTES from 'routes/names';
 import ActionButton from 'components/Theme/ActionButton';
+import ROUTES from 'routes/names';
 
 const FormSchema = Yup.object().shape({
   email: Yup.string()
@@ -42,7 +43,13 @@ const Login = () => {
   const navigation = useNavigation();
   const [errorMessage, setErrorMessage] = useState('');
   const dispatch: ActionDispatcher = useDispatch();
-  const loginLoading = useSelector(SessionSelector.isOnLoginProcessSelector);
+  const loginLoading: boolean = useSelector(
+    SessionSelector.isOnLoginProcessSelector,
+  );
+
+  const onLoginSuccess = useCallback(() => {
+    navigation.navigate(ROUTES.BASE);
+  }, [navigation]);
 
   const onSubmit = useCallback(
     async (values: LoginFormValues) => {
@@ -58,14 +65,14 @@ const Login = () => {
         }
 
         if (success) {
-          navigation.goBack();
+          onLoginSuccess();
         }
       } catch (error) {
         console.warn('onSubmit LoginForm', { error });
         setErrorMessage(error.message);
       }
     },
-    [navigation, dispatch],
+    [dispatch, onLoginSuccess],
   );
 
   const formik = useFormik({
