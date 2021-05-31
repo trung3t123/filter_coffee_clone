@@ -1,4 +1,4 @@
-import React, { ReactElement, memo, useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { View, StatusBar, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -11,11 +11,12 @@ import CommonHeights from 'theme/CommonHeights';
 import CommonFonts from 'theme/CommonFonts';
 
 type PropTypes = {
-  children?: ReactElement<any, any>;
-  isGoBack?: Boolean;
+  children?: any;
+  isGoBack?: boolean;
+  isAbsolute?: boolean;
 };
 
-const Header: React.FC<PropTypes> = ({ children, isGoBack }) => {
+const Header: React.FC<PropTypes> = ({ children, isGoBack, isAbsolute }) => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
@@ -27,7 +28,10 @@ const Header: React.FC<PropTypes> = ({ children, isGoBack }) => {
     <View
       style={[
         styles.container,
-        { paddingTop: Math.max(insets.top, CommonHeights.res40) },
+        {
+          paddingTop: Math.max(insets.top, CommonHeights.res40),
+        },
+        isAbsolute && styles.absoluteHeader,
       ]}>
       <StatusBar barStyle="light-content" />
       <View style={styles.contentContainer}>

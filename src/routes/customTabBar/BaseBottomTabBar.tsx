@@ -1,13 +1,24 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import CommonHeights from 'theme/CommonHeights';
-import Colors from 'utils/colors';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { BlurView } from '@react-native-community/blur';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import CommonHeights from 'theme/CommonHeights';
+import CommonStyles from 'theme/CommonStyles';
+
+import Colors from 'utils/colors';
+
 import ROUTES from 'routes/names';
 
+import IconLinearGradient from 'components/Icon/IconLinearGradient/IconLinearGradient';
+import Avatar from 'components/Image/Avatar';
+
+import styles from './styles';
+
 const BaseBottomTabBar = ({ state, descriptors, navigation }: any) => {
+  const insets = useSafeAreaInsets();
+
   const focusedOptions = descriptors[state.routes[state.index].key].options;
-  console.log(state, 'state');
   if (focusedOptions.tabBarVisible === false) {
     return null;
   }
@@ -16,18 +27,14 @@ const BaseBottomTabBar = ({ state, descriptors, navigation }: any) => {
 
   return (
     <View
-      style={{
-        // backgroundColor: 'transparent',
-        height: CommonHeights.res80,
-        backgroundColor: isEnableBlurView
-          ? 'transparent'
-          : Colors.mainBackgroundColorComponent,
-
-        bottom: 0,
-        width: '100%',
-        position: 'absolute',
-        // zIndex: 8,
-      }}>
+      style={[
+        styles.container,
+        {
+          backgroundColor: isEnableBlurView
+            ? Colors.transparent
+            : Colors.mainBackgroundColorComponent,
+        },
+      ]}>
       {isEnableBlurView && (
         <BlurView
           blurRadius={0.1}
@@ -37,19 +44,9 @@ const BaseBottomTabBar = ({ state, descriptors, navigation }: any) => {
           reducedTransparencyFallbackColor="white"
         />
       )}
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-        }}>
+      <View style={CommonStyles.rowFlex}>
         {state.routes.map((route: any, index: number) => {
           const { options } = descriptors[route.key];
-          const label =
-            options.tabBarLabel !== undefined
-              ? options.tabBarLabel
-              : options.title !== undefined
-              ? options.title
-              : route.name;
 
           const isFocused = state.index === index;
 
@@ -74,20 +71,34 @@ const BaseBottomTabBar = ({ state, descriptors, navigation }: any) => {
 
           return (
             <TouchableOpacity
-              key={`${label}`}
+              key={`${options.tabBarBadge}`}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={options.tabBarAccessibilityLabel}
               testID={options.tabBarTestID}
               onPress={onPress}
               onLongPress={onLongPress}
-              style={{
-                flex: 1,
-                alignItems: 'center',
-              }}>
-              <Text style={{ color: isFocused ? 'red' : 'white' }}>
-                {label}
-              </Text>
+              style={[
+                styles.buttonContainer,
+                {
+                  paddingBottom: insets.top / 2,
+                },
+              ]}>
+              {options.tabBarBadge === 'avatar' ? (
+                <Avatar
+                  isEnableGradient={isFocused}
+                  avatarStyle={styles.avatar}
+                  radiusAvatar={50}
+                />
+              ) : (
+                <IconLinearGradient
+                  enableLiner={isFocused}
+                  linerColor={CommonStyles.mainLinerGradientColor}
+                  name={options.tabBarBadge}
+                  size={CommonHeights.res22}
+                  color="white"
+                />
+              )}
             </TouchableOpacity>
           );
         })}
