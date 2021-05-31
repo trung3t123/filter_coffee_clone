@@ -1,10 +1,10 @@
 import React, { memo, useMemo } from 'react';
 import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { ImageStyle } from 'react-native-fast-image';
 
 import CommonStyles from 'theme/CommonStyles';
 import CacheImage from '../CacheImage';
-import { ImageStyle } from 'react-native-fast-image';
 
 import styles from './styles';
 

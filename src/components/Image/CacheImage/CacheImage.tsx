@@ -10,6 +10,7 @@ type FastImageProp = {
   uri?: string;
   resizeMode?: any;
   loadingImage?: boolean;
+  source?: any;
 };
 
 const CacheImage = ({
@@ -17,12 +18,13 @@ const CacheImage = ({
   uri,
   resizeMode,
   loadingImage,
+  source,
 }: FastImageProp) => {
   const [isLoadingImage, setIsLoadingImage] = useState(false);
 
   const sourceImage = useMemo(() => {
-    return uri ? { uri } : require('../../../../assets/Bitmap.png'); // test require default
-  }, [uri]);
+    return uri ? { uri } : source || require('../../../../assets/Bitmap.png'); // test require default
+  }, [uri, source]);
 
   const setImageLoading = useCallback(() => {
     setIsLoadingImage(!isLoadingImage);
