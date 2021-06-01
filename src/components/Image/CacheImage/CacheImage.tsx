@@ -23,7 +23,7 @@ const CacheImage = ({
   const [isLoadingImage, setIsLoadingImage] = useState(false);
 
   const sourceImage = useMemo(() => {
-    return uri ? { uri } : source || require('../../../../assets/Bitmap.png'); // test require default
+    return uri ? { uri } : source ?? require('../../../../assets/Bitmap.png'); // test require default
   }, [uri, source]);
 
   const setImageLoading = useCallback(() => {
