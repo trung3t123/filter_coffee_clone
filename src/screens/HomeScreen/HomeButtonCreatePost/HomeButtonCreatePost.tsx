@@ -14,7 +14,7 @@ const HomeButtonCreatePost = () => {
   return (
     <TouchableWithoutFeedback>
       <View style={styles.containerButton}>
-        <LinearBackground radiusLiner={50} />
+        <LinearBackground borderRadiusLinerView={50} />
         <Icon name="edit" size={CommonFonts.res20} color={Colors.white} />
       </View>
     </TouchableWithoutFeedback>

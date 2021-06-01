@@ -22,7 +22,7 @@ const ItemPost: React.FC<ItemPostProps> = ({ item }) => {
           <Text style={styles.textNameUserPost}>
             Ishika Agarwal{' '}
             <View style={styles.viewIconCheck}>
-              <Icon name="check" color={Colors.white} />
+              <Icon name="check" color={Colors.white} size={CommonFonts.res8} />
             </View>
           </Text>
 

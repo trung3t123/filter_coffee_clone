@@ -11,16 +11,16 @@ var styles = StyleSheet.create({
 });
 
 type PropTypes = {
-  radiusLiner?: number;
+  borderRadiusLinerView?: number;
 };
 
-const LinearBackground: React.FC<PropTypes> = ({ radiusLiner }) => {
+const LinearBackground: React.FC<PropTypes> = ({ borderRadiusLinerView }) => {
   return (
     <LinearGradient
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 0 }}
       colors={CommonStyles.mainLinerGradientColor}
-      style={[styles.linearGradient, { borderRadius: radiusLiner }]}
+      style={[styles.linearGradient, { borderRadius: borderRadiusLinerView }]}
     />
   );
 };

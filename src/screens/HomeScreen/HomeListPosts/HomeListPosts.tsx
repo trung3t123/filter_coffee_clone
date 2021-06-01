@@ -34,7 +34,6 @@ const HomeBanner = () => {
       onEndReachedThreshold={0.2}
       fetchData={onFetchListPosts}
       style={styles.containerFlatList}
-      data={[]}
       keyExtractor={keyExtractor}
       emptyMessage="Not Found"
     />

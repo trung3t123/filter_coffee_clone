@@ -7,18 +7,14 @@ import {
   UpdateUserNameParameter,
   UpdateFollowThemeParameter,
 } from './session.types';
-// import { CLIENT_ID, CLIENT_SECRET } from './constants';
 
 export function loginAPI({
   email = '',
   password = '',
 }: LoginAPIParameters = {}) {
   return axios.post<LoginResponse>('login', {
-    // grant_type: 'password',
     email: email,
     password: password,
-    // client_id: CLIENT_ID,
-    // client_secret: CLIENT_SECRET,
   });
 }
 
@@ -43,7 +39,7 @@ export function updateUserNameApi({
 }
 
 export function updateFollowThemeApi({ themeKey }: UpdateFollowThemeParameter) {
-  return axios.post<any>('user/follow-theme', {
+  return axios.post<any>('user-theme', {
     theme_key: themeKey,
   });
 }

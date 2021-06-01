@@ -8,7 +8,7 @@ import {
   LoginAPIParameters,
   SignUpAPIParameters,
   UpdateUserNameParameter,
-  // UpdateFollowThemeParameter,
+  UpdateFollowThemeParameter,
 } from 'api/session/session.types';
 
 import * as sessionReducerTypes from './action_reducer_types';
@@ -119,7 +119,7 @@ export const signUp = (
 ): AsyncAction<Promise<SignUpResultType>> => async dispatch => {
   const result: SignUpResultType = { success: false, error: undefined };
   try {
-    dispatch({ type: sessionReducerTypes.LOGIN_REQUEST });
+    dispatch({ type: sessionReducerTypes.REGISTER_REQUEST });
     const response = await SessionAPI.signUp(params);
 
     const {
@@ -127,6 +127,7 @@ export const signUp = (
     } = response;
 
     SetupAPI.setHeaderToken(token, 'redux:action:authorize');
+    dispatch({ type: sessionReducerTypes.REGISTER_SUCCESS });
 
     result.success = true;
   } catch (error) {
@@ -160,11 +161,13 @@ export const updateUserName = (
   return result;
 };
 
-export const updateFollowTheme = (): // params: UpdateFollowThemeParameter,
+export const updateFollowTheme = (
+  params: UpdateFollowThemeParameter,
+): // params: UpdateFollowThemeParameter,
 AsyncAction<Promise<UpdateUserNameResultType>> => async dispatch => {
   const result: UpdateUserNameResultType = { success: false, error: undefined };
   try {
-    // await SessionAPI.updateFollowTheme(params);
+    await SessionAPI.updateFollowTheme(params);
 
     dispatch(authorize());
 

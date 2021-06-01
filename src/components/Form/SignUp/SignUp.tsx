@@ -1,5 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import { Keyboard, ScrollView, Text, View } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -19,7 +21,6 @@ import ActionButton from 'components/Theme/ActionButton';
 import ROUTES from 'routes/names';
 import { HIT_SLOP } from 'theme/touch';
 import GradientText from 'components/Text/LinearGradientText/LinearGradientText';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const FormSchema = Yup.object().shape({
   email: Yup.string()
@@ -43,12 +44,13 @@ const SignUp = () => {
     SessionSelector.isOnRegisterProcessSelector,
   );
 
-  const navigateToCreateName = useCallback(
-    name => {
-      navigation.navigate(name);
-    },
-    [navigation],
-  );
+  const navigateToCreateName = useCallback(() => {
+    navigation.navigate(ROUTES.CREATE_USER_NAME);
+  }, [navigation]);
+
+  const navigateToLogin = useCallback(() => {
+    navigation.navigate(ROUTES.LOGIN);
+  }, [navigation]);
 
   const onSubmit = useCallback(
     async (values: SignUpValues) => {
@@ -61,10 +63,10 @@ const SignUp = () => {
         }
 
         if (success) {
-          navigateToCreateName(ROUTES.CREATE_USER_NAME);
+          navigateToCreateName();
         }
       } catch (error) {
-        console.warn('onSubmit LoginForm', { error });
+        console.warn('onSubmit Register', { error });
       }
     },
     [navigateToCreateName, dispatch],
@@ -76,19 +78,13 @@ const SignUp = () => {
     onSubmit,
   });
 
-  const {
-    values,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    // isSubmitting,
-    errors,
-    isValid,
-  } = formik;
+  const { values, handleChange, handleBlur, handleSubmit, errors } = formik;
   const onSubmitEditing = useCallback(() => {
     Keyboard.dismiss();
   }, []);
-  console.log(errors, 'errors');
+
+  const errorMessage = errors.password || errors.email;
+
   return (
     <>
       <ScrollView
@@ -134,10 +130,8 @@ const SignUp = () => {
                   onSubmitEditing={onSubmitEditing}
                 />
               </View>
-              {(errors.password || errors.email) && (
-                <Text style={styles.errorMessage}>
-                  {errors.email || errors.password}
-                </Text>
+              {errorMessage && (
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
               )}
             </View>
 
@@ -145,7 +139,6 @@ const SignUp = () => {
             <View style={styles.viewButton}>
               <ActionButton
                 loading={signUpLoading}
-                disabled={!isValid}
                 onPress={handleSubmit}
                 text={'Sign Up'}
               />
@@ -154,7 +147,7 @@ const SignUp = () => {
                 <Text style={styles.subtitleText}>Already an member?</Text>
                 <TouchableWithoutFeedback
                   hitSlop={HIT_SLOP.SIZE20}
-                  onPress={() => navigateToCreateName(ROUTES.LOGIN)}>
+                  onPress={navigateToLogin}>
                   <GradientText style={styles.subtitleText}>Login</GradientText>
                 </TouchableWithoutFeedback>
               </View>

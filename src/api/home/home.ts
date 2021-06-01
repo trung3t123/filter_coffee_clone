@@ -1,11 +1,16 @@
 import axios from 'axios';
 import { GetListPostsParameters, ListPostsResponse } from './home.types';
-// import { CLIENT_ID, CLIENT_SECRET } from './constants';
+import qs from 'qs';
 
 export function getListPostsApi(
   { offset, limit }: GetListPostsParameters = { offset: 0, limit: 10 },
 ) {
-  return axios.get<ListPostsResponse>(`posts?limit=${limit}&offset=${offset}`);
+  const parameterQueryListPosts = qs.parse({
+    offset: `${offset}`,
+    limit: `${limit}`,
+  });
+
+  return axios.get<ListPostsResponse>(`posts?${parameterQueryListPosts}`);
 }
 
 const HomeApi = {

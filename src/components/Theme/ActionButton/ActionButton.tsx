@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   TouchableWithoutFeedback,
   StyleSheet,
@@ -45,15 +45,20 @@ const ActionButton: React.FC<PropTypes> = ({
   text = 'Get Started',
   onPress,
   disabled,
+  loading,
 }) => {
+  const isDisabledButton = loading || disabled;
+
+  const isShowTextLoading = isDisabledButton ? 'Loading...' : text;
+
   return (
-    <TouchableWithoutFeedback onPress={onPress} disabled={disabled}>
+    <TouchableWithoutFeedback onPress={onPress} disabled={isDisabledButton}>
       <View style={styles.container}>
         <LinearBackground />
-        <Text style={styles.buttonText}>{text}</Text>
+        <Text style={styles.buttonText}>{isShowTextLoading}</Text>
       </View>
     </TouchableWithoutFeedback>
   );
 };
 
-export default ActionButton;
+export default memo(ActionButton);

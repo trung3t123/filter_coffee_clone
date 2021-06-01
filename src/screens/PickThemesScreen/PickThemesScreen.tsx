@@ -11,6 +11,7 @@ import { ActionDispatcher } from 'data/types';
 
 const PickThemesScreen = () => {
   const [optionThemePicked, pickOptionTheme] = useState<string[]>([]);
+  const [isOnProgressPickTheme, setIsOnProgressPickTheme] = useState<boolean>();
   const dispatch: ActionDispatcher = useDispatch();
 
   const pickThemeCompleted = useCallback(async () => {
@@ -18,18 +19,19 @@ const PickThemesScreen = () => {
       Alert.alert('Notice', 'Please pick a theme to continue');
       return;
     }
+    setIsOnProgressPickTheme(true);
     try {
       const { error } = await dispatch(
-        // updateFollowTheme({ themeKey: optionThemePicked }),
-        updateFollowTheme(),
+        updateFollowTheme({ themeKey: optionThemePicked }),
       );
       if (error) {
         throw new Error(error);
       }
     } catch (error) {
+      setIsOnProgressPickTheme(false);
       Alert.alert('Error', error);
     }
-  }, [dispatch, optionThemePicked.length]);
+  }, [dispatch, optionThemePicked.length, setIsOnProgressPickTheme]);
 
   const onPickOptionTheme = useCallback(
     (value: string) => {
@@ -57,7 +59,11 @@ const PickThemesScreen = () => {
           optionThemePicked={optionThemePicked}
         />
         <View style={styles.viewButton}>
-          <ActionButton onPress={pickThemeCompleted} text={'Next'} />
+          <ActionButton
+            loading={isOnProgressPickTheme}
+            onPress={pickThemeCompleted}
+            text={'Next'}
+          />
         </View>
       </ScrollView>
     </View>

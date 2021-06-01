@@ -65,7 +65,9 @@ const Login = () => {
         if (success) {
           onLoginSuccess();
         }
-      } catch (error) {}
+      } catch (error) {
+        console.warn('onSubmit LoginForm', { error });
+      }
     },
     [dispatch, onLoginSuccess],
   );
@@ -89,6 +91,8 @@ const Login = () => {
   const onSubmitEditing = useCallback(() => {
     Keyboard.dismiss();
   }, []);
+
+  const errorMessage = errors.password || errors.email;
 
   return (
     <>
@@ -136,10 +140,8 @@ const Login = () => {
                 />
               </View>
 
-              {(errors.password || errors.email) && (
-                <Text style={styles.errorMessage}>
-                  {errors.email || errors.password}
-                </Text>
+              {errorMessage && (
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
               )}
 
               {/* forgot password */}
@@ -150,9 +152,6 @@ const Login = () => {
                   </Text>
                 </View>
               </TouchableWithoutFeedback>
-              {/* {!!errorMessage && (
-                <Text style={styles.errorMessage}>{errorMessage}</Text>
-              )} */}
             </View>
 
             {/* submit button */}

@@ -19,7 +19,8 @@ interface PropTypes extends FlatListProps<never> {
   onEndReachedThreshold: number;
   fetchData: (offset: number, limit?: number) => Promise<ApiResultListData>;
   emptyMessage?: string;
-  handleData?: (data: never[]) => never[];
+  handleData: (data: never[]) => never[];
+  data: never[];
 }
 
 class InfinityList extends React.Component<PropTypes> {
@@ -61,7 +62,7 @@ class InfinityList extends React.Component<PropTypes> {
       this.fetchedData = data || [];
 
       this.setState({
-        data: handleData ? handleData(this.fetchedData) : this.fetchedData,
+        data: handleData(this.fetchedData),
         pagination: pagination,
         fetchStatus: FETCH_STATUS.IDLE,
       });
@@ -94,7 +95,7 @@ class InfinityList extends React.Component<PropTypes> {
     if (this.mounted && !error) {
       this.fetchedData = [...this.fetchedData, ...incomeData];
       this.setState({
-        data: handleData ? handleData(this.fetchedData) : this.fetchedData,
+        data: handleData(this.fetchedData),
         pagination: pagination,
         fetchStatus: FETCH_STATUS.IDLE,
       });
@@ -174,8 +175,9 @@ class InfinityList extends React.Component<PropTypes> {
   static defaultProps = {
     onEndReachedThreshold: 0.2,
     emptyMessage: '',
-    // handleData: (data: never[]) => data,
+    handleData: (data: never[]) => data,
     ListEmptyComponent: undefined,
+    data: [],
   };
 }
 

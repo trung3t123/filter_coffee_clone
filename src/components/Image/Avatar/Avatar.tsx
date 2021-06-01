@@ -15,7 +15,7 @@ type AvatarType = {
 };
 
 const Avatar = ({ uri, avatarStyle, isEnableGradient }: AvatarType) => {
-  const radiusBorderLiner = useMemo(
+  const checkBorderRadiusLinearView = useMemo(
     () => ({ borderRadius: avatarStyle?.borderRadius || 0 }),
     [avatarStyle?.borderRadius],
   );
@@ -27,7 +27,7 @@ const Avatar = ({ uri, avatarStyle, isEnableGradient }: AvatarType) => {
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           colors={CommonStyles.mainLinerGradientColor}
-          style={[styles.linearGradient, radiusBorderLiner]}
+          style={[styles.linearGradient, checkBorderRadiusLinearView]}
         />
       )}
       <CacheImage uri={uri} imageStyle={avatarStyle} />

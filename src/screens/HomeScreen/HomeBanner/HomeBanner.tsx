@@ -12,7 +12,7 @@ import styles from './styles';
 const HomeBanner = () => {
   return (
     <View style={styles.containerBanner}>
-      <LinearBackground radiusLiner={17} />
+      <LinearBackground borderRadiusLinerView={17} />
       <Text style={styles.textTitleBanner}>
         Coffee Townhouse With Ramp Capital
         <CacheImage
@@ -23,12 +23,10 @@ const HomeBanner = () => {
 
       <View style={styles.viewBottomBanner}>
         <Text style={styles.textTimeBanner}>
-          <Icon size={CommonFonts.res14} name="calendar" />
-          14/21{' '}
+          <Icon size={CommonFonts.res14} name="calendar" /> 14/21{'  '}
         </Text>
         <Text style={styles.textTimeBanner}>
-          <Icon size={CommonFonts.res14} name="clock" />
-          09:00 pm
+          <Icon size={CommonFonts.res14} name="clock" /> 09:00 pm
         </Text>
       </View>
     </View>

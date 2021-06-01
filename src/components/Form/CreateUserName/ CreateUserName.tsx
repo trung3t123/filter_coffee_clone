@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { Keyboard, ScrollView, Text, View } from 'react-native';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -32,11 +32,16 @@ const loginFormInitialValues: updateUserNameValue = {
 
 const CreateUserName = () => {
   const navigation = useNavigation();
+  const [
+    isOnProgressUpdateUserName,
+    setIsOnProgressUpdateUserName,
+  ] = useState<boolean>();
   const dispatch: ActionDispatcher = useDispatch();
 
   const onSubmit = useCallback(
     async (values: updateUserNameValue) => {
       try {
+        setIsOnProgressUpdateUserName(true);
         const { userName = '', fullName = '' } = values ?? {};
         const { success, error } = await dispatch(
           updateUserName({ userName, fullName }),
@@ -47,11 +52,12 @@ const CreateUserName = () => {
         }
 
         if (success) {
+          setIsOnProgressUpdateUserName(false);
           navigation.navigate(ROUTES.PICK_THEME);
         }
       } catch (error) {}
     },
-    [navigation, dispatch],
+    [navigation, dispatch, setIsOnProgressUpdateUserName],
   );
 
   const formik = useFormik({
@@ -67,12 +73,13 @@ const CreateUserName = () => {
     handleSubmit,
     // isSubmitting,
     errors,
-    isValid,
   } = formik;
 
   const onSubmitEditing = useCallback(() => {
     Keyboard.dismiss();
   }, []);
+
+  const errorMessage = errors.userName || errors.fullName;
 
   return (
     <>
@@ -117,15 +124,13 @@ const CreateUserName = () => {
                   onSubmitEditing={onSubmitEditing}
                 />
               </View>
-              {(errors.userName || errors.fullName) && (
-                <Text style={styles.errorMessage}>
-                  {errors.fullName || errors.userName}
-                </Text>
+              {errorMessage && (
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
               )}
             </View>
             <View style={styles.viewButton}>
               <ActionButton
-                disabled={!isValid}
+                loading={isOnProgressUpdateUserName}
                 onPress={handleSubmit}
                 text={'Next'}
               />
