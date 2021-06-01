@@ -10,6 +10,7 @@ import HomeBanner from './HomeBanner';
 import HomeListPosts from './HomeListPosts';
 import HomeButtonCreatePost from './HomeButtonCreatePost';
 import CommonFonts from 'theme/CommonFonts';
+import Colors from 'utils/colors';
 
 type PropTypes = {};
 
@@ -29,7 +30,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   titleFlatList: {
-    color: 'white',
+    color: Colors.white,
     marginTop: CommonHeights.res15,
     marginBottom: CommonHeights.res20,
     fontWeight: '500',

@@ -4,6 +4,7 @@ import { ImageStyle } from 'react-native-fast-image';
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
 import CommonFonts from 'theme/CommonFonts';
+import Colors from 'utils/colors';
 
 const styles = StyleSheet.create({
   containerBanner: {
@@ -11,7 +12,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: CommonWidths.res15,
     marginHorizontal: CommonWidths.baseSpaceHorizontal,
     marginTop: CommonHeights.res10,
-    backgroundColor: 'red',
     borderRadius: 17,
     paddingTop: CommonHeights.res35,
   },
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   textTitleBanner: {
     fontSize: CommonFonts.res22,
     fontWeight: '500',
-    color: 'white',
+    color: Colors.white,
   },
 
   imageCoffee: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
   viewBottomBanner: { flexDirection: 'row', paddingTop: CommonHeights.res40 },
 
-  textTimeBanner: { fontSize: CommonFonts.res14, color: 'white' },
+  textTimeBanner: { fontSize: CommonFonts.res14, color: Colors.white },
 });
 
 export default styles;
