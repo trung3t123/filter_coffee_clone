@@ -11,29 +11,48 @@ import styles from '../styles';
 import FormTextInput from '../FormTextInput';
 import ActionButton from 'components/Theme/ActionButton';
 import ROUTES from 'routes/names';
+import { useDispatch } from 'react-redux';
+import { updateUserName } from 'data/session/actions';
+import { ActionDispatcher } from 'data/types';
 
 const FormSchema = Yup.object().shape({
   userName: Yup.string().required('User name should not be empty!'),
   fullName: Yup.string().required('Full name should not be empty!'),
 });
 
-interface LoginFormValues {
+interface updateUserNameValue {
   userName: string;
   fullName: string;
 }
 
-const loginFormInitialValues: LoginFormValues = { userName: '', fullName: '' };
+const loginFormInitialValues: updateUserNameValue = {
+  userName: '',
+  fullName: '',
+};
 
 const CreateUserName = () => {
   const navigation = useNavigation();
+  const dispatch: ActionDispatcher = useDispatch();
 
-  const onSubmit = useCallback((values: LoginFormValues) => {
-    console.log('LoginFormValues', values);
-  }, []);
+  const onSubmit = useCallback(
+    async (values: updateUserNameValue) => {
+      try {
+        const { userName = '', fullName = '' } = values ?? {};
+        const { success, error } = await dispatch(
+          updateUserName({ userName, fullName }),
+        );
 
-  const navigateToCreateName = useCallback(() => {
-    navigation.navigate(ROUTES.PICK_THEME);
-  }, [navigation]);
+        if (error) {
+          throw new Error(error);
+        }
+
+        if (success) {
+          navigation.navigate(ROUTES.PICK_THEME);
+        }
+      } catch (error) {}
+    },
+    [navigation, dispatch],
+  );
 
   const formik = useFormik({
     validationSchema: FormSchema,
@@ -45,8 +64,9 @@ const CreateUserName = () => {
     values,
     handleChange,
     handleBlur,
-    // handleSubmit,
+    handleSubmit,
     // isSubmitting,
+    errors,
     isValid,
   } = formik;
 
@@ -97,19 +117,21 @@ const CreateUserName = () => {
                   onSubmitEditing={onSubmitEditing}
                 />
               </View>
+              {(errors.userName || errors.fullName) && (
+                <Text style={styles.errorMessage}>
+                  {errors.fullName || errors.userName}
+                </Text>
+              )}
             </View>
             <View style={styles.viewButton}>
               <ActionButton
-                // loading={loginLoading} // waiting API
                 disabled={!isValid}
-                onPress={navigateToCreateName}
+                onPress={handleSubmit}
                 text={'Next'}
               />
             </View>
           </View>
         </View>
-
-        {/* submit button */}
       </ScrollView>
     </>
   );

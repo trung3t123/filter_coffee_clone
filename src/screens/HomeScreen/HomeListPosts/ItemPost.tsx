@@ -20,7 +20,7 @@ const ItemPost: React.FC<ItemPostProps> = ({ item }) => {
 
         <View style={styles.viewNamePostOfUser}>
           <Text style={styles.textNameUserPost}>
-            Ishika Agarwal
+            Ishika Agarwal{' '}
             <View style={styles.viewIconCheck}>
               <Icon name="check" color={Colors.white} />
             </View>

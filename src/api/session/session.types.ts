@@ -15,7 +15,11 @@ export type SignUpResponse = {
   status: number;
 };
 
-export type updateInfoParameter = {
-  username: string;
+export type UpdateUserNameParameter = {
+  userName: string;
   fullName: string;
+};
+
+export type UpdateFollowThemeParameter = {
+  themeKey: string[];
 };

@@ -82,12 +82,13 @@ const SignUp = () => {
     handleBlur,
     handleSubmit,
     // isSubmitting,
+    errors,
     isValid,
   } = formik;
   const onSubmitEditing = useCallback(() => {
     Keyboard.dismiss();
   }, []);
-
+  console.log(errors, 'errors');
   return (
     <>
       <ScrollView
@@ -133,7 +134,13 @@ const SignUp = () => {
                   onSubmitEditing={onSubmitEditing}
                 />
               </View>
+              {(errors.password || errors.email) && (
+                <Text style={styles.errorMessage}>
+                  {errors.email || errors.password}
+                </Text>
+              )}
             </View>
+
             {/* submit button */}
             <View style={styles.viewButton}>
               <ActionButton
