@@ -48,6 +48,7 @@ const Colors = {
   mainBackgroundColorContainer: 'rgb(0, 0, 0)',
   mainBackgroundColorComponent: '#1D1D1D',
   transparent: 'transparent',
+  verifiedUser: 'rgba(56, 201, 118, 1',
 
   black40: 'rgba(0, 0, 0, 0.4)',
   black70: 'rgba(0, 0, 0, 0.7)',
@@ -136,7 +137,6 @@ const Colors = {
   tealishGreen: 'rgb(0, 224, 101)', // #00e065
   tomato: 'rgb(229, 56, 56)',
   vermilionBird: 'rgb(241, 67, 54)',
-  transparent: 'transparent',
   trolleyGrey: 'rgb(130, 130, 130)', // #8282828
   tuna: '#363a45',
   ratingYellow: 'rgba(250,238,145,1)',

@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import CommonFonts from 'theme/CommonFonts';
+import Colors from 'utils/colors';
 // import CommonFonts from 'theme/CommonFonts';
 
 const styles = StyleSheet.create({
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
   viewIconCheck: {
-    backgroundColor: 'rgba(56, 201, 118, 1)',
+    backgroundColor: Colors.verifiedUser,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
