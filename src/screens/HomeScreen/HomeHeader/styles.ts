@@ -1,11 +1,19 @@
 import { StyleSheet } from 'react-native';
+import CommonHeights from 'theme/CommonHeights';
+import CommonFonts from 'theme/CommonFonts';
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    flexDirection: 'row',
+    flex: 1,
     justifyContent: 'space-between',
-    backgroundColor: 'white',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: CommonHeights.res10,
+  },
+
+  title: {
+    color: 'white',
+    fontSize: CommonFonts.res28,
   },
 });
 

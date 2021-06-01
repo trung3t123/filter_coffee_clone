@@ -11,24 +11,14 @@ import styles from './styles';
 type AvatarType = {
   uri?: string;
   avatarStyle: ImageStyle;
-  radiusAvatar?: number;
   isEnableGradient?: boolean;
 };
 
-const Avatar = ({
-  uri,
-  avatarStyle,
-  isEnableGradient,
-  radiusAvatar,
-}: AvatarType) => {
-  const radiusBorder = useMemo(() => ({ borderRadius: radiusAvatar || 0 }), [
-    radiusAvatar,
-  ]);
-
-  const imageStyle = useMemo(() => ({ ...avatarStyle, ...radiusBorder }), [
-    avatarStyle,
-    radiusBorder,
-  ]);
+const Avatar = ({ uri, avatarStyle, isEnableGradient }: AvatarType) => {
+  const radiusBorderLiner = useMemo(
+    () => ({ borderRadius: avatarStyle?.borderRadius || 0 }),
+    [avatarStyle?.borderRadius],
+  );
 
   return (
     <View>
@@ -37,10 +27,10 @@ const Avatar = ({
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           colors={CommonStyles.mainLinerGradientColor}
-          style={[styles.linearGradient, radiusBorder]}
+          style={[styles.linearGradient, radiusBorderLiner]}
         />
       )}
-      <CacheImage uri={uri} imageStyle={imageStyle} />
+      <CacheImage uri={uri} imageStyle={avatarStyle} />
     </View>
   );
 };

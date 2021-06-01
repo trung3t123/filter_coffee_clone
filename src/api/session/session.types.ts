@@ -14,3 +14,8 @@ export type SignUpResponse = {
   token: string;
   status: number;
 };
+
+export type updateInfoParameter = {
+  username: string;
+  fullName: string;
+};

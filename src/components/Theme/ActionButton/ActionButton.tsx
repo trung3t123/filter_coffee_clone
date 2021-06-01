@@ -6,11 +6,10 @@ import {
   View,
   GestureResponderEvent,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
 import CommonFonts from 'theme/CommonFonts';
-import Colors from 'utils/colors';
+import LinearBackground from '../LinearBackground';
 
 var styles = StyleSheet.create({
   linearGradient: {
@@ -50,12 +49,7 @@ const ActionButton: React.FC<PropTypes> = ({
   return (
     <TouchableWithoutFeedback onPress={onPress} disabled={disabled}>
       <View style={styles.container}>
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          colors={[Colors.mainGradientStart, Colors.mainGradientEnd]}
-          style={styles.linearGradient}
-        />
+        <LinearBackground />
         <Text style={styles.buttonText}>{text}</Text>
       </View>
     </TouchableWithoutFeedback>

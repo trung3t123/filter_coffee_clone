@@ -4,36 +4,29 @@ import {
   FlatList,
   FlatListProps,
   RefreshControl,
+  View,
 } from 'react-native';
 import config from './config';
 import NotFound from '../NotFound';
 import CommonStyles from 'theme/CommonStyles';
+import { ApiResultListData } from 'data/home/types';
+import Colors from 'utils/colors';
+import CommonHeights from 'theme/CommonHeights';
 
 const { FETCH_STATUS, PAGE_LIMIT } = config;
 
-type PaginationType = {
-  current_page: number;
-  total: number;
-};
-
 interface PropTypes extends FlatListProps<never> {
   onEndReachedThreshold: number;
-  fetchData: (
-    page: number,
-    limit: number,
-  ) => {
-    data: never[];
-    pagination: PaginationType;
-  };
+  fetchData: (offset: number, limit?: number) => Promise<ApiResultListData>;
   emptyMessage?: string;
-  handleData: (data: never[]) => never[];
+  handleData?: (data: never[]) => never[];
 }
 
 class InfinityList extends React.Component<PropTypes> {
   state = {
     fetchStatus: FETCH_STATUS.IDLE,
     data: [] as never[],
-    pagination: { current_page: 1, total: 0 },
+    pagination: { total: 0 },
   };
 
   fetchedData = [];
@@ -51,49 +44,64 @@ class InfinityList extends React.Component<PropTypes> {
   fetchNew = async () => {
     const { fetchData, handleData } = this.props;
     const { fetchStatus } = this.state;
+
     if (fetchStatus !== FETCH_STATUS.IDLE) {
       return;
     }
+
     this.setState({
       data: [],
       pagination: {},
       fetchStatus: FETCH_STATUS.REFRESH,
     });
-    const { data, pagination } = await fetchData(1, PAGE_LIMIT);
-    if (this.mounted) {
-      this.fetchedData = data;
+
+    const { data, pagination, error } = await fetchData(0, PAGE_LIMIT);
+
+    if (this.mounted && !error) {
+      this.fetchedData = data || [];
+
       this.setState({
-        data: handleData(this.fetchedData),
-        pagination,
+        data: handleData ? handleData(this.fetchedData) : this.fetchedData,
+        pagination: pagination,
         fetchStatus: FETCH_STATUS.IDLE,
+      });
+    }
+    if (error) {
+      this.setState({
+        fetchStatus: FETCH_STATUS.ERROR,
       });
     }
   };
 
   fetchNext = async () => {
     const { fetchStatus, pagination: currentPagination } = this.state;
+    const offsetQuery = this.fetchedData.length;
+
     if (fetchStatus !== FETCH_STATUS.IDLE) {
       return;
     }
-    if (
-      currentPagination?.current_page >=
-      currentPagination?.total / PAGE_LIMIT
-    ) {
+    if (offsetQuery >= currentPagination?.total) {
       return;
     }
+
     const { fetchData, handleData } = this.props;
     this.setState({ fetchStatus: FETCH_STATUS.LOAD_MORE });
-    const { data: incomeData, pagination } = await fetchData(
-      currentPagination.current_page + 1 || 1,
+    const { data, pagination, error } = await fetchData(
+      offsetQuery,
       PAGE_LIMIT,
     );
-
-    if (this.mounted) {
+    const incomeData = data || [];
+    if (this.mounted && !error) {
       this.fetchedData = [...this.fetchedData, ...incomeData];
       this.setState({
-        data: handleData(this.fetchedData),
-        pagination,
+        data: handleData ? handleData(this.fetchedData) : this.fetchedData,
+        pagination: pagination,
         fetchStatus: FETCH_STATUS.IDLE,
+      });
+    }
+    if (error) {
+      this.setState({
+        fetchStatus: FETCH_STATUS.ERROR,
       });
     }
   };
@@ -106,38 +114,52 @@ class InfinityList extends React.Component<PropTypes> {
     this.fetchNext();
   };
 
-  // keyExtractor = item => `${item.id}`;
-
   renderListEmpty = () => {
     const { emptyMessage, ListEmptyComponent } = this.props;
     const { fetchStatus } = this.state;
+
     if (fetchStatus === FETCH_STATUS.IDLE) {
       if (ListEmptyComponent) {
         return ListEmptyComponent;
       }
       return <NotFound title={emptyMessage} />;
     }
+
     return null;
   };
 
   renderFooter = () => {
     const { fetchStatus } = this.state;
-    if (fetchStatus === FETCH_STATUS.LOAD_MORE) {
-      return <ActivityIndicator style={CommonStyles.activityIndicator} />;
-    }
-    return null;
+
+    return (
+      <View
+        style={{
+          minHeight: CommonHeights.res90,
+          paddingBottom: CommonHeights.res80,
+        }}>
+        {fetchStatus === FETCH_STATUS.LOAD_MORE && (
+          <ActivityIndicator
+            size="large"
+            color={Colors.white}
+            style={CommonStyles.activityIndicator}
+          />
+        )}
+      </View>
+    );
   };
 
   render() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { fetchData, handleData, ...rest } = this.props;
+    const { ...rest } = this.props;
     const { data, fetchStatus } = this.state;
+
     return (
       <FlatList
         {...rest}
         data={data}
         refreshControl={
           <RefreshControl
+            tintColor={Colors.white}
+            size={30}
             onRefresh={this.onRefresh}
             refreshing={fetchStatus === FETCH_STATUS.REFRESH}
           />
@@ -152,7 +174,7 @@ class InfinityList extends React.Component<PropTypes> {
   static defaultProps = {
     onEndReachedThreshold: 0.2,
     emptyMessage: '',
-    handleData: (data: never[]) => data,
+    // handleData: (data: never[]) => data,
     ListEmptyComponent: undefined,
   };
 }

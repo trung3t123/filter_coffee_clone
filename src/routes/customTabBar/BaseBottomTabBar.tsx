@@ -88,7 +88,6 @@ const BaseBottomTabBar = ({ state, descriptors, navigation }: any) => {
                 <Avatar
                   isEnableGradient={isFocused}
                   avatarStyle={styles.avatar}
-                  radiusAvatar={50}
                 />
               ) : (
                 <IconLinearGradient

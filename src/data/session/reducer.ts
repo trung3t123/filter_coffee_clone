@@ -1,7 +1,7 @@
 import produce from 'immer';
 import { persistReducer, PersistConfig } from 'redux-persist';
 import MMKVStorage from 'react-native-mmkv-storage';
-import * as types from './action_types';
+import * as types from './action_reducer_types';
 import { SessionStates } from './types';
 import { SESSION_STATUS } from 'constants/session';
 import { ACTION_STATES } from 'data/config';

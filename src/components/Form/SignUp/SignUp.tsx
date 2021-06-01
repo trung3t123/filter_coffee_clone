@@ -1,11 +1,5 @@
 import React, { memo, useCallback } from 'react';
-import {
-  Keyboard,
-  ScrollView,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { Keyboard, ScrollView, Text, View } from 'react-native';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -25,6 +19,7 @@ import ActionButton from 'components/Theme/ActionButton';
 import ROUTES from 'routes/names';
 import { HIT_SLOP } from 'theme/touch';
 import GradientText from 'components/Text/LinearGradientText/LinearGradientText';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const FormSchema = Yup.object().shape({
   email: Yup.string()
@@ -48,25 +43,25 @@ const SignUp = () => {
     SessionSelector.isOnRegisterProcessSelector,
   );
 
-  const navigateToCreateName = useCallback(() => {
-    navigation.navigate(ROUTES.CREATE_USER_NAME); // Real
-  }, [navigation]);
+  const navigateToCreateName = useCallback(
+    name => {
+      navigation.navigate(name);
+    },
+    [navigation],
+  );
 
   const onSubmit = useCallback(
     async (values: SignUpValues) => {
-      console.log('SignUpValues', values);
       try {
         const { email = '', password = '' } = values ?? {};
         const { error, success } = await dispatch(signUp({ email, password }));
-
-        console.log('------->result', error, success);
 
         if (error) {
           throw new Error(error);
         }
 
         if (success) {
-          navigateToCreateName();
+          navigateToCreateName(ROUTES.CREATE_USER_NAME);
         }
       } catch (error) {
         console.warn('onSubmit LoginForm', { error });
@@ -152,7 +147,7 @@ const SignUp = () => {
                 <Text style={styles.subtitleText}>Already an member?</Text>
                 <TouchableWithoutFeedback
                   hitSlop={HIT_SLOP.SIZE20}
-                  onPress={() => console.log('Login')}>
+                  onPress={() => navigateToCreateName(ROUTES.LOGIN)}>
                   <GradientText style={styles.subtitleText}>Login</GradientText>
                 </TouchableWithoutFeedback>
               </View>
