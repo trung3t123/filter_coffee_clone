@@ -21,4 +21,13 @@ export default StyleSheet.create({
   leftIcon: {
     zIndex: 1,
   },
+
+  absoluteHeader: {
+    position: 'absolute',
+    top: 0,
+    maxHeight: CommonHeights.res80,
+    width: '100%',
+    zIndex: 10,
+    backgroundColor: Colors.transparent,
+  },
 });

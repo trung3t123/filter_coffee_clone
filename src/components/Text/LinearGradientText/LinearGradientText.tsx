@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { MaskedViewIOS, Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Colors from 'utils/colors';
@@ -16,4 +16,4 @@ const GradientText = (props: any) => (
   </MaskedViewIOS>
 );
 
-export default GradientText;
+export default memo(GradientText);

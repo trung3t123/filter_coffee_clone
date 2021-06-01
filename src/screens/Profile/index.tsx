@@ -1,9 +1,11 @@
+import React, { useCallback } from 'react';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { logout } from 'data/session/actions';
 import { ActionDispatcher } from 'data/types';
-import React, { useCallback } from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import CommonStyles from 'theme/CommonStyles';
+import Screen from 'utils/screen';
+import Header from 'components/Header';
+import Colors from 'utils/colors';
 
 type PropTypes = {
   navigation: any;
@@ -17,16 +19,21 @@ const Profile: React.FC<PropTypes> = ({}) => {
   }, [dispatch]);
 
   return (
-    <View style={CommonStyles.container}>
-      <SafeAreaView style={CommonStyles.flex1}>
-        <Text>Profile Screen</Text>
-
+    <View style={{ height: Screen.height, width: Screen.width }}>
+      <Header>
+        <Text style={styles.textColor}>Profile Screen</Text>
         <TouchableOpacity onPress={onPressLogout}>
-          <Text>Log out</Text>
+          <Text style={styles.textColor}>Log out</Text>
         </TouchableOpacity>
-      </SafeAreaView>
+      </Header>
     </View>
   );
 };
 
 export default Profile;
+
+const styles = StyleSheet.create({
+  textColor: {
+    color: Colors.white,
+  },
+});

@@ -47,6 +47,7 @@ const Colors = {
   mainGradientEnd: '#875BFF',
   mainBackgroundColorContainer: 'rgb(0, 0, 0)',
   mainBackgroundColorComponent: '#1D1D1D',
+  transparent: 'transparent',
 
   black40: 'rgba(0, 0, 0, 0.4)',
   black70: 'rgba(0, 0, 0, 0.7)',

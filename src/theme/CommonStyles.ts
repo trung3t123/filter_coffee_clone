@@ -9,7 +9,7 @@ const CommonStyles = {
 
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.mainBackgroundColorContainer,
   } as ViewStyle,
 
   absolute: StyleSheet.absoluteFillObject,
@@ -30,6 +30,10 @@ const CommonStyles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  } as ViewStyle,
+
+  rowFlex: {
+    flexDirection: 'row',
   } as ViewStyle,
 };
 

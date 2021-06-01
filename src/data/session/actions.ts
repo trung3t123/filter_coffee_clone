@@ -83,8 +83,6 @@ export const login = (
     dispatch({ type: types.LOGIN_REQUEST });
     const response = await SessionAPI.login(params);
 
-    console.log('login response', response);
-
     const {
       data: { token },
     } = response;
@@ -110,14 +108,15 @@ export const signUp = (
   const result: SignUpResultType = { success: false, error: undefined };
   try {
     dispatch({ type: types.LOGIN_REQUEST });
-    const response = await SessionAPI.signUp(params);
+    await SessionAPI.signUp(params);
 
-    const {
-      data: { token },
-    } = response;
+    // const {
+    //   data: { token },
+    // } = response;
     // set token
-    await dispatch(authorize(token));
-    dispatch({ type: types.LOGIN_SUCCESS });
+
+    // await dispatch(authorize(token));
+    // dispatch({ type: types.LOGIN_SUCCESS });
 
     result.success = true;
   } catch (error) {
