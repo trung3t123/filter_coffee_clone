@@ -16,7 +16,7 @@ var styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
   buttonText: {
-    fontSize: CommonFonts.res18,
+    fontSize: CommonFonts.res17,
     // fontFamily: 'Metropolis',
     textAlign: 'center',
     color: '#ffffff',

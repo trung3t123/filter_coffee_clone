@@ -1,6 +1,8 @@
 import React, { memo, useCallback } from 'react';
 import { Keyboard, ScrollView, Text, View } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+
+// use button from gesture-handler to resolve conflix with GradientText( <- use MarkedView )
+import { TouchableWithoutFeedback as TouchableGestureHandler } from 'react-native-gesture-handler';
 
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -145,11 +147,11 @@ const SignUp = () => {
 
               <View style={styles.viewGoLogin}>
                 <Text style={styles.subtitleText}>Already an member?</Text>
-                <TouchableWithoutFeedback
+                <TouchableGestureHandler
                   hitSlop={HIT_SLOP.SIZE20}
                   onPress={navigateToLogin}>
                   <GradientText style={styles.subtitleText}>Login</GradientText>
-                </TouchableWithoutFeedback>
+                </TouchableGestureHandler>
               </View>
             </View>
           </View>
