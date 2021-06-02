@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo } from 'react';
 import {
   Text,
   View,
@@ -77,6 +77,40 @@ const MediaScreen: React.FC<PropTypes> = ({}) => {
     ));
   }
 
+  const renderItem = ({ item, index }) => {
+    const inputRange = [
+      ITEM_SIZE * (index - 0.5),
+      ITEM_SIZE * index,
+      ITEM_SIZE * (index + 0.5),
+    ];
+    const scale = scrollX.interpolate({
+      inputRange,
+      outputRange: [0.9, 1, 0.9],
+    });
+    const position = scrollX.interpolate({
+      inputRange,
+      outputRange: [-CommonWidths.p15, 0, CommonWidths.p15],
+    });
+    const perspective = scrollX.interpolate({
+      inputRange,
+      outputRange: [1200, 800, 1200],
+    });
+    return (
+      <Animated.View
+        style={{
+          transform: [{ scale }, { translateX: position }, { perspective }],
+        }}>
+        <ScrollingCarouselItem
+          key={index}
+          imageUrl={item.url}
+          itemTitle={item.tittle}
+        />
+      </Animated.View>
+    );
+  };
+
+  const getKey = (item: { id: any }) => item.id;
+
   return (
     <View style={styles.container}>
       <Header isGoBack>
@@ -101,42 +135,8 @@ const MediaScreen: React.FC<PropTypes> = ({}) => {
             pagingEnabled
             showsHorizontalScrollIndicator={false}
             data={mockData}
-            renderItem={({ item, index }) => {
-              const inputRange = [
-                ITEM_SIZE * (index - 0.5),
-                ITEM_SIZE * index,
-                ITEM_SIZE * (index + 0.5),
-              ];
-              const scale = scrollX.interpolate({
-                inputRange,
-                outputRange: [0.9, 1, 0.9],
-              });
-              const position = scrollX.interpolate({
-                inputRange,
-                outputRange: [-CommonWidths.p15, 0, CommonWidths.p15],
-              });
-              const perspective = scrollX.interpolate({
-                inputRange,
-                outputRange: [1200, 800, 1200],
-              });
-              return (
-                <Animated.View
-                  style={{
-                    transform: [
-                      { scale },
-                      { translateX: position },
-                      { perspective },
-                    ],
-                  }}>
-                  <ScrollingCarouselItem
-                    key={index}
-                    imageUrl={item.url}
-                    itemTitle={item.tittle}
-                  />
-                </Animated.View>
-              );
-            }}
-            keyExtractor={item => item.id}
+            renderItem={renderItem}
+            keyExtractor={getKey}
           />
         </View>
         <View style={styles.flexRowBetween}>
@@ -149,7 +149,7 @@ const MediaScreen: React.FC<PropTypes> = ({}) => {
   );
 };
 
-export default MediaScreen;
+export default memo(MediaScreen);
 
 const styles = StyleSheet.create({
   container: {
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
 
   itemTitle: {
     fontWeight: '500',
-    fontSize: 20,
+    fontSize: CommonFonts.res20,
     lineHeight: 28,
     color: Colors.textColor,
   },

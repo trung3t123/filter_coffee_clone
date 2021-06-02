@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CommonWidths from 'theme/CommonWidths';
 import CommonHeights from 'theme/CommonHeights';
 import Colors from 'utils/colors';
 import CacheImage from 'components/Image/CacheImage';
+import CommonFonts from 'theme/CommonFonts';
 
 type Props = {
   textItem: string;
 };
-
-export default function ResearchItem({ textItem }: Props) {
+const ResearchItem = ({ textItem }: Props) => {
   return (
     <View style={styles.container}>
       <CacheImage
@@ -19,7 +19,7 @@ export default function ResearchItem({ textItem }: Props) {
       <Text style={styles.itemText}>{textItem}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -40,10 +40,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemText: {
-    fontSize: 17,
+    fontSize: CommonFonts.res17,
     fontWeight: '500',
     lineHeight: 23,
     color: Colors.textColor,
     flex: 3,
   },
 });
+
+export default memo(ResearchItem);

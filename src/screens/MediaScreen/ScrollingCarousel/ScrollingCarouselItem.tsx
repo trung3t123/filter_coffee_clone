@@ -4,16 +4,15 @@ import CacheImage from 'components/Image/CacheImage';
 import Colors from 'utils/colors';
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
+import CommonFonts from 'theme/CommonFonts';
+import { memo } from 'react';
 
 type PropsType = {
   imageUrl: string;
   itemTitle: string;
 };
 
-export default function ScrollingCarouselItem({
-  imageUrl,
-  itemTitle,
-}: PropsType) {
+const ScrollingCarouselItem = ({ imageUrl, itemTitle }: PropsType) => {
   return (
     <View style={styles.centerItem}>
       <View style={styles.itemContainer}>
@@ -25,7 +24,7 @@ export default function ScrollingCarouselItem({
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
   },
   itemTitle: {
     fontWeight: '500',
-    fontSize: 20,
+    fontSize: CommonFonts.res20,
     lineHeight: 28,
     color: Colors.textColor,
   },
@@ -55,3 +54,5 @@ const styles = StyleSheet.create({
     marginBottom: CommonHeights.res18,
   },
 });
+
+export default memo(ScrollingCarouselItem);
