@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     height: CommonHeights.res80,
     resizeMode: 'contain',
     borderRadius: 10,
-    marginRight: 10,
+    marginRight: CommonWidths.res10,
     flex: 1,
   },
   itemText: {
