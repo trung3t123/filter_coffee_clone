@@ -6,7 +6,8 @@ export const SET_SESSION_STATUS = 'session:SET_SESSION_STATUS';
 
 export const UPDATE_TOKEN = 'session:UPDATE_TOKEN';
 
-export const UPDATE_USER_ID = 'session:UPDATE_USER_ID';
+export const UPDATE_USER = 'session:UPDATE_USER';
+
 export const CLEAR = 'session:CLEAR';
 
 export const LOGOUT_REQUEST = 'session:LOGOUT_REQUEST';

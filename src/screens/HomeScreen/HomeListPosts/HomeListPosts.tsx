@@ -4,17 +4,20 @@ import InfinityList from 'components/List/InfinityList';
 import { onGetListPosts } from 'data/home/actions';
 import { useDispatch } from 'react-redux';
 import { ActionDispatcher } from 'data/types';
-import ItemPost from './ItemPost';
 import { itemType } from './types';
 
 import styles from './styles';
-import { ApiResultListData } from 'data/home/types';
+import { HomeActionResultListData } from 'data/home/types';
+import PostItem from 'components/Item/PostItem';
 
 const HomeBanner = () => {
   const dispatch: ActionDispatcher = useDispatch();
 
   const onFetchListPosts = useCallback(
-    async (offset: number, limit?: number): Promise<ApiResultListData> => {
+    async (
+      offset: number,
+      limit?: number,
+    ): Promise<HomeActionResultListData> => {
       const response = await dispatch(onGetListPosts(offset, limit));
       return response;
     },
@@ -22,7 +25,7 @@ const HomeBanner = () => {
   );
 
   const renderItem = useCallback(
-    (item: itemType) => <ItemPost item={item} />,
+    (item: itemType) => <PostItem item={item} />,
     [],
   );
 

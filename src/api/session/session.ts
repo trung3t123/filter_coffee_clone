@@ -6,6 +6,7 @@ import {
   SignUpResponse,
   UpdateUserNameParameter,
   UpdateFollowThemeParameter,
+  UpdateUserNameResponse,
 } from './session.types';
 
 export function loginAPI({
@@ -32,7 +33,7 @@ export function updateUserNameApi({
   userName = '',
   fullName = '',
 }: UpdateUserNameParameter) {
-  return axios.put<any>('user/info', {
+  return axios.put<UpdateUserNameResponse>('user/info', {
     username: userName,
     fullname: fullName,
   });

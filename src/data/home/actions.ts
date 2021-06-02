@@ -2,7 +2,8 @@ import * as homeReducerTypes from './action_reducer_types';
 import { AsyncAction } from 'data/types';
 import {
   // PostTypes,
-  ApiResultListData,
+  HomeActionResult,
+  HomeActionResultListData,
 } from './types';
 import ActionErrorHandler from 'utils/error-handler/action';
 import HomeApi from 'api/home/home';
@@ -24,8 +25,8 @@ const onRequestListPostFailed = () => ({
 export const onGetListPosts = (
   offset: number,
   limit?: number,
-): AsyncAction<Promise<ApiResultListData>> => async dispatch => {
-  let result: ApiResultListData = {
+): AsyncAction<Promise<HomeActionResultListData>> => async dispatch => {
+  let result: HomeActionResultListData = {
     data: [],
     pagination: {
       total: 0,
@@ -61,5 +62,30 @@ export const onGetListPosts = (
       breadCrumb: true,
     });
     return { error: error?.data?.response?.data?.message || '' };
+  }
+};
+
+export const getDetailPost = async (id: string): Promise<HomeActionResult> => {
+  let result: HomeActionResult = {
+    data: undefined,
+    success: false,
+    error: undefined,
+  };
+  try {
+    const {
+      data: { data },
+    } = await HomeApi.getDetailPost({
+      id,
+    });
+
+    result.data = data?.record;
+    result.success = true;
+
+    return result;
+  } catch (error) {
+    ActionErrorHandler.handleFunction(error, 'getDetailPost', {
+      breadCrumb: true,
+    });
+    return { error: error?.data?.response?.data?.message || [] };
   }
 };

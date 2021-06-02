@@ -6,6 +6,7 @@ const ROUTES = {
   // stack
   MAIN_STACK: 'MAIN_STACK',
   MODAL_STACK: 'MODAL_STACK',
+
   // BottomTab
   BASE: 'BASE',
 
@@ -13,6 +14,8 @@ const ROUTES = {
   PROFILE: 'PROFILE',
   EXPLORE: 'EXPLORE',
   MEDIA: 'MEDIA',
+
+  POST_DETAIL: 'POST_DETAIL',
 
   //
   INTRODUCE: 'INTRODUCE',

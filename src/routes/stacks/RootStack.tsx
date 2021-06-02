@@ -12,6 +12,7 @@ import BottomTabBar from '../tab/BottomTabBar';
 import PickThemesScreen from 'screens/PickThemesScreen';
 import SessionSelector from 'data/session/selectors';
 import { useSelector } from 'react-redux';
+import PostDetailScreen from 'screens/PostDetailScreen';
 
 export interface RootStackParamsList extends ParamListBase {
   LOGIN: undefined;
@@ -32,7 +33,13 @@ const RootStack = () => {
         gestureEnabled: true,
       }}>
       {isAuthorized ? (
-        <Stack.Screen name={ROUTES.BASE} component={BottomTabBar} />
+        <>
+          <Stack.Screen name={ROUTES.BASE} component={BottomTabBar} />
+          <Stack.Screen
+            name={ROUTES.POST_DETAIL}
+            component={PostDetailScreen}
+          />
+        </>
       ) : (
         <>
           <Stack.Screen name={ROUTES.LOGIN} component={LoginScreen} />

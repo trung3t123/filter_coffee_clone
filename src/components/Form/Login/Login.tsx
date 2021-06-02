@@ -85,7 +85,6 @@ const Login = () => {
     handleSubmit,
     errors,
     // isSubmitting,
-    isValid,
   } = formik;
 
   const onSubmitEditing = useCallback(() => {
@@ -158,7 +157,6 @@ const Login = () => {
             <View style={styles.viewButton}>
               <ActionButton
                 loading={loginLoading}
-                disabled={!isValid}
                 onPress={handleSubmit}
                 text={'Login'}
               />

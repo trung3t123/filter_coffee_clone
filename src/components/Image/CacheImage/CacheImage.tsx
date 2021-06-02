@@ -4,6 +4,7 @@ import FastImage, { ImageStyle } from 'react-native-fast-image';
 
 import styles from './styles';
 import { doNothing } from 'constants/default-values';
+import Colors from 'utils/colors';
 
 type FastImageProp = {
   imageStyle: ImageStyle;
@@ -46,7 +47,7 @@ const CacheImage = ({
       {(isLoadingImage || loadingImage) && (
         <ActivityIndicator
           style={styles.positionAbsolute}
-          color="white"
+          color={Colors.white}
           size="large"
         />
       )}

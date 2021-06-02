@@ -17,6 +17,7 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: CommonFonts.res17,
+    fontWeight: '500',
     // fontFamily: 'Metropolis',
     textAlign: 'center',
     color: '#ffffff',

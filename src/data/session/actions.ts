@@ -17,6 +17,7 @@ import {
   LoginResultType,
   SignUpResultType,
   UpdateUserNameResultType,
+  UserInfoTypes,
 } from './types';
 import { Alert } from 'react-native';
 
@@ -32,6 +33,21 @@ export const updateToken = (token: string = '') => ({
 
 export const clearSession = () => ({
   type: sessionReducerTypes.CLEAR,
+});
+
+export const updateUserInfo = (userInfo: UserInfoTypes) => ({
+  type: sessionReducerTypes.UPDATE_USER,
+  payload: { userInfo },
+});
+
+export const registerSuccess = (userInfo: UserInfoTypes) => ({
+  type: sessionReducerTypes.REGISTER_SUCCESS,
+  payload: { userInfo },
+});
+
+export const loginSuccess = (userInfo: UserInfoTypes) => ({
+  type: sessionReducerTypes.LOGIN_SUCCESS,
+  payload: { userInfo },
 });
 
 export const authorize = (newAccessToken?: string): AsyncAction => async (
@@ -93,11 +109,12 @@ export const login = (
     const response = await SessionAPI.login(params);
 
     const {
-      data: { token },
+      data: { token, user },
     } = response;
     // set token
     await dispatch(authorize(token));
-    dispatch({ type: sessionReducerTypes.LOGIN_SUCCESS });
+    dispatch(loginSuccess(user));
+    // dispatch({ type: sessionReducerTypes.LOGIN_SUCCESS });
 
     result.success = true;
   } catch (error) {
@@ -123,11 +140,12 @@ export const signUp = (
     const response = await SessionAPI.signUp(params);
 
     const {
-      data: { token },
+      data: { token, user },
     } = response;
 
     SetupAPI.setHeaderToken(token, 'redux:action:authorize');
-    dispatch({ type: sessionReducerTypes.REGISTER_SUCCESS });
+    dispatch(registerSuccess(user));
+    // dispatch({ type: sessionReducerTypes.REGISTER_SUCCESS });
 
     result.success = true;
   } catch (error) {
@@ -145,10 +163,15 @@ export const signUp = (
 
 export const updateUserName = (
   params: UpdateUserNameParameter,
-): AsyncAction<Promise<UpdateUserNameResultType>> => async () => {
+): AsyncAction<Promise<UpdateUserNameResultType>> => async dispatch => {
   const result: UpdateUserNameResultType = { success: false, error: undefined };
   try {
-    await SessionAPI.updateUserName(params);
+    const {
+      data: {
+        data: { user },
+      },
+    } = await SessionAPI.updateUserName(params);
+    dispatch(updateUserInfo(user));
 
     result.success = true;
   } catch (error) {
@@ -163,8 +186,7 @@ export const updateUserName = (
 
 export const updateFollowTheme = (
   params: UpdateFollowThemeParameter,
-): // params: UpdateFollowThemeParameter,
-AsyncAction<Promise<UpdateUserNameResultType>> => async dispatch => {
+): AsyncAction<Promise<UpdateUserNameResultType>> => async dispatch => {
   const result: UpdateUserNameResultType = { success: false, error: undefined };
   try {
     await SessionAPI.updateFollowTheme(params);

@@ -9,7 +9,7 @@ import {
 import config from './config';
 import NotFound from '../NotFound';
 import CommonStyles from 'theme/CommonStyles';
-import { ApiResultListData } from 'data/home/types';
+import { HomeActionResultListData } from 'data/home/types';
 import Colors from 'utils/colors';
 import CommonHeights from 'theme/CommonHeights';
 
@@ -17,7 +17,10 @@ const { FETCH_STATUS, PAGE_LIMIT } = config;
 
 interface PropTypes extends FlatListProps<never> {
   onEndReachedThreshold: number;
-  fetchData: (offset: number, limit?: number) => Promise<ApiResultListData>;
+  fetchData: (
+    offset: number,
+    limit?: number,
+  ) => Promise<HomeActionResultListData>;
   emptyMessage?: string;
   handleData: (data: never[]) => never[];
   data: never[];
