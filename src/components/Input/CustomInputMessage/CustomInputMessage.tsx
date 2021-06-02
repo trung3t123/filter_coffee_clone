@@ -13,9 +13,6 @@ import {
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
   TouchableWithoutFeedback,
-  LayoutAnimation,
-  Platform,
-  UIManager,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -25,19 +22,11 @@ import CommonFonts from 'theme/CommonFonts';
 import CommonHeights from 'theme/CommonHeights';
 import { HIT_SLOP } from 'theme/touch';
 
-if (Platform.OS === 'android') {
-  if (UIManager.setLayoutAnimationEnabledExperimental) {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-  }
-}
-
 type CustomInputMessageProps = {
   onSubmitEditing?: (
     event: NativeSyntheticEvent<TextInputSubmitEditingEventData> | string,
   ) => void;
 };
-
-LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
 
 // ({ onSubmitEditing }: CustomInputMessageProps) =>
 class CustomInputMessage extends Component<CustomInputMessageProps> {
