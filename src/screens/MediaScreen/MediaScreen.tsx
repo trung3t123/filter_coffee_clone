@@ -162,8 +162,8 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontWeight: '500',
     fontSize: CommonFonts.res20,
-    lineHeight: 28,
-    color: Colors.textColor,
+    lineHeight: CommonFonts.res28,
+    color: Colors.textInvertedWhiteColor,
   },
 
   flexRowBetween: {
@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
   subtitleText: {
     textAlign: 'right',
     fontSize: CommonFonts.res15,
+    paddingHorizontal: CommonWidths.res23,
     fontWeight: '500',
     paddingBottom: CommonHeights.res20,
   },
@@ -195,13 +196,13 @@ const styles = StyleSheet.create({
   },
 
   textTitleActive: {
-    color: Colors.textColor,
+    color: Colors.textInvertedWhiteColor,
     fontSize: CommonFonts.res22,
     fontWeight: '400',
   },
 
   textTitle: {
-    color: Colors.textColor,
+    color: Colors.textInvertedWhiteColor,
     opacity: 0.5,
     fontSize: CommonFonts.res22,
     fontWeight: '400',

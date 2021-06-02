@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: CommonFonts.res17,
     fontWeight: '500',
-    lineHeight: 23,
-    color: Colors.textColor,
+    lineHeight: CommonFonts.res23,
+    color: Colors.textInvertedWhiteColor,
     flex: 3,
   },
 });

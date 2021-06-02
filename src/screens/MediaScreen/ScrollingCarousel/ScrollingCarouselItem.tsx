@@ -43,8 +43,8 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontWeight: '500',
     fontSize: CommonFonts.res20,
-    lineHeight: 28,
-    color: Colors.textColor,
+    lineHeight: CommonFonts.res28,
+    color: Colors.textInvertedWhiteColor,
   },
   scrollImageStyle: {
     height: CommonHeights.res350,
