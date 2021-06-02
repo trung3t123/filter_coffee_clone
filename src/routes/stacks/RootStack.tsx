@@ -26,7 +26,6 @@ const RootStack = () => {
   return (
     <Stack.Navigator
       initialRouteName={ROUTES.INTRODUCE}
-      // initialRouteName={ROUTES.BASE} // test
       screenOptions={{
         stackPresentation: 'push',
         headerShown: false,

@@ -3,29 +3,38 @@ import { AsyncAction } from 'data/types';
 import { SESSION_STATUS } from 'constants/session';
 import ActionErrorHandler from 'utils/error-handler/action';
 
-import SessionAPI from 'api/session';
-import { LoginAPIParameters, SignUpAPIParameters } from 'api/session.types';
+import SessionAPI from 'api/session/session';
+import {
+  LoginAPIParameters,
+  SignUpAPIParameters,
+  UpdateUserNameParameter,
+  UpdateFollowThemeParameter,
+} from 'api/session/session.types';
 
-import * as types from './action_types';
+import * as sessionReducerTypes from './action_reducer_types';
 import SessionSelector from './selectors';
-import { LoginResultType, SignUpResultType } from './types';
+import {
+  LoginResultType,
+  SignUpResultType,
+  UpdateUserNameResultType,
+} from './types';
 import { Alert } from 'react-native';
 
 export const setSessionStatus = (status: string) => ({
-  type: types.SET_SESSION_STATUS,
+  type: sessionReducerTypes.SET_SESSION_STATUS,
   payload: { status },
 });
 
 export const updateToken = (token: string = '') => ({
-  type: types.UPDATE_TOKEN,
+  type: sessionReducerTypes.UPDATE_TOKEN,
   payload: { access_token: token },
 });
 
 export const clearSession = () => ({
-  type: types.CLEAR,
+  type: sessionReducerTypes.CLEAR,
 });
 
-export const authorize = (newAccessToken: string): AsyncAction => async (
+export const authorize = (newAccessToken?: string): AsyncAction => async (
   dispatch,
   getState,
 ) => {
@@ -80,7 +89,7 @@ export const login = (
 ): AsyncAction<Promise<LoginResultType>> => async dispatch => {
   const result: LoginResultType = { success: false, error: undefined };
   try {
-    dispatch({ type: types.LOGIN_REQUEST });
+    dispatch({ type: sessionReducerTypes.LOGIN_REQUEST });
     const response = await SessionAPI.login(params);
 
     const {
@@ -88,13 +97,16 @@ export const login = (
     } = response;
     // set token
     await dispatch(authorize(token));
-    dispatch({ type: types.LOGIN_SUCCESS });
+    dispatch({ type: sessionReducerTypes.LOGIN_SUCCESS });
 
     result.success = true;
   } catch (error) {
     result.error = error?.data?.response?.data?.message || '';
+
     Alert.alert('error', result.error);
-    dispatch({ type: types.LOGIN_FAILURE });
+
+    dispatch({ type: sessionReducerTypes.LOGIN_FAILURE });
+
     ActionErrorHandler.handleFunction(error, 'handleLogin', {
       breadCrumb: true,
     });
@@ -107,23 +119,63 @@ export const signUp = (
 ): AsyncAction<Promise<SignUpResultType>> => async dispatch => {
   const result: SignUpResultType = { success: false, error: undefined };
   try {
-    dispatch({ type: types.LOGIN_REQUEST });
-    await SessionAPI.signUp(params);
+    dispatch({ type: sessionReducerTypes.REGISTER_REQUEST });
+    const response = await SessionAPI.signUp(params);
 
-    // const {
-    //   data: { token },
-    // } = response;
-    // set token
+    const {
+      data: { token },
+    } = response;
 
-    // await dispatch(authorize(token));
-    // dispatch({ type: types.LOGIN_SUCCESS });
+    SetupAPI.setHeaderToken(token, 'redux:action:authorize');
+    dispatch({ type: sessionReducerTypes.REGISTER_SUCCESS });
+
+    result.success = true;
+  } catch (error) {
+    console.log(error?.data, { error }, '>>>>>>>>>>>>>>>>>>>>');
+
+    result.error = error?.data?.response?.data?.message || '';
+    Alert.alert('error', result.error);
+    dispatch({ type: sessionReducerTypes.REGISTER_FAILURE });
+    ActionErrorHandler.handleFunction(error, 'handleSignUp', {
+      breadCrumb: true,
+    });
+  }
+  return result;
+};
+
+export const updateUserName = (
+  params: UpdateUserNameParameter,
+): AsyncAction<Promise<UpdateUserNameResultType>> => async () => {
+  const result: UpdateUserNameResultType = { success: false, error: undefined };
+  try {
+    await SessionAPI.updateUserName(params);
 
     result.success = true;
   } catch (error) {
     result.error = error?.data?.response?.data?.message || '';
     Alert.alert('error', result.error);
-    dispatch({ type: types.REGISTER_FAILURE });
-    ActionErrorHandler.handleFunction(error, 'handleSignUp', {
+    ActionErrorHandler.handleFunction(error, 'updateUserName', {
+      breadCrumb: true,
+    });
+  }
+  return result;
+};
+
+export const updateFollowTheme = (
+  params: UpdateFollowThemeParameter,
+): // params: UpdateFollowThemeParameter,
+AsyncAction<Promise<UpdateUserNameResultType>> => async dispatch => {
+  const result: UpdateUserNameResultType = { success: false, error: undefined };
+  try {
+    await SessionAPI.updateFollowTheme(params);
+
+    dispatch(authorize());
+
+    result.success = true;
+  } catch (error) {
+    result.error = error?.data?.response?.data?.message || '';
+    Alert.alert('error', result.error);
+    ActionErrorHandler.handleFunction(error, 'updateFollowTheme', {
       breadCrumb: true,
     });
   }

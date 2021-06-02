@@ -4,6 +4,7 @@ import Screen from 'utils/screen';
 import Header from 'components/Header';
 import CommonFonts from 'theme/CommonFonts';
 import CacheImage from 'components/Image/CacheImage';
+import Colors from 'utils/colors';
 
 type PropTypes = {
   navigation: any;
@@ -33,18 +34,17 @@ const styles = StyleSheet.create({
   container: {
     height: Screen.height,
     width: Screen.width,
-    backgroundColor: 'white',
+    backgroundColor: Colors.white,
     position: 'relative',
   },
 
   content: {
     ...StyleSheet.absoluteFillObject,
     flex: 1,
-    backgroundColor: 'red',
   },
 
   textTitle: {
-    color: 'white',
+    color: Colors.white,
     fontSize: CommonFonts.res22,
     fontWeight: '600',
   },

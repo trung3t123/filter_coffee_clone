@@ -14,3 +14,12 @@ export type SignUpResponse = {
   token: string;
   status: number;
 };
+
+export type UpdateUserNameParameter = {
+  userName: string;
+  fullName: string;
+};
+
+export type UpdateFollowThemeParameter = {
+  themeKey: string[];
+};

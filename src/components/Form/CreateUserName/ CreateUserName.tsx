@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { Keyboard, ScrollView, Text, View } from 'react-native';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
@@ -11,29 +11,54 @@ import styles from '../styles';
 import FormTextInput from '../FormTextInput';
 import ActionButton from 'components/Theme/ActionButton';
 import ROUTES from 'routes/names';
+import { useDispatch } from 'react-redux';
+import { updateUserName } from 'data/session/actions';
+import { ActionDispatcher } from 'data/types';
 
 const FormSchema = Yup.object().shape({
   userName: Yup.string().required('User name should not be empty!'),
   fullName: Yup.string().required('Full name should not be empty!'),
 });
 
-interface LoginFormValues {
+interface updateUserNameValue {
   userName: string;
   fullName: string;
 }
 
-const loginFormInitialValues: LoginFormValues = { userName: '', fullName: '' };
+const loginFormInitialValues: updateUserNameValue = {
+  userName: '',
+  fullName: '',
+};
 
 const CreateUserName = () => {
   const navigation = useNavigation();
+  const [
+    isOnProgressUpdateUserName,
+    setIsOnProgressUpdateUserName,
+  ] = useState<boolean>();
+  const dispatch: ActionDispatcher = useDispatch();
 
-  const onSubmit = useCallback((values: LoginFormValues) => {
-    console.log('LoginFormValues', values);
-  }, []);
+  const onSubmit = useCallback(
+    async (values: updateUserNameValue) => {
+      try {
+        setIsOnProgressUpdateUserName(true);
+        const { userName = '', fullName = '' } = values ?? {};
+        const { success, error } = await dispatch(
+          updateUserName({ userName, fullName }),
+        );
 
-  const navigateToCreateName = useCallback(() => {
-    navigation.navigate(ROUTES.PICK_THEME);
-  }, [navigation]);
+        if (error) {
+          throw new Error(error);
+        }
+
+        if (success) {
+          setIsOnProgressUpdateUserName(false);
+          navigation.navigate(ROUTES.PICK_THEME);
+        }
+      } catch (error) {}
+    },
+    [navigation, dispatch, setIsOnProgressUpdateUserName],
+  );
 
   const formik = useFormik({
     validationSchema: FormSchema,
@@ -45,14 +70,16 @@ const CreateUserName = () => {
     values,
     handleChange,
     handleBlur,
-    // handleSubmit,
+    handleSubmit,
     // isSubmitting,
-    isValid,
+    errors,
   } = formik;
 
   const onSubmitEditing = useCallback(() => {
     Keyboard.dismiss();
   }, []);
+
+  const errorMessage = errors.userName || errors.fullName;
 
   return (
     <>
@@ -97,19 +124,19 @@ const CreateUserName = () => {
                   onSubmitEditing={onSubmitEditing}
                 />
               </View>
+              {errorMessage && (
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
+              )}
             </View>
             <View style={styles.viewButton}>
               <ActionButton
-                // loading={loginLoading} // waiting API
-                disabled={!isValid}
-                onPress={navigateToCreateName}
+                loading={isOnProgressUpdateUserName}
+                onPress={handleSubmit}
                 text={'Next'}
               />
             </View>
           </View>
         </View>
-
-        {/* submit button */}
       </ScrollView>
     </>
   );

@@ -2,9 +2,11 @@ import { AnyAction } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
 import { SessionStates } from './session/types';
+import { HomeStates } from './home/types';
 
 export interface RootStates {
   session: SessionStates;
+  home: HomeStates;
 }
 
 export type ActionDispatcher = ThunkDispatch<RootStates, unknown, AnyAction>;

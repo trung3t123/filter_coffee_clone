@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   TouchableWithoutFeedback,
   StyleSheet,
@@ -6,18 +6,17 @@ import {
   View,
   GestureResponderEvent,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
 import CommonFonts from 'theme/CommonFonts';
-import Colors from 'utils/colors';
+import LinearBackground from '../LinearBackground';
 
 var styles = StyleSheet.create({
   linearGradient: {
     ...StyleSheet.absoluteFillObject,
   },
   buttonText: {
-    fontSize: CommonFonts.res18,
+    fontSize: CommonFonts.res17,
     // fontFamily: 'Metropolis',
     textAlign: 'center',
     color: '#ffffff',
@@ -46,20 +45,20 @@ const ActionButton: React.FC<PropTypes> = ({
   text = 'Get Started',
   onPress,
   disabled,
+  loading,
 }) => {
+  const isDisabledButton = loading || disabled;
+
+  const isShowTextLoading = isDisabledButton ? 'Loading...' : text;
+
   return (
-    <TouchableWithoutFeedback onPress={onPress} disabled={disabled}>
+    <TouchableWithoutFeedback onPress={onPress} disabled={isDisabledButton}>
       <View style={styles.container}>
-        <LinearGradient
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          colors={[Colors.mainGradientStart, Colors.mainGradientEnd]}
-          style={styles.linearGradient}
-        />
-        <Text style={styles.buttonText}>{text}</Text>
+        <LinearBackground />
+        <Text style={styles.buttonText}>{isShowTextLoading}</Text>
       </View>
     </TouchableWithoutFeedback>
   );
 };
 
-export default ActionButton;
+export default memo(ActionButton);

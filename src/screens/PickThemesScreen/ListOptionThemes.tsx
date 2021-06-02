@@ -13,7 +13,7 @@ type OptionThemeType = {
 
 type ListOptionThemesType = {
   onPickOptionTheme: (value: OptionThemeType['value']) => void;
-  optionThemePicked: OptionThemeType['value'];
+  optionThemePicked: OptionThemeType['value'][];
 };
 
 const ListOptionThemes: React.FC<ListOptionThemesType> = ({
@@ -28,7 +28,7 @@ const ListOptionThemes: React.FC<ListOptionThemesType> = ({
           <OptionTheme
             title={option.title}
             nameIcon={option.nameIcon}
-            isActive={optionThemePicked === option.value}
+            isActive={optionThemePicked.includes(option.value)}
             onPress={() => onPickOptionTheme(option.value)}
           />
         </View>

@@ -1,35 +1,20 @@
-import React, { memo, useCallback } from 'react';
-import { View } from 'react-native';
-import { useSelector } from 'react-redux';
+import React, { memo } from 'react';
+import { View, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 
-// import styles from './styles';
-import { Button } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/core';
-import ROUTES from 'routes/names';
+import styles from './styles';
 
-import SessionSelector from 'data/session/selectors';
 import Header from 'components/Header';
+import CommonFonts from 'theme/CommonFonts';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const HomeHeader = () => {
-  const isAuthenticated = useSelector(SessionSelector.isLoggedInSelector);
-  const navigation = useNavigation();
-
-  const navigateToLogin = useCallback(() => {
-    navigation.navigate(ROUTES.LOGIN);
-  }, [navigation]);
-
   return (
     <Header>
-      <>
-        <View />
-        <View>
-          <View />
-          {isAuthenticated && <Button>SHARE</Button>}
-          {!isAuthenticated && (
-            <Button onPress={navigateToLogin}>LOGIN/REGISTER</Button>
-          )}
-        </View>
-      </>
+      <View style={styles.container}>
+        <Text style={styles.title}>Welcome to Coffee 👋</Text>
+        <Icon size={CommonFonts.res22} name="bell" color={Colors.white} />
+      </View>
     </Header>
   );
 };

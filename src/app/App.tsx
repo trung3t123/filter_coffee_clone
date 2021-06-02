@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /**
  * configure App elements and layout
  *
@@ -8,19 +9,30 @@
  * Last modified  : 2021-05-11 15:35:15
  */
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useLayoutEffect } from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import RNBootSplash from 'react-native-bootsplash';
 
 import RootStack from '../routes/stacks/RootStack';
+import SetupAPI from 'api/config';
+import { useDispatch } from 'react-redux';
+import { logout } from 'data/session/actions';
+import { ActionDispatcher } from 'data/types';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const dispatch: ActionDispatcher = useDispatch();
 
   const onNavigationReady = useCallback(() => {
     RNBootSplash.hide({ fade: true });
+  }, []);
+
+  useLayoutEffect(() => {
+    SetupAPI.setupResponseAxios(() => {
+      dispatch(logout());
+    });
   }, []);
 
   return (

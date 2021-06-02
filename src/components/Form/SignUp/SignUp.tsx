@@ -1,11 +1,9 @@
 import React, { memo, useCallback } from 'react';
-import {
-  Keyboard,
-  ScrollView,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { Keyboard, ScrollView, Text, View } from 'react-native';
+
+// use button from gesture-handler to resolve conflix with GradientText( <- use MarkedView )
+import { TouchableWithoutFeedback as TouchableGestureHandler } from 'react-native-gesture-handler';
+
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -49,17 +47,18 @@ const SignUp = () => {
   );
 
   const navigateToCreateName = useCallback(() => {
-    navigation.navigate(ROUTES.CREATE_USER_NAME); // Real
+    navigation.navigate(ROUTES.CREATE_USER_NAME);
+  }, [navigation]);
+
+  const navigateToLogin = useCallback(() => {
+    navigation.navigate(ROUTES.LOGIN);
   }, [navigation]);
 
   const onSubmit = useCallback(
     async (values: SignUpValues) => {
-      console.log('SignUpValues', values);
       try {
         const { email = '', password = '' } = values ?? {};
         const { error, success } = await dispatch(signUp({ email, password }));
-
-        console.log('------->result', error, success);
 
         if (error) {
           throw new Error(error);
@@ -69,7 +68,7 @@ const SignUp = () => {
           navigateToCreateName();
         }
       } catch (error) {
-        console.warn('onSubmit LoginForm', { error });
+        console.warn('onSubmit Register', { error });
       }
     },
     [navigateToCreateName, dispatch],
@@ -81,17 +80,12 @@ const SignUp = () => {
     onSubmit,
   });
 
-  const {
-    values,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    // isSubmitting,
-    isValid,
-  } = formik;
+  const { values, handleChange, handleBlur, handleSubmit, errors } = formik;
   const onSubmitEditing = useCallback(() => {
     Keyboard.dismiss();
   }, []);
+
+  const errorMessage = errors.password || errors.email;
 
   return (
     <>
@@ -138,23 +132,26 @@ const SignUp = () => {
                   onSubmitEditing={onSubmitEditing}
                 />
               </View>
+              {errorMessage && (
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
+              )}
             </View>
+
             {/* submit button */}
             <View style={styles.viewButton}>
               <ActionButton
                 loading={signUpLoading}
-                disabled={!isValid}
                 onPress={handleSubmit}
                 text={'Sign Up'}
               />
 
               <View style={styles.viewGoLogin}>
                 <Text style={styles.subtitleText}>Already an member?</Text>
-                <TouchableWithoutFeedback
+                <TouchableGestureHandler
                   hitSlop={HIT_SLOP.SIZE20}
-                  onPress={() => console.log('Login')}>
+                  onPress={navigateToLogin}>
                   <GradientText style={styles.subtitleText}>Login</GradientText>
-                </TouchableWithoutFeedback>
+                </TouchableGestureHandler>
               </View>
             </View>
           </View>

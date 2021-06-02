@@ -1,5 +1,4 @@
 import { HTTP_ERROR_CODES } from 'constants/http-errors';
-import { doNothing } from 'constants/default-values';
 import ApiErrorHandler from 'utils/error-handler/api';
 import { SERVERS } from 'constants/servers';
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
@@ -143,73 +142,77 @@ const getErrorMessagesFromServer = (
   return getUnhandledErrorMessage(error);
 };
 
-const onResponseSuccess = (response: AxiosResponse) => {
-  const authorization = response?.headers?.authorization ?? '';
-  if (authorization) {
-    setHeaderToken(authorization, `onReceivedToken:${response?.config.url}`);
-    // onReceivedToken(authorization);
-  }
-  return response;
-};
+const setupResponseAxios = (handleError: () => void) => {
+  const onResponseSuccess = (response: AxiosResponse) => {
+    const authorization = response?.headers?.authorization ?? '';
+    if (authorization) {
+      setHeaderToken(authorization, `onReceivedToken:${response?.config.url}`);
+      // onReceivedToken(authorization);
+    }
+    return response;
+  };
 
-/**
- * handle error response
- */
-const onResponseError = (error: AxiosError) => {
-  console.log('axios Error', { error });
-  let alertMessage = l10n.unknown_error;
+  /**
+   * handle error response
+   */
+  const onResponseError = (error: AxiosError) => {
+    console.log('axios Error', { error });
+    let alertMessage = l10n.unknown_error;
 
-  if (!error.response) {
-    switch (error.message) {
-      case 'Network Error':
-        alertMessage = l10n.no_internet_connection;
+    if (!error.response) {
+      switch (error.message) {
+        case 'Network Error':
+          alertMessage = l10n.no_internet_connection;
+          break;
+
+        default:
+          alertMessage = getUnhandledErrorMessage(error);
+          break;
+      }
+      throw new Error(alertMessage);
+    }
+
+    const {
+      response: { status, data },
+    } = error;
+    const errorDataFromServer = data.message || {};
+
+    console.log(status, data, errorDataFromServer, 'datadatadata');
+
+    /**
+     * handle error by http error code
+     */
+    switch (status) {
+      case HTTP_ERROR_CODES.UNAUTHORIZED:
+        ApiErrorHandler.handleApiResponseError(
+          error,
+          '-----> HTTP_ERROR_CODES.UNAUTHORIZED',
+          {
+            breadCrumb: true,
+            handler: handleError,
+          },
+        );
+        // onUnAuthorized({ url: error?.config?.url });
+        break;
+
+      case HTTP_ERROR_CODES.BLACKLIST:
+        // onBlacklist();
         break;
 
       default:
-        alertMessage = getUnhandledErrorMessage(error);
+        alertMessage = getErrorMessagesFromServer(errorDataFromServer, error);
         break;
     }
-    throw new Error(alertMessage);
-  }
 
-  const {
-    response: { status, data },
-  } = error;
-  const errorDataFromServer = data || {};
+    const finalError = new HttpException(status, alertMessage, {
+      response: error.response,
+    });
 
-  /**
-   * handle error by http error code
-   */
-  switch (status) {
-    case HTTP_ERROR_CODES.UNAUTHORIZED:
-      ApiErrorHandler.handleApiResponseError(
-        error,
-        '-----> HTTP_ERROR_CODES.UNAUTHORIZED',
-        {
-          breadCrumb: true,
-          handler: doNothing,
-        },
-      );
-      // onUnAuthorized({ url: error?.config?.url });
-      break;
+    throw finalError;
+  };
 
-    case HTTP_ERROR_CODES.BLACKLIST:
-      // onBlacklist();
-      break;
-
-    default:
-      alertMessage = getErrorMessagesFromServer(errorDataFromServer, error);
-      break;
-  }
-
-  const finalError = new HttpException(status, alertMessage, {
-    response: error.response,
-  });
-
-  throw finalError;
+  Axios.interceptors.response.use(onResponseSuccess, onResponseError);
 };
-
-Axios.interceptors.response.use(onResponseSuccess, onResponseError);
 
 const SetupAPI = {
   init,
@@ -217,6 +220,7 @@ const SetupAPI = {
   clearBaseUrl,
   setHeaderToken,
   clearHeaderToken,
+  setupResponseAxios,
 };
 
 export default SetupAPI;

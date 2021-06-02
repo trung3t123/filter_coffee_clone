@@ -49,7 +49,6 @@ export default StyleSheet.create({
 
   errorText: {
     height: CommonHeights.res30,
-    // marginTop: 10,
     color: Colors.danger,
     textAlign: 'left',
   },
@@ -57,8 +56,7 @@ export default StyleSheet.create({
     fontSize: CommonFonts.res14,
     textAlign: 'center',
     color: Colors.danger,
-    borderColor: Colors.danger,
-    borderWidth: 1,
+    marginTop: CommonHeights.res10,
   },
 
   closeButton: {

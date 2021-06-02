@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
-import { MaskedViewIOS } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Feather';
 import { IconProps } from 'react-native-vector-icons/Icon';
+import MaskedView from '@react-native-community/masked-view';
 
 const opacity = 0;
 
@@ -17,14 +17,14 @@ const IconLinearGradient = (props: IconLinearGradient) => {
   }
 
   return (
-    <MaskedViewIOS maskElement={<Icon {...props} />}>
+    <MaskedView maskElement={<Icon {...props} />}>
       <LinearGradient
         colors={props.linerColor}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}>
         <Icon {...props} style={[props.style, { opacity: opacity }]} />
       </LinearGradient>
-    </MaskedViewIOS>
+    </MaskedView>
   );
 };
 

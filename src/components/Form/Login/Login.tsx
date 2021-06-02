@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback } from 'react';
 import {
   Keyboard,
   ScrollView,
@@ -41,7 +41,6 @@ const loginFormInitialValues: LoginFormValues = { email: '', password: '' };
 
 const Login = () => {
   const navigation = useNavigation();
-  const [errorMessage, setErrorMessage] = useState('');
   const dispatch: ActionDispatcher = useDispatch();
   const loginLoading: boolean = useSelector(
     SessionSelector.isOnLoginProcessSelector,
@@ -53,7 +52,6 @@ const Login = () => {
 
   const onSubmit = useCallback(
     async (values: LoginFormValues) => {
-      console.log('LoginFormValues', values);
       try {
         const { email = '', password = '' } = values ?? {};
         const { error, success } = await dispatch(login({ email, password }));
@@ -69,7 +67,6 @@ const Login = () => {
         }
       } catch (error) {
         console.warn('onSubmit LoginForm', { error });
-        setErrorMessage(error.message);
       }
     },
     [dispatch, onLoginSuccess],
@@ -86,6 +83,7 @@ const Login = () => {
     handleChange,
     handleBlur,
     handleSubmit,
+    errors,
     // isSubmitting,
     isValid,
   } = formik;
@@ -93,6 +91,8 @@ const Login = () => {
   const onSubmitEditing = useCallback(() => {
     Keyboard.dismiss();
   }, []);
+
+  const errorMessage = errors.password || errors.email;
 
   return (
     <>
@@ -140,6 +140,10 @@ const Login = () => {
                 />
               </View>
 
+              {errorMessage && (
+                <Text style={styles.errorMessage}>{errorMessage}</Text>
+              )}
+
               {/* forgot password */}
               <TouchableWithoutFeedback onPress={doNothing}>
                 <View style={styles.forgotPassword}>
@@ -148,9 +152,6 @@ const Login = () => {
                   </Text>
                 </View>
               </TouchableWithoutFeedback>
-              {!!errorMessage && (
-                <Text style={styles.errorMessage}>{errorMessage}</Text>
-              )}
             </View>
 
             {/* submit button */}

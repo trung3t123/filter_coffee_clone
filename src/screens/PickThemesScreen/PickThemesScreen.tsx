@@ -1,26 +1,49 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Alert } from 'react-native';
 import styles from './styles';
 import Header from 'components/Header';
 import ListOptionThemes from './ListOptionThemes';
-import { useNavigation } from '@react-navigation/native';
-import ROUTES from 'routes/names';
 import ActionButton from 'components/Theme/ActionButton';
+import { useDispatch } from 'react-redux';
+import { updateFollowTheme } from 'data/session/actions';
+import { ActionDispatcher } from 'data/types';
 
 const PickThemesScreen = () => {
-  const [optionThemePicked, pickOptionTheme] = useState('');
-  const navigation = useNavigation();
+  const [optionThemePicked, pickOptionTheme] = useState<string[]>([]);
+  const [isOnProgressPickTheme, setIsOnProgressPickTheme] = useState<boolean>();
+  const dispatch: ActionDispatcher = useDispatch();
+
+  const pickThemeCompleted = useCallback(async () => {
+    if (optionThemePicked.length === 0) {
+      Alert.alert('Notice', 'Please pick a theme to continue');
+      return;
+    }
+    setIsOnProgressPickTheme(true);
+    try {
+      const { error } = await dispatch(
+        updateFollowTheme({ themeKey: optionThemePicked }),
+      );
+      if (error) {
+        throw new Error(error);
+      }
+    } catch (error) {
+      setIsOnProgressPickTheme(false);
+      Alert.alert('Error', error);
+    }
+  }, [dispatch, optionThemePicked.length, setIsOnProgressPickTheme]);
 
   const onPickOptionTheme = useCallback(
-    value => {
-      pickOptionTheme(value);
+    (value: string) => {
+      pickOptionTheme(state => {
+        if (state.includes(value)) {
+          return state.filter(optionTheme => optionTheme !== value);
+        }
+        return [...state, value];
+      });
     },
     [pickOptionTheme],
   );
-
-  const navigateToLogin = useCallback(() => {
-    navigation.navigate(ROUTES.LOGIN);
-  }, [navigation]);
 
   return (
     <View style={styles.container}>
@@ -36,7 +59,11 @@ const PickThemesScreen = () => {
           optionThemePicked={optionThemePicked}
         />
         <View style={styles.viewButton}>
-          <ActionButton onPress={navigateToLogin} text={'Next'} />
+          <ActionButton
+            loading={isOnProgressPickTheme}
+            onPress={pickThemeCompleted}
+            text={'Next'}
+          />
         </View>
       </ScrollView>
     </View>

@@ -11,9 +11,13 @@ export interface SessionStates {
   login_status: string;
 }
 
-export type LoginResultType = {
+type SessionResult = {
   success: boolean;
   error?: string;
 };
 
-export type SignUpResultType = LoginResultType;
+export type LoginResultType = SessionResult;
+
+export type SignUpResultType = SessionResult;
+
+export type UpdateUserNameResultType = SessionResult;

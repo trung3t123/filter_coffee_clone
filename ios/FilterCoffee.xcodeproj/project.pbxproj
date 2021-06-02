@@ -501,6 +501,7 @@
 				DEVELOPMENT_TEAM = S2KHR2J3B3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FilterCoffee/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -530,6 +531,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = S2KHR2J3B3;
 				INFOPLIST_FILE = FilterCoffee/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -38,10 +38,9 @@ const BaseBottomTabBar = ({ state, descriptors, navigation }: any) => {
       {isEnableBlurView && (
         <BlurView
           blurRadius={0.1}
-          style={{ ...StyleSheet.absoluteFillObject }}
-          blurType="ultraThinMaterialDark"
+          style={StyleSheet.absoluteFillObject}
+          blurType="dark"
           blurAmount={0.1}
-          reducedTransparencyFallbackColor="white"
         />
       )}
       <View style={CommonStyles.rowFlex}>
@@ -88,7 +87,6 @@ const BaseBottomTabBar = ({ state, descriptors, navigation }: any) => {
                 <Avatar
                   isEnableGradient={isFocused}
                   avatarStyle={styles.avatar}
-                  radiusAvatar={50}
                 />
               ) : (
                 <IconLinearGradient

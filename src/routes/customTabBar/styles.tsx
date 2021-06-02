@@ -25,5 +25,6 @@ export default StyleSheet.create({
     height: CommonWidths.res35,
     width: CommonWidths.res35,
     margin: 1,
+    borderRadius: 50,
   },
 });
