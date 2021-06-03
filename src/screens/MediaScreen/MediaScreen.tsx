@@ -3,7 +3,6 @@ import GradientText from 'components/Text/LinearGradientText/LinearGradientText'
 import React, { memo, useRef, useEffect, useState } from 'react';
 import {
   Animated,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -20,6 +19,7 @@ import { useDispatch } from 'react-redux';
 import { onGetMediaPost } from 'data/home/actions';
 import { ActionDispatcher } from 'data/types';
 import { itemType } from './type';
+import InfinityList from 'components/List/InfinityList';
 
 type PropTypes = {
   navigation: any;
@@ -40,22 +40,25 @@ const MediaScreen: React.FC<PropTypes> = () => {
     fetchData();
   }, []);
 
+  const onFetchListPosts = async (offset: number, limit?: number) => {
+    const response = await dispatch(onGetMediaPost(offset, limit));
+    return response;
+  };
+
   const scrollX = useRef(new Animated.Value(0)).current;
 
-  function renderResearchList() {
-    return mediaList.map((item: itemType) => (
-      <TouchableOpacity
+  const renderResearchList = item => (
+    <TouchableOpacity
+      key={item.content.id}
+      // onPress={() => navigation.navigate(ROUTES.BLOG_DETAIL)}
+    >
+      <ResearchItem
+        imageUrl={item.content.image_urls[0]}
+        textItem={item.content.content}
         key={item.content.id}
-        // onPress={() => navigation.navigate(ROUTES.BLOG_DETAIL)}
-      >
-        <ResearchItem
-          imageUrl={item.content.image_urls[0]}
-          textItem={item.content.content}
-          key={item.content.id}
-        />
-      </TouchableOpacity>
-    ));
-  }
+      />
+    </TouchableOpacity>
+  );
 
   const renderItem = ({ item, index }) => {
     const inputRange = [
@@ -90,41 +93,52 @@ const MediaScreen: React.FC<PropTypes> = () => {
   };
 
   const getKey = (item: { id: any }) => item.id;
+  const getKeyVerticalList = (item: { id: any }) => item.id;
 
   return (
     <View style={styles.container}>
-      <ScrollView stickyHeaderIndices={[0]} style={styles.content}>
-        <Header isTransparent isGoBack>
-          <View style={styles.flexRow}>
-            <Text style={styles.textTitleActive}>Insights </Text>
-            <Text style={styles.textTitle}> - </Text>
-            <Text style={styles.textTitle}>Scoops </Text>
+      <Header isTransparent isGoBack>
+        <View style={styles.flexRow}>
+          <Text style={styles.textTitleActive}>Insights </Text>
+          <Text style={styles.textTitle}> - </Text>
+          <Text style={styles.textTitle}>Scoops </Text>
+        </View>
+        <View />
+      </Header>
+      <InfinityList
+        ListHeaderComponent={() => (
+          <View>
+            <View style={styles.flatlistContainer}>
+              <GradientText style={styles.subtitleText}>View all</GradientText>
+            </View>
+            <View style={styles.flexRowBetween}>
+              <Text style={styles.itemTitle}>Coffee research</Text>
+              <GradientText style={styles.subtitleText}>View all</GradientText>
+            </View>
+            <Animated.FlatList
+              contentContainerStyle={styles.alignItemCenter}
+              onScroll={Animated.event(
+                [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                {
+                  useNativeDriver: true,
+                },
+              )}
+              horizontal
+              pagingEnabled
+              showsHorizontalScrollIndicator={false}
+              data={mediaList}
+              renderItem={renderItem}
+              keyExtractor={getKey}
+            />
           </View>
-        </Header>
-        <View style={styles.flatlistContainer}>
-          <GradientText style={styles.subtitleText}>View all</GradientText>
-          <Animated.FlatList
-            contentContainerStyle={styles.alignItemCenter}
-            onScroll={Animated.event(
-              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-              {
-                useNativeDriver: true,
-              },
-            )}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            data={mediaList}
-            renderItem={renderItem}
-            keyExtractor={getKey}
-          />
-        </View>
-        <View style={styles.flexRowBetween}>
-          <Text style={styles.itemTitle}>Coffee research</Text>
-          <GradientText style={styles.subtitleText}>View all</GradientText>
-        </View>
-        <View style={styles.researchListContainer}>{renderResearchList()}</View>
-      </ScrollView>
+        )}
+        renderItem={renderResearchList}
+        onEndReachedThreshold={0.2}
+        fetchData={onFetchListPosts}
+        style={styles.flatlistContainer}
+        keyExtractor={getKeyVerticalList}
+        emptyMessage="Not Found"
+      />
     </View>
   );
 };

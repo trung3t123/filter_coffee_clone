@@ -36,7 +36,6 @@ export const onGetMediaPost = (
       offset,
       limit,
     });
-
     if (data.status === API_STATUS.SUCCESS) {
       result = {
         data: data?.data?.data?.records || [],
