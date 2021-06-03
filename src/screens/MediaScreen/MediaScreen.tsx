@@ -1,52 +1,220 @@
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import Screen from 'utils/screen';
 import Header from 'components/Header';
+import GradientText from 'components/Text/LinearGradientText/LinearGradientText';
+import React, { memo, useRef } from 'react';
+import {
+  Animated,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import ROUTES from 'routes/names';
 import CommonFonts from 'theme/CommonFonts';
-import CacheImage from 'components/Image/CacheImage';
+import CommonHeights from 'theme/CommonHeights';
+import CommonWidths from 'theme/CommonWidths';
 import Colors from 'utils/colors';
+import Screen from 'utils/screen';
+import ResearchItem from './ResearchItem';
+import ScrollingCarouselItem from './ScrollingCarousel/ScrollingCarouselItem';
 
 type PropTypes = {
   navigation: any;
 };
 
-const MediaScreen: React.FC<PropTypes> = ({}) => {
+const mockData = [
+  { id: '1', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
+  { id: '2', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
+  { id: '3', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
+  { id: '4', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
+  { id: '5', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
+  { id: '6', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
+  { id: '7', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
+];
+
+const researchData = [
+  {
+    id: '1',
+    url: '../../../assets/Bitmap.png',
+    tittle: 'Plant based milk company Oatly just IPO’ed at $10 billion',
+  },
+  {
+    id: '2',
+    url: '../../../assets/Bitmap.png',
+    tittle: '$150 billion media merger you should know about ✌️',
+  },
+  {
+    id: '3',
+    url: '../../../assets/Bitmap.png',
+    tittle: 'Adani gobbles SB Energy',
+  },
+  {
+    id: '4',
+    url: '../../../assets/Bitmap.png',
+    tittle: '$150 billion media merger you should know about ✌️',
+  },
+  {
+    id: '5',
+    url: '../../../assets/Bitmap.png',
+    tittle: 'Plant based milk company Oatly just IPO’ed at $10 billion',
+  },
+  {
+    id: '6',
+    url: '../../../assets/Bitmap.png',
+    tittle: 'Adani gobbles SB Energy',
+  },
+];
+
+const ITEM_SIZE = CommonWidths.p100;
+
+const MediaScreen: React.FC<PropTypes> = ({ navigation }) => {
+  const scrollX = useRef(new Animated.Value(0)).current;
+
+  function renderResearchList() {
+    return researchData.map((item, index) => (
+      <TouchableOpacity
+        key={item.id}
+        // onPress={() => navigation.navigate(ROUTES.BLOG_DETAIL)}
+      >
+        <ResearchItem textItem={item.tittle} key={item.id} />
+      </TouchableOpacity>
+    ));
+  }
+
+  const renderItem = ({ item, index }) => {
+    const inputRange = [
+      ITEM_SIZE * (index - 0.5),
+      ITEM_SIZE * index,
+      ITEM_SIZE * (index + 0.5),
+    ];
+    const scale = scrollX.interpolate({
+      inputRange,
+      outputRange: [0.9, 1, 0.9],
+    });
+    const position = scrollX.interpolate({
+      inputRange,
+      outputRange: [-CommonWidths.p15, 0, CommonWidths.p15],
+    });
+    const perspective = scrollX.interpolate({
+      inputRange,
+      outputRange: [1200, 800, 1200],
+    });
+    return (
+      <Animated.View
+        style={{
+          transform: [{ scale }, { translateX: position }, { perspective }],
+        }}>
+        <ScrollingCarouselItem
+          key={index}
+          imageUrl={item.url}
+          itemTitle={item.tittle}
+        />
+      </Animated.View>
+    );
+  };
+
+  const getKey = (item: { id: any }) => item.id;
+
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        <Header isAbsolute>
-          <View />
-          <Text style={styles.textTitle}>Media</Text>
-          <View />
-        </Header>
-        <CacheImage
-          source={require('../../../assets/Bitmap.png')}
-          imageStyle={styles.imageBackground}
-        />
-      </View>
+      <Header isGoBack>
+        <View style={styles.flexRow}>
+          <Text style={styles.textTitleActive}>Insights </Text>
+          <Text style={styles.textTitle}> - </Text>
+          <Text style={styles.textTitle}>Scoops </Text>
+        </View>
+      </Header>
+      <ScrollView style={styles.content}>
+        <View style={styles.flatlistContainer}>
+          <GradientText style={styles.subtitleText}>View all</GradientText>
+          <Animated.FlatList
+            contentContainerStyle={styles.alignItemCenter}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+              {
+                useNativeDriver: true,
+              },
+            )}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            data={mockData}
+            renderItem={renderItem}
+            keyExtractor={getKey}
+          />
+        </View>
+        <View style={styles.flexRowBetween}>
+          <Text style={styles.itemTitle}>Coffee research</Text>
+          <GradientText style={styles.subtitleText}>View all</GradientText>
+        </View>
+        <View style={styles.researchListContainer}>{renderResearchList()}</View>
+      </ScrollView>
     </View>
   );
 };
 
-export default MediaScreen;
+export default memo(MediaScreen);
 
 const styles = StyleSheet.create({
   container: {
     height: Screen.height,
     width: Screen.width,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.black,
     position: 'relative',
   },
 
+  itemTitle: {
+    fontWeight: '500',
+    fontSize: CommonFonts.res20,
+    paddingHorizontal: CommonWidths.res23,
+    lineHeight: CommonFonts.res28,
+    color: Colors.textInvertedWhiteColor,
+  },
+
+  flexRowBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: CommonHeights.res18,
+  },
+
+  flexRow: {
+    flexDirection: 'row',
+  },
+  alignItemCenter: { alignItems: 'center' },
+
+  subtitleText: {
+    textAlign: 'right',
+    fontSize: CommonFonts.res15,
+    paddingHorizontal: CommonWidths.res23,
+    fontWeight: '500',
+    paddingBottom: CommonHeights.res20,
+  },
+
+  researchListContainer: {
+    paddingHorizontal: CommonWidths.res23,
+    marginBottom: CommonHeights.p10,
+  },
+
   content: {
-    ...StyleSheet.absoluteFillObject,
     flex: 1,
+    backgroundColor: Colors.black,
+  },
+
+  textTitleActive: {
+    color: Colors.textInvertedWhiteColor,
+    fontSize: CommonFonts.res22,
+    fontWeight: '400',
   },
 
   textTitle: {
-    color: Colors.white,
+    color: Colors.textInvertedWhiteColor,
+    opacity: 0.5,
     fontSize: CommonFonts.res22,
-    fontWeight: '600',
+    fontWeight: '400',
+  },
+
+  flatlistContainer: {
+    paddingBottom: CommonHeights.res60,
   },
 
   imageBackground: {
