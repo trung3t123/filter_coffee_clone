@@ -45,13 +45,13 @@ const MediaScreen: React.FC<PropTypes> = () => {
   function renderResearchList() {
     return mediaList.map((item: itemType) => (
       <TouchableOpacity
-        key={item.id}
+        key={item.content.id}
         // onPress={() => navigation.navigate(ROUTES.BLOG_DETAIL)}
       >
         <ResearchItem
           imageUrl={item.content.image_urls[0]}
           textItem={item.content.content}
-          key={item.id}
+          key={item.content.id}
         />
       </TouchableOpacity>
     ));
