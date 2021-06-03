@@ -49,6 +49,7 @@ const Colors = {
   mainBackgroundColorComponent: '#1D1D1D',
   transparent: 'transparent',
   verifiedUser: 'rgba(56, 201, 118, 1)',
+  borderColorItem: 'rgba(50, 50, 53, 1)',
 
   black40: 'rgba(0, 0, 0, 0.4)',
   black70: 'rgba(0, 0, 0, 0.7)',

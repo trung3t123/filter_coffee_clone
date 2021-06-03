@@ -1,8 +1,11 @@
 import React, { memo, useCallback } from 'react';
-import { Keyboard, ScrollView, Text, View } from 'react-native';
-
-// use button from gesture-handler to resolve conflix with GradientText( <- use MarkedView )
-import { TouchableWithoutFeedback as TouchableGestureHandler } from 'react-native-gesture-handler';
+import {
+  Keyboard,
+  ScrollView,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -78,6 +81,7 @@ const SignUp = () => {
     validationSchema: FormSchema,
     initialValues: loginFormInitialValues,
     onSubmit,
+    validateOnBlur: false,
   });
 
   const { values, handleChange, handleBlur, handleSubmit, errors } = formik;
@@ -147,11 +151,11 @@ const SignUp = () => {
 
               <View style={styles.viewGoLogin}>
                 <Text style={styles.subtitleText}>Already an member?</Text>
-                <TouchableGestureHandler
+                <TouchableOpacity
                   hitSlop={HIT_SLOP.SIZE20}
                   onPress={navigateToLogin}>
                   <GradientText style={styles.subtitleText}>Login</GradientText>
-                </TouchableGestureHandler>
+                </TouchableOpacity>
               </View>
             </View>
           </View>

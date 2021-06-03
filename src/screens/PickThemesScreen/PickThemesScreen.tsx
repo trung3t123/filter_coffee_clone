@@ -8,11 +8,14 @@ import ActionButton from 'components/Theme/ActionButton';
 import { useDispatch } from 'react-redux';
 import { updateFollowTheme } from 'data/session/actions';
 import { ActionDispatcher } from 'data/types';
+import { useNavigation } from '@react-navigation/native';
+import ROUTES from 'routes/names';
 
 const PickThemesScreen = () => {
   const [optionThemePicked, pickOptionTheme] = useState<string[]>([]);
   const [isOnProgressPickTheme, setIsOnProgressPickTheme] = useState<boolean>();
   const dispatch: ActionDispatcher = useDispatch();
+  const navigation = useNavigation();
 
   const pickThemeCompleted = useCallback(async () => {
     if (optionThemePicked.length === 0) {
@@ -21,17 +24,30 @@ const PickThemesScreen = () => {
     }
     setIsOnProgressPickTheme(true);
     try {
-      const { error } = await dispatch(
+      const { success, error } = await dispatch(
         updateFollowTheme({ themeKey: optionThemePicked }),
       );
+
+      if (success) {
+        navigation.navigate(ROUTES.BASE);
+      }
+
       if (error) {
+        setIsOnProgressPickTheme(false);
+        navigation.navigate(ROUTES.BASE);
         throw new Error(error);
       }
     } catch (error) {
       setIsOnProgressPickTheme(false);
+      navigation.navigate(ROUTES.BASE);
       Alert.alert('Error', error);
     }
-  }, [dispatch, optionThemePicked.length, setIsOnProgressPickTheme]);
+  }, [
+    dispatch,
+    optionThemePicked.length,
+    setIsOnProgressPickTheme,
+    navigation,
+  ]);
 
   const onPickOptionTheme = useCallback(
     (value: string) => {

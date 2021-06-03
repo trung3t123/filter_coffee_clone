@@ -119,8 +119,9 @@ export const login = (
     result.success = true;
   } catch (error) {
     result.error = error?.data?.response?.data?.message || '';
+    console.log(error, error.message, { error }, '>>>>>>>>>>>>>>>>>>>>');
 
-    Alert.alert('error', result.error);
+    Alert.alert('Error', error.message);
 
     dispatch({ type: sessionReducerTypes.LOGIN_FAILURE });
 
@@ -149,10 +150,8 @@ export const signUp = (
 
     result.success = true;
   } catch (error) {
-    console.log(error?.data, { error }, '>>>>>>>>>>>>>>>>>>>>');
-
     result.error = error?.data?.response?.data?.message || '';
-    Alert.alert('error', result.error);
+    Alert.alert('Error', error.message);
     dispatch({ type: sessionReducerTypes.REGISTER_FAILURE });
     ActionErrorHandler.handleFunction(error, 'handleSignUp', {
       breadCrumb: true,
@@ -176,7 +175,7 @@ export const updateUserName = (
     result.success = true;
   } catch (error) {
     result.error = error?.data?.response?.data?.message || '';
-    Alert.alert('error', result.error);
+    Alert.alert('Error', error.message);
     ActionErrorHandler.handleFunction(error, 'updateUserName', {
       breadCrumb: true,
     });
@@ -196,7 +195,7 @@ export const updateFollowTheme = (
     result.success = true;
   } catch (error) {
     result.error = error?.data?.response?.data?.message || '';
-    Alert.alert('error', result.error);
+    Alert.alert('Error', error.message);
     ActionErrorHandler.handleFunction(error, 'updateFollowTheme', {
       breadCrumb: true,
     });

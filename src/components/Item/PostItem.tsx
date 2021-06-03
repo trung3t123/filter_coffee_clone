@@ -28,7 +28,9 @@ const PostItem: React.FC<ItemPostProps> = ({ item }) => {
     <TouchableWithoutFeedback onPress={navigateToDetailPost}>
       <View style={styles.containerItem}>
         <View style={styles.viewInfoPost}>
-          <Avatar isEnableGradient avatarStyle={styles.avatar} />
+          <View>
+            <Avatar isEnableGradient avatarStyle={styles.avatar} />
+          </View>
 
           <View style={styles.viewNamePostOfUser}>
             <Text style={styles.textNameUserPost}>

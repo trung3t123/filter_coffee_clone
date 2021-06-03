@@ -19,9 +19,9 @@ export default StyleSheet.create({
     color: Colors.white,
     paddingHorizontal: CommonWidths.res15,
     paddingVertical: CommonHeights.res10,
-    minHeight: CommonHeights.res56,
+    height: CommonHeights.res56,
     backgroundColor: Colors.mainBackgroundColorComponent,
-    margin: 1,
+    margin: 1.5,
     borderRadius: 15,
   },
 

@@ -1,11 +1,4 @@
-import React, {
-  useState,
-  useMemo,
-  memo,
-  useRef,
-  Component,
-  createRef,
-} from 'react';
+import React, { memo, Component, createRef } from 'react';
 import {
   View,
   TextInput,
@@ -13,6 +6,7 @@ import {
   NativeSyntheticEvent,
   TextInputSubmitEditingEventData,
   TouchableWithoutFeedback,
+  Animated,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -21,24 +15,24 @@ import CommonWidths from 'theme/CommonWidths';
 import CommonFonts from 'theme/CommonFonts';
 import CommonHeights from 'theme/CommonHeights';
 import { HIT_SLOP } from 'theme/touch';
+import Screen from 'utils/screen';
 
 type CustomInputMessageProps = {
-  onSubmitEditing?: (
-    event: NativeSyntheticEvent<TextInputSubmitEditingEventData> | string,
-  ) => void;
+  submitEditing: (text: string) => void;
+  isInputReady?: never;
 };
 
-// ({ onSubmitEditing }: CustomInputMessageProps) =>
 class CustomInputMessage extends Component<CustomInputMessageProps> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      valueInput: '',
-    };
-    this.refInput = createRef().current;
-  }
+  state = {
+    valueInput: '',
+  };
 
-  //  [valueInput, setValueInput] = useState<string>();
+  refInput: React.RefObject<TextInput> = createRef();
+  translateY = new Animated.Value(0);
+
+  onClearTextInput = () => this.refInput?.current?.clear();
+
+  onBlurTextInput = () => this.refInput?.current?.blur();
 
   onChangeValue: (text: string) => void = text => {
     this.setState({ valueInput: text });
@@ -46,27 +40,44 @@ class CustomInputMessage extends Component<CustomInputMessageProps> {
 
   onSendMessage = () => {
     const { valueInput } = this.state;
-    const { onSubmitEditing } = this.props;
-    onSubmitEditing(valueInput);
-    this.refInput?.clear();
-    this.refInput?.blur();
+    const { submitEditing } = this.props;
+    submitEditing(valueInput);
+    this.onClearTextInput();
+    this.onBlurTextInput();
+  };
+
+  onSubmitEditing = (
+    event: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
+  ) => {
+    event.persist();
+    const { submitEditing } = this.props;
+    const { valueInput } = this.state;
+
+    console.log(this.refInput);
+
+    submitEditing(valueInput);
+    this.onClearTextInput();
   };
 
   render() {
     const { valueInput } = this.state;
+    const { isInputReady } = this.props;
+
+    if (!isInputReady) {
+      return null;
+    }
+
     return (
       <View style={styles.containerInput}>
         <View style={styles.justifyContentCenter}>
           <TextInput
-            ref={ref => (this.refInput = ref)}
-            onBlur={() => {
-              this.refInput?.clear();
-            }}
-            clearButtonMode="always"
+            clearButtonMode="never"
+            ref={this.refInput}
+            onBlur={this.onClearTextInput}
             blurOnSubmit
             onChangeText={this.onChangeValue}
             value={valueInput}
-            onSubmitEditing={this.props.onSubmitEditing}
+            onSubmitEditing={this.onSubmitEditing}
             placeholder={'Add a comment'}
             placeholderTextColor={Colors.white}
             style={styles.input}
@@ -94,12 +105,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: Colors.mainBackgroundColorComponent,
     paddingHorizontal: CommonWidths.baseSpaceHorizontal,
+    paddingBottom: Screen.homeIndicatorHeight + CommonHeights.res15,
   },
   input: {
     width: '100%',
     paddingVertical: CommonHeights.res15,
-    maxHeight: CommonHeights.res50,
-    backgroundColor: 'rgba(50, 50, 53, 1) ',
+    minHeight: CommonHeights.res50,
+    backgroundColor: Colors.borderColorItem,
     borderRadius: 15,
     color: Colors.white,
     fontSize: CommonFonts.res17,
@@ -111,8 +123,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   viewIcon: {
-    height: 20,
-    width: 20,
+    height: CommonFonts.res20,
+    width: CommonFonts.res20,
     zIndex: 100,
     position: 'absolute',
     right: CommonHeights.res15,

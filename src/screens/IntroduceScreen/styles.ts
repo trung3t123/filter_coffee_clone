@@ -8,7 +8,6 @@ export default StyleSheet.create({
   contentContainerStyleFlatList: {
     flex: 1,
     backgroundColor: Colors.mainBackgroundColorContainer,
-    paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     justifyContent: 'space-between',
   },
   viewButton: {
@@ -19,8 +18,7 @@ export default StyleSheet.create({
   },
   viewContent: {
     width: CommonWidths.res370,
-    height: CommonHeights.res500,
-    backgroundColor: Colors.mainBackgroundColorComponent,
+    height: CommonHeights.res400,
     borderRadius: 30,
   },
 
@@ -38,11 +36,21 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginBottom: CommonHeights.res5,
     color: Colors.white,
+
+    position: 'relative',
+    zIndex: 11,
   },
 
   subtitleText: {
     fontSize: CommonFonts.res20,
     color: Colors.white,
     textAlign: 'center',
+  },
+
+  viewTitleIntroduce: {
+    position: 'absolute',
+    bottom: CommonHeights.res245,
+    width: '100%',
+    alignItems: 'center',
   },
 });

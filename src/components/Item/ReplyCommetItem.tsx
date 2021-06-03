@@ -13,10 +13,6 @@ import IconWithText from 'components/Icon/IconWithText';
 import { useSelector } from 'react-redux';
 import SessionSelector from 'data/session/selectors';
 
-// type ItemPostProps = {
-//   item: itemType;
-// };
-
 type ItemPostProps = any;
 
 const ReplyCommentItem: React.FC<ItemPostProps> = ({
@@ -29,7 +25,9 @@ const ReplyCommentItem: React.FC<ItemPostProps> = ({
   return (
     <View style={styles.containerItem}>
       <View style={styles.viewInfoPost}>
-        <Avatar isEnableGradient avatarStyle={styles.avatar} />
+        <View>
+          <Avatar isEnableGradient avatarStyle={styles.avatar} />
+        </View>
 
         <View style={styles.viewNamePostOfUser}>
           <Text style={styles.textNameUserPost}>
@@ -70,7 +68,7 @@ const styles = StyleSheet.create({
     marginBottom: CommonHeights.res20,
     paddingHorizontal: CommonWidths.baseSpaceHorizontal,
 
-    borderBottomColor: 'rgba(50, 50, 53, 1)',
+    borderBottomColor: Colors.borderColorItem,
     borderBottomWidth: 1,
     paddingBottom: CommonHeights.res16,
   },
@@ -80,7 +78,6 @@ const styles = StyleSheet.create({
   },
   viewBottomPost: {
     flexDirection: 'row',
-    // paddingLeft: CommonWidths.res15,
   },
 
   avatar: {

@@ -56,8 +56,6 @@ const Login = () => {
         const { email = '', password = '' } = values ?? {};
         const { error, success } = await dispatch(login({ email, password }));
 
-        console.log('------->result', error, success);
-
         if (error) {
           throw new Error(error);
         }
@@ -76,6 +74,7 @@ const Login = () => {
     validationSchema: FormSchema,
     initialValues: loginFormInitialValues,
     onSubmit,
+    validateOnBlur: false,
   });
 
   const {

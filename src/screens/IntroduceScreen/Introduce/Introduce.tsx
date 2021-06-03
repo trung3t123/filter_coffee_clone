@@ -7,7 +7,7 @@ import styles from '../styles';
 import ActionButton from 'components/Theme/ActionButton';
 import ROUTES from 'routes/names';
 
-const Login = () => {
+const Introduce = () => {
   const navigation = useNavigation();
 
   const navigateToSignUp = useCallback(() => {
@@ -22,8 +22,7 @@ const Login = () => {
         keyboardShouldPersistTaps="handled"
         overScrollMode="always"
         contentContainerStyle={styles.contentContainerStyleFlatList}>
-        <View>
-          <View style={styles.viewContent} />
+        <View style={styles.viewTitleIntroduce}>
           <Text style={styles.titleText}>{'Filter Coffee'}</Text>
           <Text style={styles.subtitleText}>
             {'Connect • Understand • Invest'}
@@ -39,4 +38,4 @@ const Login = () => {
   );
 };
 
-export default memo(Login);
+export default memo(Introduce);

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
   containerItem: {
     marginBottom: CommonHeights.res20,
-    borderBottomColor: 'rgba(50, 50, 53, 1)',
+    borderBottomColor: Colors.borderColorItem,
     borderBottomWidth: 1,
     paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     paddingBottom: CommonHeights.res16,

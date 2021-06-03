@@ -13,7 +13,9 @@ const DetailPost = ({ item }: { item?: PostTypes }) => {
   return (
     <View style={styles.containerItem}>
       <View style={styles.viewInfoPost}>
-        <Avatar isEnableGradient avatarStyle={styles.avatar} />
+        <View>
+          <Avatar isEnableGradient avatarStyle={styles.avatar} />
+        </View>
 
         <View style={styles.viewNamePostOfUser}>
           <Text style={styles.textNameUserPost}>
