@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -12,6 +12,7 @@ import ROUTES from 'routes/names';
 import { itemType } from 'screens/HomeScreen/HomeListPosts/types';
 import Avatar from 'components/Image/Avatar';
 import IconWithText from 'components/Icon/IconWithText';
+import { calculateTimeAgo } from 'utils/commonFunction';
 
 type ItemPostProps = {
   item: itemType;
@@ -21,8 +22,16 @@ const PostItem: React.FC<ItemPostProps> = ({ item }) => {
   const navigation = useNavigation();
 
   const navigateToDetailPost = () => {
-    navigation.navigate(ROUTES.POST_DETAIL, { idPost: item.item.id });
+    navigation.navigate(ROUTES.POST_DETAIL, {
+      idPost: item.item.id,
+      item: item.item,
+    });
   };
+
+  const onCalculateTimeAgo = useMemo(
+    () => calculateTimeAgo(item.item.content.createdAt),
+    [item.item.content.createdAt],
+  );
 
   return (
     <TouchableWithoutFeedback onPress={navigateToDetailPost}>
@@ -49,7 +58,7 @@ const PostItem: React.FC<ItemPostProps> = ({ item }) => {
             </Text>
 
             <Text style={styles.textTime}>
-              @wtfishika • <Text>20h ago</Text>
+              @wtfishika • <Text>{onCalculateTimeAgo}</Text>
             </Text>
           </View>
         </View>

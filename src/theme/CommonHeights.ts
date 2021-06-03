@@ -53,10 +53,12 @@ const CommonHeights = {
   res180: responsiveHeight(180),
   res195: responsiveHeight(195),
   res200: responsiveHeight(200),
+  res225: responsiveHeight(225),
   res245: responsiveHeight(245),
   res260: responsiveHeight(260),
 
   res300: responsiveHeight(300),
+  res350: responsiveHeight(350),
   res400: responsiveHeight(400),
   res500: responsiveHeight(500),
 

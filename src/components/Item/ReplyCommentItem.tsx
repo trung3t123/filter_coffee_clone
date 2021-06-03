@@ -1,4 +1,5 @@
-import React, { memo } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { memo, useMemo } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -10,18 +11,25 @@ import Colors from 'utils/colors';
 // import { itemType } from 'screens/HomeScreen/HomeListPosts/types';
 import Avatar from 'components/Image/Avatar';
 import IconWithText from 'components/Icon/IconWithText';
+import { calculateTimeAgo } from 'utils/commonFunction';
 
 type ItemPostProps = {
   message?: string;
   userName?: string;
   linkAvatar?: string;
+  createAtPost: string;
 };
 
 const ReplyCommentItem: React.FC<ItemPostProps> = ({
   message,
   userName,
   linkAvatar,
+  createAtPost,
 }) => {
+  const onCalculateTimeAgo = useMemo(() => calculateTimeAgo(createAtPost), [
+    [createAtPost],
+  ]);
+
   return (
     <View style={styles.containerItem}>
       <View style={styles.viewInfoPost}>
@@ -42,7 +50,7 @@ const ReplyCommentItem: React.FC<ItemPostProps> = ({
           </Text>
 
           <Text style={styles.textTime}>
-            @wtfishika • <Text>20h ago</Text>
+            @wtfishika • <Text>{onCalculateTimeAgo}</Text>
           </Text>
         </View>
       </View>

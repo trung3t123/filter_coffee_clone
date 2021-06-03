@@ -7,8 +7,9 @@ import PostDetailHeader from './PostDetailHeader';
 import { useRoute } from '@react-navigation/native';
 
 type RouteTypes = {
-  params?: {
+  params: {
     idPost?: string;
+    item: any;
   };
 };
 
@@ -20,7 +21,10 @@ const PostDetailScreen = () => {
   return (
     <View style={CommonStyles.container}>
       <PostDetailHeader />
-      <PostDetailContent idPost={route?.params?.idPost || ''} />
+      <PostDetailContent
+        item={route.params.item}
+        idPost={route?.params?.idPost || ''}
+      />
     </View>
   );
 };

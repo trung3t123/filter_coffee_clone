@@ -69,7 +69,7 @@ class CustomInputMessage extends Component<CustomInputMessageProps> {
     const { submitEditing } = this.props;
     await submitEditing(valueInput);
     this.onClearTextInput();
-    this.onBlurTextInput();
+    // this.onBlurTextInput();
   };
 
   onSubmitEditing = (
@@ -79,19 +79,12 @@ class CustomInputMessage extends Component<CustomInputMessageProps> {
     const { submitEditing } = this.props;
     const { valueInput } = this.state;
 
-    console.log(this.refInput);
-
     submitEditing(valueInput);
     this.onClearTextInput();
   };
 
   render() {
     const { valueInput } = this.state;
-    const { isInputReady } = this.props;
-
-    if (!isInputReady) {
-      return null;
-    }
 
     return (
       <View style={styles.containerInput}>

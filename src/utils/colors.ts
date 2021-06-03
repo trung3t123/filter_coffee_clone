@@ -51,6 +51,7 @@ const Colors = {
   verifiedUser: 'rgba(56, 201, 118, 1)',
   borderColorItem: 'rgba(50, 50, 53, 1)',
 
+  textInvertedWhiteColor: '#FCFCFC',
   black40: 'rgba(0, 0, 0, 0.4)',
   black70: 'rgba(0, 0, 0, 0.7)',
   black60: 'rgba(0, 0, 0, 0.6)',

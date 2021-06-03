@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Text } from 'react-native';
 import DetailPost from './DetailPost';
-import { CommentPostsType } from 'data/home/types';
+import { CommentPostsType, PostTypes } from 'data/home/types';
 import CustomInputMessage from 'components/Input/CustomInputMessage';
 import ReplyCommentItem from 'components/Item/ReplyCommentItem';
 import CommonHeights from 'theme/CommonHeights';
@@ -9,9 +9,12 @@ import { onPostCommentPost, onGetListCommentOfPost } from 'data/home/actions';
 import InfinityList from 'components/List/InfinityList';
 import { HomeActionResultListData } from 'data/home/types';
 import Colors from 'utils/colors';
+import CommonWidths from 'theme/CommonWidths';
+import CommonFonts from 'theme/CommonFonts';
 
 type PostDetailContentProps = {
   idPost: string;
+  item: PostTypes;
 };
 
 type refInfinityList = {
@@ -70,15 +73,24 @@ class PostDetailContent extends Component<PostDetailContentProps> {
   };
 
   renderDetailPost = () => {
-    const { idPost } = this.props;
+    const { item } = this.props;
     const { isOnProgressPostComment, totalComment } = this.state;
     return (
       <>
-        <DetailPost
-          setDetailPostReady={this.setDetailPostReady.bind(this)}
-          totalComment={totalComment}
-          idPost={idPost}
-        />
+        {item.group_type === 'premium' && (
+          <Text
+            style={{
+              fontSize: CommonFonts.res25,
+              fontWeight: '500',
+              color: 'white',
+              marginHorizontal: CommonWidths.baseSpaceHorizontal,
+              marginBottom: CommonHeights.res30,
+              overflow: 'hidden',
+            }}>
+            {item.description}
+          </Text>
+        )}
+        <DetailPost item={item} totalComment={totalComment} />
         {isOnProgressPostComment && (
           <ActivityIndicator size="large" color={Colors.white} />
         )}
@@ -87,12 +99,9 @@ class PostDetailContent extends Component<PostDetailContentProps> {
   };
 
   renderReplyCommentItem = ({ item }: { item: CommentPostsType }) => {
-    const { isDetailPostReady } = this.state;
-    if (!isDetailPostReady) {
-      return null;
-    }
     return (
       <ReplyCommentItem
+        createAtPost={item.createdAt}
         linkAvatar={item.user.image_url}
         userName={item?.user?.fullname}
         message={item?.text}
@@ -123,8 +132,6 @@ class PostDetailContent extends Component<PostDetailContentProps> {
   };
 
   render() {
-    const { isDetailPostReady } = this.state;
-
     return (
       <>
         <InfinityList
@@ -137,7 +144,7 @@ class PostDetailContent extends Component<PostDetailContentProps> {
         />
 
         <CustomInputMessage
-          isInputReady={isDetailPostReady}
+          // isInputReady={isDetailPostReady}
           submitEditing={this.onSubmitReplyComment}
         />
       </>

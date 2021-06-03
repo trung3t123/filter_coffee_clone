@@ -6,10 +6,12 @@ import styles from './styles';
 import { doNothing } from 'constants/default-values';
 import Colors from 'utils/colors';
 
+declare type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center';
+
 type FastImageProp = {
   imageStyle: ImageStyle;
   uri?: string | null | undefined;
-  resizeMode?: any;
+  resizeMode?: ResizeMode;
   loadingImage?: boolean;
   source?: any;
 };

@@ -16,13 +16,13 @@ import CommonHeights from 'theme/CommonHeights';
 const { FETCH_STATUS, PAGE_LIMIT } = config;
 
 interface PropTypes extends FlatListProps<never> {
-  onEndReachedThreshold: number;
+  onEndReachedThreshold?: number;
   fetchData: (
-    offset?: number,
-    limit?: number,
+    offset: number,
+    limit: number,
   ) => Promise<HomeActionResultListData>;
   emptyMessage?: string;
-  handleData: (data: never[]) => never[];
+  handleData?: (data: never[]) => never[];
   data: never[];
   getRefInfinityList?: (ref: any) => void;
 }

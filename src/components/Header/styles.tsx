@@ -5,7 +5,7 @@ import CommonHeights from 'theme/CommonHeights';
 
 export default StyleSheet.create({
   container: {
-    paddingHorizontal: CommonWidths.res23,
+    paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     paddingBottom: CommonHeights.res10,
     alignItems: 'center',
     backgroundColor: Colors.mainBackgroundColorContainer,
@@ -21,7 +21,11 @@ export default StyleSheet.create({
   leftIcon: {
     zIndex: 1,
   },
-
+  transparentHeader: {
+    maxHeight: CommonHeights.res80,
+    width: '100%',
+    backgroundColor: Colors.transparent,
+  },
   absoluteHeader: {
     position: 'absolute',
     top: 0,

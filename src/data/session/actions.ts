@@ -112,8 +112,18 @@ export const login = (
       data: { token, user },
     } = response;
     // set token
-    await dispatch(authorize(token));
+
     dispatch(loginSuccess(user));
+
+    if (!user.fullname && !user.username) {
+      SetupAPI.setHeaderToken(token, 'redux:action:authorize');
+
+      result.error = 'No Name';
+    }
+
+    if (user.fullname && user.username) {
+      await dispatch(authorize(token));
+    }
 
     result.success = true;
   } catch (error) {

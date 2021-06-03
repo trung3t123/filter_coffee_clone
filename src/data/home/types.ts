@@ -9,19 +9,30 @@ export type CommentPostsType = {
     username?: string;
     image_url?: string;
   };
+  createdAt: string;
+  parrent_id: null;
+  post_id: string;
+  updatedAt: string;
+  user_id: string;
 };
 export interface PostTypes {
+  image_urls: string;
   id: string;
   content: {
     content: string;
 
     createdAt: string;
-    image_urls: string;
+    image_urls: string[];
+    thumbnail_url: string;
+
     post_id: string;
     updatedAt: string;
   };
   description: string;
   user_id: string;
+
+  thumbnail_url: string;
+  group_type: string;
 
   theme_ids: string[];
   user: UserInfoTypes;
