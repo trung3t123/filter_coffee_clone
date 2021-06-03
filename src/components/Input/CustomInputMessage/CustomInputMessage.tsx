@@ -19,7 +19,7 @@ import Screen from 'utils/screen';
 
 type CustomInputMessageProps = {
   submitEditing: (text: string) => void;
-  isInputReady?: never;
+  isInputReady?: boolean;
 };
 
 class CustomInputMessage extends Component<CustomInputMessageProps> {

@@ -1,4 +1,4 @@
-import { PostTypes } from 'data/home/types';
+import { PostTypes, CommentPostsType } from 'data/home/types';
 
 export type GetListPostsParameters = {
   offset: number;
@@ -7,6 +7,11 @@ export type GetListPostsParameters = {
 
 export type DetailPostParameter = {
   id: string;
+};
+
+export type PostReplyPostParameter = {
+  text: string;
+  post_id: string;
 };
 
 export type ListPostsResponse = {
@@ -20,6 +25,21 @@ export type ListPostsResponse = {
 export type DetailPostResponse = {
   data?: {
     record: PostTypes;
+  };
+  status: number;
+};
+
+export type PostCommentResponse = {
+  data?: {
+    record: CommentPostsType;
+  };
+  status: number;
+};
+
+export type GetCommentOfPostResponse = {
+  data?: {
+    records?: never[];
+    total: number;
   };
   status: number;
 };

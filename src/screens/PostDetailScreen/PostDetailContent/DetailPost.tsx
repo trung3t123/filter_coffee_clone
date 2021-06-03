@@ -1,5 +1,6 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect, useCallback, memo } from 'react';
+import { View, Text, ActivityIndicator } from 'react-native';
 import IconWithText from 'components/Icon/IconWithText';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -7,36 +8,94 @@ import styles from './styles';
 import Avatar from 'components/Image/Avatar';
 import Colors from 'utils/colors';
 import CommonFonts from 'theme/CommonFonts';
+import { getDetailPost } from 'data/home/actions';
 import { PostTypes } from 'data/home/types';
 
-const DetailPost = ({ item }: { item?: PostTypes }) => {
+const DetailPost = ({
+  idPost,
+  totalComment,
+}: {
+  idPost: string;
+  totalComment: number;
+}) => {
+  const [detailPost, setDetailPost] = useState<PostTypes>();
+
+  const [isLoading, setLoading] = useState<boolean>(false);
+
+  const onGetDetailPost = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data, success, error } = await getDetailPost(idPost);
+
+      if (error) {
+        setLoading(false);
+        throw new Error(error);
+      }
+
+      if (success) {
+        setLoading(false);
+        setDetailPost(data);
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  }, [idPost, setDetailPost]);
+
+  useEffect(() => {
+    onGetDetailPost();
+  }, []);
+
   return (
     <View style={styles.containerItem}>
       <View style={styles.viewInfoPost}>
         <View>
-          <Avatar isEnableGradient avatarStyle={styles.avatar} />
+          <Avatar
+            isLoading={isLoading}
+            // uri={}
+            isEnableGradient
+            avatarStyle={styles.avatar}
+          />
         </View>
 
         <View style={styles.viewNamePostOfUser}>
-          <Text style={styles.textNameUserPost}>
-            Ishika Agarwal{' '}
-            <View style={styles.viewIconCheck}>
-              <Icon name="check" color={Colors.white} size={CommonFonts.res8} />
-            </View>
-          </Text>
+          {isLoading ? (
+            <ActivityIndicator
+              style={{ top: 10, right: 100 }}
+              size="small"
+              color={Colors.white}
+            />
+          ) : (
+            <>
+              <Text style={styles.textNameUserPost}>
+                {detailPost?.user.fullname}{' '}
+                <View style={styles.viewIconCheck}>
+                  <Icon
+                    name="check"
+                    color={Colors.white}
+                    size={CommonFonts.res8}
+                  />
+                </View>
+              </Text>
 
-          <Text style={styles.textTime}>
-            @wtfishika • <Text>20h ago</Text>
-          </Text>
+              <Text style={styles.textTime}>
+                @wtfishika • <Text>20h ago</Text>
+              </Text>
+            </>
+          )}
         </View>
       </View>
 
       <View style={styles.viewContentPost}>
-        <Text style={styles.textContent}>{item?.content?.content}</Text>
+        {isLoading ? (
+          <ActivityIndicator size="small" color={Colors.white} />
+        ) : (
+          <Text style={styles.textContent}>{detailPost?.content.content}</Text>
+        )}
       </View>
 
       <View style={styles.viewBottomPost}>
         <IconWithText
+          isLoading={isLoading}
           styleContainerIcon={styles.viewComment}
           iconColor={Colors.white}
           iconName={'eye'}
@@ -46,27 +105,33 @@ const DetailPost = ({ item }: { item?: PostTypes }) => {
         />
 
         <IconWithText
+          isLoading={isLoading}
           styleContainerIcon={styles.viewLike}
           iconColor={Colors.red}
           iconName={'heart'}
           textStyle={styles.textLikeAndComment}
           title={'11.23k'}
+          image
           sizeIcon={CommonFonts.res23}
         />
         <IconWithText
+          isLoading={isLoading}
           styleContainerIcon={styles.viewComment}
           iconColor={Colors.white}
           iconName={'message-circle'}
           textStyle={styles.opacity75}
-          title={'1.76k'}
+          title={totalComment}
+          image
           sizeIcon={CommonFonts.res23}
         />
         <IconWithText
+          isLoading={isLoading}
           styleContainerIcon={styles.viewComment}
           iconColor={Colors.white}
           iconName={'share-2'}
           textStyle={styles.opacity75}
           title={'1.76k'}
+          image
           sizeIcon={CommonFonts.res23}
         />
       </View>
@@ -74,4 +139,4 @@ const DetailPost = ({ item }: { item?: PostTypes }) => {
   );
 };
 
-export default DetailPost;
+export default memo(DetailPost);

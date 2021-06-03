@@ -34,7 +34,7 @@ const PostItem: React.FC<ItemPostProps> = ({ item }) => {
 
           <View style={styles.viewNamePostOfUser}>
             <Text style={styles.textNameUserPost}>
-              Ishika Agarwal{' '}
+              {item.item.user.fullname}{' '}
               <View style={styles.viewIconCheck}>
                 <Icon
                   name="check"
@@ -56,6 +56,7 @@ const PostItem: React.FC<ItemPostProps> = ({ item }) => {
 
         <View style={styles.viewBottomPost}>
           <IconWithText
+            image
             styleContainerIcon={styles.viewLike}
             iconColor={Colors.red}
             iconName={'heart'}
@@ -64,11 +65,12 @@ const PostItem: React.FC<ItemPostProps> = ({ item }) => {
             sizeIcon={CommonFonts.res23}
           />
           <IconWithText
+            image
             styleContainerIcon={styles.viewComment}
             iconColor={Colors.white}
             iconName={'message-circle'}
             textStyle={styles.opacity75}
-            title={'1.76k'}
+            title={item.item.comment_posts.length}
             sizeIcon={CommonFonts.res23}
           />
         </View>
@@ -81,7 +83,10 @@ export default memo(PostItem);
 
 const styles = StyleSheet.create({
   containerItem: {
-    marginBottom: CommonHeights.res20,
+    paddingBottom: CommonHeights.res20,
+    marginBottom: CommonHeights.res10,
+    borderBottomWidth: 1,
+    borderColor: Colors.borderColorItem,
   },
   viewInfoPost: { flexDirection: 'row', marginBottom: CommonHeights.res10 },
   viewContentPost: {
@@ -118,17 +123,20 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontSize: CommonFonts.res15,
     fontWeight: '500',
+    marginLeft: 5,
   },
   textContent: {
     color: Colors.white,
     fontSize: CommonFonts.res23,
-    opacity: 0.75,
+    marginBottom: CommonHeights.res10,
   },
   viewIconCheck: {
     backgroundColor: Colors.verifiedUser,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    height: CommonHeights.res12,
+    width: CommonHeights.res12,
   },
   viewLike: {
     flexDirection: 'row',
@@ -138,6 +146,7 @@ const styles = StyleSheet.create({
 
   opacity75: {
     opacity: 0.75,
+    marginLeft: 5,
   },
 
   viewComment: { flexDirection: 'row', alignItems: 'center' },

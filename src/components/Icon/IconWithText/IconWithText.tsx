@@ -1,8 +1,17 @@
 import React, { memo } from 'react';
-import { View, StyleSheet, TextStyle, ViewStyle, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Colors from 'utils/colors';
 import CommonFonts from 'theme/CommonFonts';
+import CommonWidths from 'theme/CommonWidths';
+import FastImage from 'react-native-fast-image';
 
 type IconWithText = {
   styleContainerIcon?: ViewStyle;
@@ -11,7 +20,17 @@ type IconWithText = {
   sizeIcon?: number;
   textStyle?: TextStyle;
   textPosition?: 'right' | 'left';
-  title?: string;
+  title: string | number;
+  isLoading?: boolean;
+  image?: boolean;
+};
+
+const imageLink: {
+  [key: string]: string;
+} = {
+  heart: require('../../../../assets/heart.png'),
+  ['message-circle']: require('../../../../assets/comment.png'),
+  ['share-2']: require('../../../../assets/network.png'),
 };
 
 const IconWithText = ({
@@ -22,19 +41,48 @@ const IconWithText = ({
   textStyle,
   textPosition = 'right',
   title,
+  isLoading,
+  image,
 }: IconWithText) => {
   const isTextPositionOnLeftIcon = textPosition === 'left';
 
   return (
     <View style={[styles.containerIcon, styleContainerIcon]}>
       {isTextPositionOnLeftIcon && (
-        <Text style={[styles.textStyle, textStyle]}>{title}</Text>
+        <>
+          {isLoading ? (
+            <View style={{ width: CommonWidths.baseSpaceHorizontal }}>
+              <ActivityIndicator size="small" color={Colors.white} />
+            </View>
+          ) : (
+            <Text style={[styles.textStyle, textStyle]}>{title}</Text>
+          )}
+        </>
       )}
 
-      <Icon name={iconName} color={iconColor} size={sizeIcon} />
+      {image ? (
+        <FastImage
+          resizeMode="contain"
+          style={{
+            height: CommonFonts.res23,
+            width: CommonFonts.res23,
+          }}
+          source={imageLink[iconName]}
+        />
+      ) : (
+        <Icon name={iconName} color={iconColor} size={sizeIcon} />
+      )}
 
       {!isTextPositionOnLeftIcon && (
-        <Text style={[styles.textStyle, textStyle]}>{title}</Text>
+        <>
+          {isLoading ? (
+            <View style={{ width: CommonWidths.baseSpaceHorizontal }}>
+              <ActivityIndicator size="small" color={Colors.white} />
+            </View>
+          ) : (
+            <Text style={[styles.textStyle, textStyle]}>{title}</Text>
+          )}
+        </>
       )}
     </View>
   );

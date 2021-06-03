@@ -114,12 +114,10 @@ export const login = (
     // set token
     await dispatch(authorize(token));
     dispatch(loginSuccess(user));
-    // dispatch({ type: sessionReducerTypes.LOGIN_SUCCESS });
 
     result.success = true;
   } catch (error) {
     result.error = error?.data?.response?.data?.message || '';
-    console.log(error, error.message, { error }, '>>>>>>>>>>>>>>>>>>>>');
 
     Alert.alert('Error', error.message);
 
@@ -146,7 +144,6 @@ export const signUp = (
 
     SetupAPI.setHeaderToken(token, 'redux:action:authorize');
     dispatch(registerSuccess(user));
-    // dispatch({ type: sessionReducerTypes.REGISTER_SUCCESS });
 
     result.success = true;
   } catch (error) {

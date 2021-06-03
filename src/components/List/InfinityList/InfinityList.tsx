@@ -18,12 +18,13 @@ const { FETCH_STATUS, PAGE_LIMIT } = config;
 interface PropTypes extends FlatListProps<never> {
   onEndReachedThreshold: number;
   fetchData: (
-    offset: number,
+    offset?: number,
     limit?: number,
   ) => Promise<HomeActionResultListData>;
   emptyMessage?: string;
   handleData: (data: never[]) => never[];
   data: never[];
+  getRefInfinityList?: (refInfinityList: InfinityList) => void;
 }
 
 class InfinityList extends React.Component<PropTypes> {
@@ -37,6 +38,8 @@ class InfinityList extends React.Component<PropTypes> {
   mounted = false;
 
   componentDidMount() {
+    const { getRefInfinityList } = this.props;
+    getRefInfinityList && getRefInfinityList(this);
     this.mounted = true;
     this.fetchNew();
   }
@@ -44,6 +47,13 @@ class InfinityList extends React.Component<PropTypes> {
   componentWillUnmount() {
     this.mounted = false;
   }
+
+  addNewData = (newData: never) => {
+    this.fetchedData = [newData, ...this.fetchedData];
+    this.setState({
+      data: this.fetchedData,
+    });
+  };
 
   fetchNew = async () => {
     const { fetchData, handleData } = this.props;
@@ -155,7 +165,6 @@ class InfinityList extends React.Component<PropTypes> {
   render() {
     const { ...rest } = this.props;
     const { data, fetchStatus } = this.state;
-
     return (
       <FlatList
         {...rest}
@@ -179,6 +188,7 @@ class InfinityList extends React.Component<PropTypes> {
     onEndReachedThreshold: 0.2,
     emptyMessage: '',
     handleData: (data: never[]) => data,
+    getRefInfinityList: (refInfinityList: InfinityList): void => {},
     ListEmptyComponent: undefined,
     data: [],
   };

@@ -15,8 +15,8 @@ const HomeBanner = () => {
 
   const onFetchListPosts = useCallback(
     async (
-      offset: number,
-      limit?: number,
+      offset: number = 0,
+      limit: number = 0,
     ): Promise<HomeActionResultListData> => {
       const response = await dispatch(onGetListPosts(offset, limit));
       return response;

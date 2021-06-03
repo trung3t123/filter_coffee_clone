@@ -10,18 +10,16 @@ import Colors from 'utils/colors';
 // import { itemType } from 'screens/HomeScreen/HomeListPosts/types';
 import Avatar from 'components/Image/Avatar';
 import IconWithText from 'components/Icon/IconWithText';
-import { useSelector } from 'react-redux';
-import SessionSelector from 'data/session/selectors';
 
 type ItemPostProps = any;
 
 const ReplyCommentItem: React.FC<ItemPostProps> = ({
   message,
+  userName,
 }: {
   message?: string;
+  userName?: string;
 }) => {
-  const userName = useSelector(SessionSelector.getUserFullName);
-
   return (
     <View style={styles.containerItem}>
       <View style={styles.viewInfoPost}>
@@ -49,6 +47,7 @@ const ReplyCommentItem: React.FC<ItemPostProps> = ({
 
       <View style={styles.viewBottomPost}>
         <IconWithText
+          image
           styleContainerIcon={styles.viewLike}
           iconColor={Colors.red}
           iconName={'heart'}
@@ -104,17 +103,20 @@ const styles = StyleSheet.create({
   textLikeAndComment: {
     color: Colors.white,
     fontWeight: '500',
-    marginLeft: CommonWidths.res10,
+    marginLeft: 5,
   },
   textContent: {
     color: Colors.white,
     fontSize: CommonFonts.res17,
+    marginBottom: CommonHeights.res10,
   },
   viewIconCheck: {
     backgroundColor: Colors.verifiedUser,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    height: CommonHeights.res12,
+    width: CommonHeights.res12,
   },
   viewLike: {
     flexDirection: 'row',

@@ -1,127 +1,124 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useMemo, useCallback, useState, useEffect } from 'react';
-import {
-  View,
-  FlatList as ListReplyComment,
-  LayoutAnimation,
-  ActivityIndicator,
-  StyleSheet,
-} from 'react-native';
+import React, { Component } from 'react';
+import { View, LayoutAnimation, ActivityIndicator } from 'react-native';
 import DetailPost from './DetailPost';
-import { PostTypes } from 'data/home/types';
+import { CommentPostsType } from 'data/home/types';
 import CustomInputMessage from 'components/Input/CustomInputMessage';
-import ReplyCommentItem from 'components/Item/ReplyCommetItem';
+import ReplyCommentItem from 'components/Item/ReplyCommentItem';
 import CommonHeights from 'theme/CommonHeights';
-import { useRoute } from '@react-navigation/native';
-import { getDetailPost } from 'data/home/actions';
+import { onPostCommentPost, onGetListCommentOfPost } from 'data/home/actions';
+import InfinityList from 'components/List/InfinityList';
+import { HomeActionResultListData } from 'data/home/types';
 import Colors from 'utils/colors';
-
-type message = { id: string; message: string };
-
-type listMessages = Array<message>;
-
-type RoutePrams = {
-  params: {
-    idPost: string;
-  };
-};
 
 LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
 
-const PostDetailContent = () => {
-  const route: RoutePrams = useRoute();
+type PostDetailContentProps = {
+  idPost: string;
+};
 
-  const [detailPost, setDetailPost] = useState<PostTypes>();
-  const [isLoading, setLoading] = useState<boolean>(false);
+class PostDetailContent extends Component<PostDetailContentProps> {
+  state = {
+    isOnProgressPostComment: false,
+    totalComment: 0,
+  };
 
-  const onGetDetailPost = useCallback(async () => {
-    setLoading(true);
+  refInfinityList = null;
+
+  stopLoading = () => {
+    this.setState({
+      isOnProgressPostComment: false,
+    });
+  };
+
+  setTotalComment = (numberComment: number) => {
+    this.setState({ totalComment: numberComment });
+  };
+
+  onSubmitReplyComment = async (text: string) => {
+    const { idPost } = this.props;
+    const { totalComment } = this.state;
+    this.setState({ isOnProgressPostComment: true });
     try {
-      const { data, success, error } = await getDetailPost(route.params.idPost);
+      const { success, commentResponse, error } = await onPostCommentPost({
+        contentReply: text,
+        idPost: idPost,
+      });
 
       if (error) {
-        setLoading(false);
-        throw new Error(error);
+        this.stopLoading();
       }
 
       if (success) {
-        setLoading(false);
-        setDetailPost(data);
+        this.stopLoading();
+        this.setTotalComment(totalComment + 1);
+        console.log(commentResponse, 'commentResponse');
+        commentResponse && this.refInfinityList?.addNewData(commentResponse);
       }
-    } catch (error) {
-      setLoading(false);
+    } catch {
+      this.stopLoading();
     }
-  }, [setLoading, setDetailPost]);
+  };
 
-  useEffect(() => {
-    onGetDetailPost();
-  }, []);
-
-  const [listReplyMessages, setListMessages] = useState<listMessages>([]); // create data to test feature comment
-
-  const onSubmitReplyComment = useCallback(
-    (text: string) => {
-      setListMessages(
-        [
-          {
-            id: `${Math.random() * 10}`,
-            message: text,
-          },
-        ].concat(listReplyMessages),
-      );
-    },
-    [setListMessages, listReplyMessages],
-  );
-
-  const renderDetailPost = useMemo(() => {
+  renderDetailPost = () => {
+    const { idPost } = this.props;
+    const { isOnProgressPostComment, totalComment } = this.state;
     return (
       <>
-        {isLoading ? (
-          <View style={styles.viewIndicator}>
-            <ActivityIndicator size="large" color={Colors.white} />
-          </View>
-        ) : (
-          <DetailPost item={detailPost} />
+        <DetailPost totalComment={totalComment} idPost={idPost} />
+        {isOnProgressPostComment && (
+          <ActivityIndicator size="large" color={Colors.white} />
         )}
       </>
     );
-  }, [detailPost, isLoading]);
+  };
 
-  const renderReplyCommentItem = useCallback(
-    ({ item }) => <ReplyCommentItem message={item.message} />,
-    [],
-  );
+  renderReplyCommentItem = ({ item }: { item: CommentPostsType }) => {
+    console.log(item, 'item');
+    return (
+      <ReplyCommentItem userName={item?.user?.fullname} message={item?.text} />
+    );
+  };
 
-  const keyExtractor = useCallback((item: any) => `${item.id}`, [
-    listReplyMessages.length,
-  ]);
+  keyExtractor = (item: any) => `${item.id}`;
 
-  const ListFooterComponent = useCallback(
-    () => <View style={{ height: CommonHeights.res100 }} />,
-    [],
-  );
+  ListFooterComponent = () => <View style={{ height: CommonHeights.res100 }} />;
 
-  const isInputReady = detailPost ?? detailPost;
+  onFetchListComment = async (
+    offset: number = 0,
+    limit: number = 0,
+  ): Promise<HomeActionResultListData> => {
+    const { idPost } = this.props;
+    const response = await onGetListCommentOfPost({
+      offset,
+      limit,
+      idPost: idPost,
+    });
+    this.setTotalComment(response.pagination?.total);
+    return response;
+  };
 
-  return (
-    <>
-      <ListReplyComment
-        keyExtractor={keyExtractor}
-        renderItem={renderReplyCommentItem}
-        data={listReplyMessages}
-        ListHeaderComponent={renderDetailPost}
-        ListFooterComponent={ListFooterComponent}
-      />
-      <CustomInputMessage
-        isInputReady={isInputReady as never}
-        submitEditing={onSubmitReplyComment}
-      />
-    </>
-  );
-};
+  getRefInfinityList = (ref: never) => {
+    this.refInfinityList = ref;
+  };
+
+  render() {
+    return (
+      <>
+        <InfinityList
+          fetchData={this.onFetchListComment}
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderReplyCommentItem}
+          ListHeaderComponent={this.renderDetailPost}
+          ListFooterComponent={this.ListFooterComponent}
+          getRefInfinityList={this.getRefInfinityList}
+        />
+        <CustomInputMessage
+          isInputReady={true}
+          submitEditing={this.onSubmitReplyComment}
+        />
+      </>
+    );
+  }
+}
 
 export default PostDetailContent;
-
-const styles = StyleSheet.create({
-  viewIndicator: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-});

@@ -4,7 +4,6 @@ import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
 import CommonFonts from 'theme/CommonFonts';
 import Colors from 'utils/colors';
-// import CommonFonts from 'theme/CommonFonts';
 
 const styles = StyleSheet.create({
   containerFlatList: {
@@ -20,7 +19,7 @@ const styles = StyleSheet.create({
   },
   viewInfoPost: { flexDirection: 'row', marginBottom: CommonHeights.res15 },
   viewContentPost: {
-    paddingBottom: CommonHeights.res20,
+    paddingBottom: CommonHeights.res10,
   },
   viewBottomPost: {
     flexDirection: 'row',
@@ -52,17 +51,19 @@ const styles = StyleSheet.create({
     fontSize: CommonFonts.res15,
     fontWeight: '500',
     marginLeft: CommonWidths.res5,
-    marginRight: CommonWidths.res10,
+    marginRight: CommonWidths.res15,
   },
   textContent: {
     color: Colors.white,
-    fontSize: CommonFonts.res17,
+    fontSize: CommonFonts.res23,
   },
   viewIconCheck: {
     backgroundColor: Colors.verifiedUser,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    height: CommonHeights.res12,
+    width: CommonHeights.res12,
   },
   viewLike: {
     flexDirection: 'row',

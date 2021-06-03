@@ -1,5 +1,15 @@
 import { UserInfoTypes } from 'data/session/types';
 
+export type CommentPostsType = {
+  id: string;
+  text: string;
+  parent_id: string;
+  user: {
+    fullname?: string;
+    username?: string;
+    image_url?: string;
+  };
+};
 export interface PostTypes {
   id: string;
   content: {
@@ -15,10 +25,18 @@ export interface PostTypes {
 
   theme_ids: string[];
   user: UserInfoTypes;
+
+  comment_posts: CommentPostsType[];
 }
 
 export type HomeActionResult = {
   data?: PostTypes;
+  success?: boolean;
+  error?: string;
+};
+
+export type PostCommentActionResult = {
+  commentResponse?: CommentPostsType;
   success?: boolean;
   error?: string;
 };
