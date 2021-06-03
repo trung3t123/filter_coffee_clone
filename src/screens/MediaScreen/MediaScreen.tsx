@@ -1,23 +1,22 @@
-import React, { useRef, memo } from 'react';
+import Header from 'components/Header';
+import GradientText from 'components/Text/LinearGradientText/LinearGradientText';
+import React, { memo, useRef } from 'react';
 import {
-  Text,
-  View,
-  StyleSheet,
-  FlatList,
   Animated,
   ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import Screen from 'utils/screen';
-import Header from 'components/Header';
+import ROUTES from 'routes/names';
 import CommonFonts from 'theme/CommonFonts';
-import Colors from 'utils/colors';
-import GradientText from 'components/Text/LinearGradientText/LinearGradientText';
-import CommonWidths from 'theme/CommonWidths';
-import { render } from 'enzyme';
-import ScrollingCarouselItem from './ScrollingCarousel/ScrollingCarouselItem';
 import CommonHeights from 'theme/CommonHeights';
+import CommonWidths from 'theme/CommonWidths';
+import Colors from 'utils/colors';
+import Screen from 'utils/screen';
 import ResearchItem from './ResearchItem';
-import { ReactElement } from 'react';
+import ScrollingCarouselItem from './ScrollingCarousel/ScrollingCarouselItem';
 
 type PropTypes = {
   navigation: any;
@@ -68,12 +67,16 @@ const researchData = [
 
 const ITEM_SIZE = CommonWidths.p100;
 
-const MediaScreen: React.FC<PropTypes> = ({}) => {
+const MediaScreen: React.FC<PropTypes> = ({ navigation }) => {
   const scrollX = useRef(new Animated.Value(0)).current;
 
   function renderResearchList() {
-    return researchData.map(item => (
-      <ResearchItem textItem={item.tittle} key={item.id} />
+    return researchData.map((item, index) => (
+      <TouchableOpacity
+        key={item.id}
+        onPress={() => navigation.navigate(ROUTES.BLOG_DETAIL)}>
+        <ResearchItem textItem={item.tittle} key={item.id} />
+      </TouchableOpacity>
     ));
   }
 
@@ -155,13 +158,14 @@ const styles = StyleSheet.create({
   container: {
     height: Screen.height,
     width: Screen.width,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.black,
     position: 'relative',
   },
 
   itemTitle: {
     fontWeight: '500',
     fontSize: CommonFonts.res20,
+    paddingHorizontal: CommonWidths.res23,
     lineHeight: CommonFonts.res28,
     color: Colors.textInvertedWhiteColor,
   },
@@ -169,7 +173,6 @@ const styles = StyleSheet.create({
   flexRowBetween: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: CommonWidths.res23,
     paddingBottom: CommonHeights.res18,
   },
 
@@ -188,6 +191,7 @@ const styles = StyleSheet.create({
 
   researchListContainer: {
     paddingHorizontal: CommonWidths.res23,
+    marginBottom: CommonHeights.p10,
   },
 
   content: {
