@@ -1,4 +1,5 @@
 export interface PostTypes {
+  image_urls: string;
   id: string;
   content: {
     content: string;

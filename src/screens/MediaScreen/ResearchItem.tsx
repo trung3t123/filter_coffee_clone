@@ -8,13 +8,14 @@ import CommonFonts from 'theme/CommonFonts';
 
 type Props = {
   textItem: string;
+  imageUrl: string;
 };
-const ResearchItem = ({ textItem }: Props) => {
+const ResearchItem = ({ textItem, imageUrl }: Props) => {
   return (
     <View style={styles.container}>
       <CacheImage
         imageStyle={styles.itemImageContainer}
-        source={require('../../../assets/Bitmap.png')}
+        source={{ uri: imageUrl }}
       />
       <Text style={styles.itemText}>{textItem}</Text>
     </View>

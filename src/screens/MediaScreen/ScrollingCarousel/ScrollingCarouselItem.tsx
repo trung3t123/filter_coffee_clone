@@ -17,7 +17,7 @@ const ScrollingCarouselItem = ({ imageUrl, itemTitle }: PropsType) => {
     <View style={styles.centerItem}>
       <View style={styles.itemContainer}>
         <CacheImage
-          source={require('../../../../assets/Bitmap.png')}
+          source={{ uri: imageUrl }}
           imageStyle={styles.scrollImageStyle}
         />
         <Text style={styles.itemTitle}>{itemTitle}</Text>

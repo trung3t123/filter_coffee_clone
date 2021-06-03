@@ -1,6 +1,6 @@
 import Header from 'components/Header';
 import GradientText from 'components/Text/LinearGradientText/LinearGradientText';
-import React, { memo, useRef } from 'react';
+import React, { memo, useRef, useEffect, useState } from 'react';
 import {
   Animated,
   ScrollView,
@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import ROUTES from 'routes/names';
 import CommonFonts from 'theme/CommonFonts';
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
@@ -17,66 +16,43 @@ import Colors from 'utils/colors';
 import Screen from 'utils/screen';
 import ResearchItem from './ResearchItem';
 import ScrollingCarouselItem from './ScrollingCarousel/ScrollingCarouselItem';
+import { useDispatch } from 'react-redux';
+import { onGetMediaPost } from 'data/home/actions';
+import { ActionDispatcher } from 'data/types';
+import { itemType } from './type';
 
 type PropTypes = {
   navigation: any;
 };
 
-const mockData = [
-  { id: '1', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '2', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '3', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '4', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '5', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '6', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '7', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-];
-
-const researchData = [
-  {
-    id: '1',
-    url: '../../../assets/Bitmap.png',
-    tittle: 'Plant based milk company Oatly just IPO’ed at $10 billion',
-  },
-  {
-    id: '2',
-    url: '../../../assets/Bitmap.png',
-    tittle: '$150 billion media merger you should know about ✌️',
-  },
-  {
-    id: '3',
-    url: '../../../assets/Bitmap.png',
-    tittle: 'Adani gobbles SB Energy',
-  },
-  {
-    id: '4',
-    url: '../../../assets/Bitmap.png',
-    tittle: '$150 billion media merger you should know about ✌️',
-  },
-  {
-    id: '5',
-    url: '../../../assets/Bitmap.png',
-    tittle: 'Plant based milk company Oatly just IPO’ed at $10 billion',
-  },
-  {
-    id: '6',
-    url: '../../../assets/Bitmap.png',
-    tittle: 'Adani gobbles SB Energy',
-  },
-];
-
 const ITEM_SIZE = CommonWidths.p100;
 
-const MediaScreen: React.FC<PropTypes> = ({ navigation }) => {
+const MediaScreen: React.FC<PropTypes> = () => {
+  const dispatch: ActionDispatcher = useDispatch();
+  const [mediaList, setMediaList] = useState([]);
+
+  const fetchData = async () => {
+    const mediaPost = await dispatch(onGetMediaPost(0, 10));
+    setMediaList(mediaPost.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const scrollX = useRef(new Animated.Value(0)).current;
 
   function renderResearchList() {
-    return researchData.map((item, index) => (
+    return mediaList.map((item: itemType) => (
       <TouchableOpacity
         key={item.id}
         // onPress={() => navigation.navigate(ROUTES.BLOG_DETAIL)}
       >
-        <ResearchItem textItem={item.tittle} key={item.id} />
+        <ResearchItem
+          imageUrl={item.content.image_urls[0]}
+          textItem={item.content.content}
+          key={item.id}
+        />
       </TouchableOpacity>
     ));
   }
@@ -105,9 +81,9 @@ const MediaScreen: React.FC<PropTypes> = ({ navigation }) => {
           transform: [{ scale }, { translateX: position }, { perspective }],
         }}>
         <ScrollingCarouselItem
-          key={index}
-          imageUrl={item.url}
-          itemTitle={item.tittle}
+          key={item.id}
+          imageUrl={item.content.image_urls[0]}
+          itemTitle={item.content.content}
         />
       </Animated.View>
     );
@@ -138,7 +114,7 @@ const MediaScreen: React.FC<PropTypes> = ({ navigation }) => {
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
-            data={mockData}
+            data={mediaList}
             renderItem={renderItem}
             keyExtractor={getKey}
           />
