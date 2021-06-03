@@ -93,14 +93,14 @@ const MediaScreen: React.FC<PropTypes> = () => {
 
   return (
     <View style={styles.container}>
-      <Header isGoBack>
-        <View style={styles.flexRow}>
-          <Text style={styles.textTitleActive}>Insights </Text>
-          <Text style={styles.textTitle}> - </Text>
-          <Text style={styles.textTitle}>Scoops </Text>
-        </View>
-      </Header>
-      <ScrollView style={styles.content}>
+      <ScrollView stickyHeaderIndices={[0]} style={styles.content}>
+        <Header isTransparent isGoBack>
+          <View style={styles.flexRow}>
+            <Text style={styles.textTitleActive}>Insights </Text>
+            <Text style={styles.textTitle}> - </Text>
+            <Text style={styles.textTitle}>Scoops </Text>
+          </View>
+        </Header>
         <View style={styles.flatlistContainer}>
           <GradientText style={styles.subtitleText}>View all</GradientText>
           <Animated.FlatList
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontWeight: '500',
     fontSize: CommonFonts.res20,
-    paddingHorizontal: CommonWidths.res23,
+    paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     lineHeight: CommonFonts.res28,
     color: Colors.textInvertedWhiteColor,
   },
@@ -161,13 +161,13 @@ const styles = StyleSheet.create({
   subtitleText: {
     textAlign: 'right',
     fontSize: CommonFonts.res15,
-    paddingHorizontal: CommonWidths.res23,
+    paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     fontWeight: '500',
     paddingBottom: CommonHeights.res20,
   },
 
   researchListContainer: {
-    paddingHorizontal: CommonWidths.res23,
+    paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     marginBottom: CommonHeights.p10,
   },
 
