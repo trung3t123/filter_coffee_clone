@@ -74,7 +74,8 @@ const MediaScreen: React.FC<PropTypes> = ({ navigation }) => {
     return researchData.map((item, index) => (
       <TouchableOpacity
         key={item.id}
-        onPress={() => navigation.navigate(ROUTES.BLOG_DETAIL)}>
+        // onPress={() => navigation.navigate(ROUTES.BLOG_DETAIL)}
+      >
         <ResearchItem textItem={item.tittle} key={item.id} />
       </TouchableOpacity>
     ));
