@@ -8,7 +8,7 @@ import Colors from 'utils/colors';
 
 type FastImageProp = {
   imageStyle: ImageStyle;
-  uri?: string;
+  uri?: string | null | undefined;
   resizeMode?: any;
   loadingImage?: boolean;
   source?: any;

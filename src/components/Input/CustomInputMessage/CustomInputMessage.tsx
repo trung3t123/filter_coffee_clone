@@ -7,6 +7,7 @@ import {
   TextInputSubmitEditingEventData,
   TouchableWithoutFeedback,
   Animated,
+  Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -16,6 +17,8 @@ import CommonFonts from 'theme/CommonFonts';
 import CommonHeights from 'theme/CommonHeights';
 import { HIT_SLOP } from 'theme/touch';
 import Screen from 'utils/screen';
+import Platform from 'utils/platform';
+import { doNothing } from 'constants/default-values';
 
 type CustomInputMessageProps = {
   submitEditing: (text: string) => void;
@@ -25,6 +28,29 @@ type CustomInputMessageProps = {
 class CustomInputMessage extends Component<CustomInputMessageProps> {
   state = {
     valueInput: '',
+  };
+
+  Height = new Animated.Value(0);
+
+  componentDidMount() {
+    const animateTo = (y: number, duration: number) =>
+      Animated.timing(this.Height, {
+        toValue: y,
+        duration,
+        useNativeDriver: false,
+      }).start();
+
+    Keyboard.addListener(Platform.KeyboardEvent.Show, evt => {
+      animateTo(evt.endCoordinates.height, evt.duration);
+    });
+    Keyboard.addListener(Platform.KeyboardEvent.Hide, evt => {
+      animateTo(0, evt.duration);
+    });
+  }
+
+  componentWillUnmount = () => {
+    Keyboard.removeListener(Platform.KeyboardEvent.Show, doNothing);
+    Keyboard.removeListener(Platform.KeyboardEvent.Hide, doNothing);
   };
 
   refInput: React.RefObject<TextInput> = createRef();
@@ -38,10 +64,10 @@ class CustomInputMessage extends Component<CustomInputMessageProps> {
     this.setState({ valueInput: text });
   };
 
-  onSendMessage = () => {
+  onSendMessage = async () => {
     const { valueInput } = this.state;
     const { submitEditing } = this.props;
-    submitEditing(valueInput);
+    await submitEditing(valueInput);
     this.onClearTextInput();
     this.onBlurTextInput();
   };
@@ -73,8 +99,6 @@ class CustomInputMessage extends Component<CustomInputMessageProps> {
           <TextInput
             clearButtonMode="never"
             ref={this.refInput}
-            onBlur={this.onClearTextInput}
-            blurOnSubmit
             onChangeText={this.onChangeValue}
             value={valueInput}
             onSubmitEditing={this.onSubmitEditing}
@@ -90,6 +114,7 @@ class CustomInputMessage extends Component<CustomInputMessageProps> {
             </TouchableWithoutFeedback>
           </View>
         </View>
+        <Animated.View style={{ height: this.Height }} />
       </View>
     );
   }

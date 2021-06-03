@@ -13,6 +13,13 @@ import CommonFonts from 'theme/CommonFonts';
 import CommonWidths from 'theme/CommonWidths';
 import FastImage from 'react-native-fast-image';
 
+declare type Source = {
+  uri?: string;
+  headers?: {
+    [key: string]: string;
+  };
+};
+
 type IconWithText = {
   styleContainerIcon?: ViewStyle;
   iconColor: string;
@@ -46,6 +53,9 @@ const IconWithText = ({
 }: IconWithText) => {
   const isTextPositionOnLeftIcon = textPosition === 'left';
 
+  const sourceImage =
+    iconName in imageLink ? imageLink[iconName] : imageLink.heart;
+
   return (
     <View style={[styles.containerIcon, styleContainerIcon]}>
       {isTextPositionOnLeftIcon && (
@@ -67,7 +77,7 @@ const IconWithText = ({
             height: CommonFonts.res23,
             width: CommonFonts.res23,
           }}
-          source={imageLink[iconName]}
+          source={sourceImage as Source}
         />
       ) : (
         <Icon name={iconName} color={iconColor} size={sizeIcon} />

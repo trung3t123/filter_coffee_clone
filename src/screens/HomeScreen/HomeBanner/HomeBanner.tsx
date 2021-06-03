@@ -11,24 +11,26 @@ import styles from './styles';
 
 const HomeBanner = () => {
   return (
-    <View style={styles.containerBanner}>
-      <LinearBackground borderRadiusLinerView={17} />
-      <Text style={styles.textTitleBanner}>
-        Coffee Townhouse With Ramp Capital
-        <CacheImage
-          imageStyle={styles.imageCoffee}
-          source={require('../../../../assets/icon_coffee.png')}
-        />
-      </Text>
-
-      <View style={styles.viewBottomBanner}>
-        <Text style={styles.textTimeBanner}>
-          <Icon size={CommonFonts.res14} name="calendar" /> 14/21{'  '}
+    <View>
+      <View style={styles.containerBanner}>
+        <LinearBackground borderRadiusLinerView={17} />
+        <Text style={styles.textTitleBanner}>
+          Coffee Townhouse With Ramp Capital
+          <CacheImage
+            imageStyle={styles.imageCoffee}
+            source={require('../../../../assets/icon_coffee.png')}
+          />
         </Text>
-        <Text style={styles.textTimeBanner}>
-          <Icon size={CommonFonts.res14} name="clock" /> 09:00 pm
-        </Text>
+        <View style={styles.viewBottomBanner}>
+          <Text style={styles.textTimeBanner}>
+            <Icon size={CommonFonts.res14} name="calendar" /> 14/21{'  '}
+          </Text>
+          <Text style={styles.textTimeBanner}>
+            <Icon size={CommonFonts.res14} name="clock" /> 09:00 pm
+          </Text>
+        </View>
       </View>
+      <Text style={styles.titleFlatList}>Trending 🔥</Text>
     </View>
   );
 };

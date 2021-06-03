@@ -11,20 +11,26 @@ import Colors from 'utils/colors';
 import Avatar from 'components/Image/Avatar';
 import IconWithText from 'components/Icon/IconWithText';
 
-type ItemPostProps = any;
+type ItemPostProps = {
+  message?: string;
+  userName?: string;
+  linkAvatar?: string;
+};
 
 const ReplyCommentItem: React.FC<ItemPostProps> = ({
   message,
   userName,
-}: {
-  message?: string;
-  userName?: string;
+  linkAvatar,
 }) => {
   return (
     <View style={styles.containerItem}>
       <View style={styles.viewInfoPost}>
         <View>
-          <Avatar isEnableGradient avatarStyle={styles.avatar} />
+          <Avatar
+            uri={linkAvatar}
+            isEnableGradient
+            avatarStyle={styles.avatar}
+          />
         </View>
 
         <View style={styles.viewNamePostOfUser}>

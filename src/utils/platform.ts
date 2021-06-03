@@ -7,7 +7,10 @@ const OS = NativePlatform.OS;
 const isAndroid = OS === 'android';
 const isIos = OS === 'ios';
 const iosVersion = isIos ? NativePlatform.Version : 0;
-const KeyboardEvent = {
+const KeyboardEvent: {
+  Show: 'keyboardWillShow' | 'keyboardDidShow';
+  Hide: 'keyboardWillHide' | 'keyboardDidHide';
+} = {
   Show: isIos ? 'keyboardWillShow' : 'keyboardDidShow',
   Hide: isIos ? 'keyboardWillHide' : 'keyboardDidHide',
 };

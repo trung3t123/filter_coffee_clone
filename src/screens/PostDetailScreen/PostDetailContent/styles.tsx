@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     paddingBottom: CommonHeights.res16,
+    minHeight: CommonHeights.res50,
   },
   viewInfoPost: { flexDirection: 'row', marginBottom: CommonHeights.res15 },
   viewContentPost: {

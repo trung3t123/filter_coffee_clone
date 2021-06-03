@@ -24,7 +24,7 @@ interface PropTypes extends FlatListProps<never> {
   emptyMessage?: string;
   handleData: (data: never[]) => never[];
   data: never[];
-  getRefInfinityList?: (refInfinityList: InfinityList) => void;
+  getRefInfinityList?: (ref: any) => void;
 }
 
 class InfinityList extends React.Component<PropTypes> {
@@ -188,7 +188,7 @@ class InfinityList extends React.Component<PropTypes> {
     onEndReachedThreshold: 0.2,
     emptyMessage: '',
     handleData: (data: never[]) => data,
-    getRefInfinityList: (refInfinityList: InfinityList): void => {},
+    getRefInfinityList: (): void => {},
     ListEmptyComponent: undefined,
     data: [],
   };

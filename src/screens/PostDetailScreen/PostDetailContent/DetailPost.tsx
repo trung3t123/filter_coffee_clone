@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useCallback, memo } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text } from 'react-native';
 import IconWithText from 'components/Icon/IconWithText';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -14,9 +14,11 @@ import { PostTypes } from 'data/home/types';
 const DetailPost = ({
   idPost,
   totalComment,
+  setDetailPostReady,
 }: {
   idPost: string;
   totalComment: number;
+  setDetailPostReady: () => void;
 }) => {
   const [detailPost, setDetailPost] = useState<PostTypes>();
 
@@ -35,6 +37,7 @@ const DetailPost = ({
       if (success) {
         setLoading(false);
         setDetailPost(data);
+        setDetailPostReady();
       }
     } catch (error) {
       setLoading(false);
@@ -47,25 +50,21 @@ const DetailPost = ({
 
   return (
     <View style={styles.containerItem}>
-      <View style={styles.viewInfoPost}>
-        <View>
-          <Avatar
-            isLoading={isLoading}
-            // uri={}
-            isEnableGradient
-            avatarStyle={styles.avatar}
-          />
-        </View>
+      {isLoading ? (
+        <View />
+      ) : (
+        <>
+          <View style={styles.viewInfoPost}>
+            <View>
+              <Avatar
+                isLoading={isLoading}
+                uri={detailPost?.user.image_url}
+                isEnableGradient
+                avatarStyle={styles.avatar}
+              />
+            </View>
 
-        <View style={styles.viewNamePostOfUser}>
-          {isLoading ? (
-            <ActivityIndicator
-              style={{ top: 10, right: 100 }}
-              size="small"
-              color={Colors.white}
-            />
-          ) : (
-            <>
+            <View style={styles.viewNamePostOfUser}>
               <Text style={styles.textNameUserPost}>
                 {detailPost?.user.fullname}{' '}
                 <View style={styles.viewIconCheck}>
@@ -80,61 +79,55 @@ const DetailPost = ({
               <Text style={styles.textTime}>
                 @wtfishika • <Text>20h ago</Text>
               </Text>
-            </>
-          )}
-        </View>
-      </View>
+            </View>
+          </View>
 
-      <View style={styles.viewContentPost}>
-        {isLoading ? (
-          <ActivityIndicator size="small" color={Colors.white} />
-        ) : (
-          <Text style={styles.textContent}>{detailPost?.content.content}</Text>
-        )}
-      </View>
+          <View style={styles.viewContentPost}>
+            <Text style={styles.textContent}>
+              {detailPost?.content.content}
+            </Text>
+          </View>
 
-      <View style={styles.viewBottomPost}>
-        <IconWithText
-          isLoading={isLoading}
-          styleContainerIcon={styles.viewComment}
-          iconColor={Colors.white}
-          iconName={'eye'}
-          textStyle={styles.opacity75}
-          title={'23.67k'}
-          sizeIcon={CommonFonts.res23}
-        />
+          <View style={styles.viewBottomPost}>
+            <IconWithText
+              styleContainerIcon={styles.viewComment}
+              iconColor={Colors.white}
+              iconName={'eye'}
+              textStyle={styles.opacity75}
+              title={'23.67k'}
+              sizeIcon={CommonFonts.res23}
+            />
 
-        <IconWithText
-          isLoading={isLoading}
-          styleContainerIcon={styles.viewLike}
-          iconColor={Colors.red}
-          iconName={'heart'}
-          textStyle={styles.textLikeAndComment}
-          title={'11.23k'}
-          image
-          sizeIcon={CommonFonts.res23}
-        />
-        <IconWithText
-          isLoading={isLoading}
-          styleContainerIcon={styles.viewComment}
-          iconColor={Colors.white}
-          iconName={'message-circle'}
-          textStyle={styles.opacity75}
-          title={totalComment}
-          image
-          sizeIcon={CommonFonts.res23}
-        />
-        <IconWithText
-          isLoading={isLoading}
-          styleContainerIcon={styles.viewComment}
-          iconColor={Colors.white}
-          iconName={'share-2'}
-          textStyle={styles.opacity75}
-          title={'1.76k'}
-          image
-          sizeIcon={CommonFonts.res23}
-        />
-      </View>
+            <IconWithText
+              styleContainerIcon={styles.viewLike}
+              iconColor={Colors.red}
+              iconName={'heart'}
+              textStyle={styles.textLikeAndComment}
+              title={'11.23k'}
+              image
+              sizeIcon={CommonFonts.res23}
+            />
+            <IconWithText
+              styleContainerIcon={styles.viewComment}
+              iconColor={Colors.white}
+              iconName={'message-circle'}
+              textStyle={styles.opacity75}
+              title={totalComment}
+              image
+              sizeIcon={CommonFonts.res23}
+            />
+            <IconWithText
+              styleContainerIcon={styles.viewComment}
+              iconColor={Colors.white}
+              iconName={'share-2'}
+              textStyle={styles.opacity75}
+              title={'1.76k'}
+              image
+              sizeIcon={CommonFonts.res23}
+            />
+          </View>
+        </>
+      )}
     </View>
   );
 };

@@ -16,7 +16,7 @@ export interface PostTypes {
     content: string;
 
     createdAt: string;
-    image_urls: string[];
+    image_urls: string;
     post_id: string;
     updatedAt: string;
   };

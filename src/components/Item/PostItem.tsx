@@ -29,7 +29,11 @@ const PostItem: React.FC<ItemPostProps> = ({ item }) => {
       <View style={styles.containerItem}>
         <View style={styles.viewInfoPost}>
           <View>
-            <Avatar isEnableGradient avatarStyle={styles.avatar} />
+            <Avatar
+              uri={item.item.user.image_url}
+              isEnableGradient
+              avatarStyle={styles.avatar}
+            />
           </View>
 
           <View style={styles.viewNamePostOfUser}>

@@ -9,8 +9,9 @@ import { itemType } from './types';
 import styles from './styles';
 import { HomeActionResultListData } from 'data/home/types';
 import PostItem from 'components/Item/PostItem';
+import HomeBanner from '../HomeBanner';
 
-const HomeBanner = () => {
+const HomeListPosts = () => {
   const dispatch: ActionDispatcher = useDispatch();
 
   const onFetchListPosts = useCallback(
@@ -31,8 +32,11 @@ const HomeBanner = () => {
 
   const keyExtractor = useCallback((item: any) => `${item.id}`, []);
 
+  const ListHeaderComponent = useCallback(() => <HomeBanner />, []);
+
   return (
     <InfinityList
+      ListHeaderComponent={ListHeaderComponent}
       renderItem={renderItem}
       onEndReachedThreshold={0.2}
       fetchData={onFetchListPosts}
@@ -43,4 +47,4 @@ const HomeBanner = () => {
   );
 };
 
-export default memo(HomeBanner);
+export default memo(HomeListPosts);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, LayoutAnimation, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import DetailPost from './DetailPost';
 import { CommentPostsType } from 'data/home/types';
 import CustomInputMessage from 'components/Input/CustomInputMessage';
@@ -10,19 +10,22 @@ import InfinityList from 'components/List/InfinityList';
 import { HomeActionResultListData } from 'data/home/types';
 import Colors from 'utils/colors';
 
-LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-
 type PostDetailContentProps = {
   idPost: string;
 };
+
+type refInfinityList = {
+  addNewData: (ref: never) => void | null;
+} | null;
 
 class PostDetailContent extends Component<PostDetailContentProps> {
   state = {
     isOnProgressPostComment: false,
     totalComment: 0,
+    isDetailPostReady: false,
   };
 
-  refInfinityList = null;
+  refInfinityList: refInfinityList = null;
 
   stopLoading = () => {
     this.setState({
@@ -30,8 +33,14 @@ class PostDetailContent extends Component<PostDetailContentProps> {
     });
   };
 
-  setTotalComment = (numberComment: number) => {
-    this.setState({ totalComment: numberComment });
+  setDetailPostReady = () => {
+    this.setState({
+      isDetailPostReady: true,
+    });
+  };
+
+  setTotalComment = (numberComment?: number) => {
+    this.setState({ totalComment: numberComment || 0 });
   };
 
   onSubmitReplyComment = async (text: string) => {
@@ -51,8 +60,9 @@ class PostDetailContent extends Component<PostDetailContentProps> {
       if (success) {
         this.stopLoading();
         this.setTotalComment(totalComment + 1);
-        console.log(commentResponse, 'commentResponse');
-        commentResponse && this.refInfinityList?.addNewData(commentResponse);
+
+        commentResponse &&
+          this.refInfinityList?.addNewData(commentResponse as never);
       }
     } catch {
       this.stopLoading();
@@ -64,7 +74,11 @@ class PostDetailContent extends Component<PostDetailContentProps> {
     const { isOnProgressPostComment, totalComment } = this.state;
     return (
       <>
-        <DetailPost totalComment={totalComment} idPost={idPost} />
+        <DetailPost
+          setDetailPostReady={this.setDetailPostReady.bind(this)}
+          totalComment={totalComment}
+          idPost={idPost}
+        />
         {isOnProgressPostComment && (
           <ActivityIndicator size="large" color={Colors.white} />
         )}
@@ -73,9 +87,16 @@ class PostDetailContent extends Component<PostDetailContentProps> {
   };
 
   renderReplyCommentItem = ({ item }: { item: CommentPostsType }) => {
-    console.log(item, 'item');
+    const { isDetailPostReady } = this.state;
+    if (!isDetailPostReady) {
+      return null;
+    }
     return (
-      <ReplyCommentItem userName={item?.user?.fullname} message={item?.text} />
+      <ReplyCommentItem
+        linkAvatar={item.user.image_url}
+        userName={item?.user?.fullname}
+        message={item?.text}
+      />
     );
   };
 
@@ -97,11 +118,13 @@ class PostDetailContent extends Component<PostDetailContentProps> {
     return response;
   };
 
-  getRefInfinityList = (ref: never) => {
+  getRefInfinityList = (ref: any) => {
     this.refInfinityList = ref;
   };
 
   render() {
+    const { isDetailPostReady } = this.state;
+
     return (
       <>
         <InfinityList
@@ -112,8 +135,9 @@ class PostDetailContent extends Component<PostDetailContentProps> {
           ListFooterComponent={this.ListFooterComponent}
           getRefInfinityList={this.getRefInfinityList}
         />
+
         <CustomInputMessage
-          isInputReady={true}
+          isInputReady={isDetailPostReady}
           submitEditing={this.onSubmitReplyComment}
         />
       </>

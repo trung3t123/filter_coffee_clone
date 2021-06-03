@@ -9,7 +9,7 @@ import CacheImage from '../CacheImage';
 import styles from './styles';
 
 type AvatarType = {
-  uri?: string;
+  uri?: string | null | undefined;
   avatarStyle: ImageStyle;
   isEnableGradient?: boolean;
   isLoading?: boolean;

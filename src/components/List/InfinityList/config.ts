@@ -1,4 +1,4 @@
-const PAGE_LIMIT = 2;
+const PAGE_LIMIT = 5;
 
 const FETCH_STATUS = {
   IDLE: 'idle',

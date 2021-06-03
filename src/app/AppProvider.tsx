@@ -13,7 +13,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { KeyboardAvoidingView } from 'react-native';
 
 PersistGate;
 
@@ -21,8 +20,6 @@ import App from './App';
 import SetupAPI from 'api/config';
 import ErrorBoundary from './ErrorBoundary';
 import { configStore } from 'data/store';
-import CommonStyles from 'theme/CommonStyles';
-import Platform from 'utils/platform';
 
 const { store, persistor } = configStore();
 
@@ -39,11 +36,7 @@ class AppProvider extends React.PureComponent {
           <PaperProvider>
             <SafeAreaProvider>
               <ErrorBoundary>
-                <KeyboardAvoidingView
-                  style={CommonStyles.flex1}
-                  behavior={Platform.isIos ? 'height' : undefined}>
-                  <App />
-                </KeyboardAvoidingView>
+                <App />
               </ErrorBoundary>
             </SafeAreaProvider>
           </PaperProvider>
