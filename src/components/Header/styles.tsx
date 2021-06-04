@@ -22,7 +22,7 @@ export default StyleSheet.create({
     zIndex: 1,
   },
   transparentHeader: {
-    maxHeight: CommonHeights.res80,
+    minHeight: CommonHeights.res80,
     width: '100%',
     backgroundColor: Colors.transparent,
   },

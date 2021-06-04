@@ -1,6 +1,7 @@
 import { StyleSheet, ViewStyle } from 'react-native';
 import Colors from 'utils/colors';
 import CommonHeights from './CommonHeights';
+import CommonFonts, { FontFamily } from './CommonFonts';
 
 const CommonStyles = {
   flex1: { flex: 1 } as ViewStyle,
@@ -10,6 +11,22 @@ const CommonStyles = {
   container: {
     flex: 1,
     backgroundColor: Colors.mainBackgroundColorContainer,
+  } as ViewStyle,
+
+  titleBanner: {
+    fontFamily: FontFamily.DMSans.medium,
+    fontWeight: '700',
+    color: Colors.white,
+    fontSize: CommonFonts.res48,
+  } as ViewStyle,
+
+  subTitleBanner: {
+    fontFamily: FontFamily.DMSans.medium,
+    fontSize: CommonFonts.res20,
+    fontWeight: '500',
+    textAlign: 'center',
+    opacity: 0.75,
+    color: Colors.white,
   } as ViewStyle,
 
   absolute: StyleSheet.absoluteFillObject,

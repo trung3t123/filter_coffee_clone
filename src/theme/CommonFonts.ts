@@ -1,15 +1,18 @@
 import { responsiveFontSize } from 'utils/screen';
-import Platform from 'utils/platform';
 
 export const FontFamily = {
-  GE_Thameen: Platform.isIos ? 'GE Thameen' : 'GE_Thameen_Book',
-  System: 'System',
+  DMSans: {
+    bold: 'DMSans-Bold',
+    boldItalic: 'DMSans-BoldItalic',
+    medium: 'DMSans-Medium',
+    mediumItalic: 'DMSans-MediumItalic',
+    italic: 'DMSans-Italic',
+    regular: 'DMSans-Regular',
+  },
 };
 
-export const ArabFont = {
-  fontFamily: FontFamily.GE_Thameen,
-  textAlign: 'left',
-  writingDirection: 'rtl',
+export const FilterCoffeeFonts = {
+  fontFamily: FontFamily.DMSans,
 };
 
 const res12 = responsiveFontSize(12);

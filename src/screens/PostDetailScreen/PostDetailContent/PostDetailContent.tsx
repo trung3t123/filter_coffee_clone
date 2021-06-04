@@ -47,13 +47,13 @@ class PostDetailContent extends Component<PostDetailContentProps> {
   };
 
   onSubmitReplyComment = async (text: string) => {
-    const { idPost } = this.props;
+    const { item } = this.props;
     const { totalComment } = this.state;
     this.setState({ isOnProgressPostComment: true });
     try {
       const { success, commentResponse, error } = await onPostCommentPost({
         contentReply: text,
-        idPost: idPost,
+        idPost: item.id,
       });
 
       if (error) {

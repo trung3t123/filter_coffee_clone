@@ -4,7 +4,7 @@ import CommonWidths from 'theme/CommonWidths';
 import CommonHeights from 'theme/CommonHeights';
 import Colors from 'utils/colors';
 import CacheImage from 'components/Image/CacheImage';
-import CommonFonts from 'theme/CommonFonts';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 
 type Props = {
   textItem: string;
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     lineHeight: CommonFonts.res23,
     color: Colors.textInvertedWhiteColor,
     flex: 3,
+    fontFamily: FontFamily.DMSans.medium,
   },
 });
 

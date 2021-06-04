@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
-import CommonFonts from 'theme/CommonFonts';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 import Colors from 'utils/colors';
 
 // import { itemType } from 'screens/HomeScreen/HomeListPosts/types';
@@ -111,18 +111,35 @@ const styles = StyleSheet.create({
   textNameUserPost: {
     color: Colors.white,
     fontSize: CommonFonts.res17,
+    lineHeight: CommonFonts.res20,
     fontWeight: '500',
+    fontFamily: FontFamily.DMSans.medium,
   },
-  textTime: { color: Colors.white, fontSize: CommonFonts.res13, opacity: 0.75 },
+
+  textTime: {
+    color: Colors.white,
+    fontSize: CommonFonts.res13,
+    lineHeight: CommonFonts.res13,
+    opacity: 0.75,
+    fontWeight: '400',
+    fontFamily: FontFamily.DMSans.regular,
+  },
+
   textLikeAndComment: {
     color: Colors.white,
+    fontSize: CommonFonts.res15,
+    marginLeft: CommonWidths.res5,
+
     fontWeight: '500',
-    marginLeft: 5,
+    fontFamily: FontFamily.DMSans.medium,
   },
+
   textContent: {
-    color: Colors.white,
-    fontSize: CommonFonts.res17,
+    color: 'rgba(252, 252, 252, 0.75)',
+    fontSize: CommonFonts.res21,
     marginBottom: CommonHeights.res10,
+    fontFamily: 'DMSans-Regular',
+    fontWeight: '400',
   },
   viewIconCheck: {
     backgroundColor: Colors.verifiedUser,

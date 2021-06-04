@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
-import CommonFonts from 'theme/CommonFonts';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 import Colors from 'utils/colors';
 
 import { useNavigation } from '@react-navigation/native';
@@ -28,10 +28,9 @@ const PostItem: React.FC<ItemPostProps> = ({ item }) => {
     });
   };
 
-  const onCalculateTimeAgo = useMemo(
-    () => calculateTimeAgo(item.item.content.createdAt),
-    [item.item.content.createdAt],
-  );
+  const onCalculateTimeAgo = useMemo(() => {
+    return calculateTimeAgo(item.item.content.createdAt);
+  }, [item.item.content.createdAt]);
 
   return (
     <TouchableWithoutFeedback onPress={navigateToDetailPost}>
@@ -58,7 +57,8 @@ const PostItem: React.FC<ItemPostProps> = ({ item }) => {
             </Text>
 
             <Text style={styles.textTime}>
-              @wtfishika • <Text>{onCalculateTimeAgo}</Text>
+              @wtfishika{'  •  '}
+              <Text>{onCalculateTimeAgo}</Text>
             </Text>
           </View>
         </View>
@@ -82,7 +82,7 @@ const PostItem: React.FC<ItemPostProps> = ({ item }) => {
             styleContainerIcon={styles.viewComment}
             iconColor={Colors.white}
             iconName={'message-circle'}
-            textStyle={styles.opacity75}
+            textStyle={{ ...styles.textLikeAndComment, ...styles.opacity75 }}
             title={item.item.comment_posts.length}
             sizeIcon={CommonFonts.res23}
           />
@@ -122,26 +122,41 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
     paddingVertical: 0,
-    lineHeight: 0,
     marginLeft: CommonWidths.res10,
   },
 
   textNameUserPost: {
     color: Colors.white,
     fontSize: CommonFonts.res17,
+    lineHeight: CommonFonts.res20,
     fontWeight: '500',
+    fontFamily: FontFamily.DMSans.medium,
   },
-  textTime: { color: Colors.white, fontSize: CommonFonts.res13, opacity: 0.75 },
+
+  textTime: {
+    color: Colors.white,
+    fontSize: CommonFonts.res13,
+    lineHeight: CommonFonts.res13,
+    opacity: 0.75,
+    fontWeight: '400',
+    fontFamily: FontFamily.DMSans.regular,
+  },
+
   textLikeAndComment: {
     color: Colors.white,
     fontSize: CommonFonts.res15,
+    // lineHeight: CommonFonts.res15,
     fontWeight: '500',
     marginLeft: 5,
+    fontFamily: FontFamily.DMSans.medium,
   },
+
   textContent: {
-    color: Colors.white,
-    fontSize: CommonFonts.res23,
+    color: 'rgba(252, 252, 252, 0.75)',
+    fontSize: CommonFonts.res21,
     marginBottom: CommonHeights.res10,
+    fontFamily: 'DMSans-Regular',
+    fontWeight: '400',
   },
   viewIconCheck: {
     backgroundColor: Colors.verifiedUser,

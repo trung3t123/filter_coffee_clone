@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import CommonFonts from 'theme/CommonFonts';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
 import Colors from 'utils/colors';
@@ -147,7 +147,7 @@ const MediaScreen: React.FC<PropTypes> = () => {
           <Text style={styles.textTitle}> - </Text>
           <Text style={styles.textTitle}>Scoops </Text>
         </View>
-        <View />
+        <View style={{ width: CommonFonts.res23 }} />
       </Header>
       <InfinityList
         ListHeaderComponent={ListHeaderComponent}
@@ -178,6 +178,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     lineHeight: CommonFonts.res28,
     color: Colors.textInvertedWhiteColor,
+    fontFamily: FontFamily.DMSans.medium,
   },
 
   flexRowBetween: {
@@ -188,6 +189,7 @@ const styles = StyleSheet.create({
 
   flexRow: {
     flexDirection: 'row',
+    paddingTop: CommonHeights.res10,
   },
   alignItemCenter: { alignItems: 'center', marginBottom: CommonHeights.res65 },
 
@@ -197,6 +199,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     fontWeight: '500',
     paddingBottom: CommonHeights.res20,
+    fontFamily: FontFamily.DMSans.medium,
   },
 
   researchListContainer: {
@@ -211,15 +214,17 @@ const styles = StyleSheet.create({
 
   textTitleActive: {
     color: Colors.textInvertedWhiteColor,
-    fontSize: CommonFonts.res22,
+    fontSize: CommonFonts.res20,
     fontWeight: '400',
+    fontFamily: FontFamily.DMSans.medium,
   },
 
   textTitle: {
     color: Colors.textInvertedWhiteColor,
     opacity: 0.5,
-    fontSize: CommonFonts.res22,
+    fontSize: CommonFonts.res20,
     fontWeight: '400',
+    fontFamily: FontFamily.DMSans.medium,
   },
 
   flatlistContainer: {

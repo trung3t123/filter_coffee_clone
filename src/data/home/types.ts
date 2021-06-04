@@ -38,6 +38,11 @@ export interface PostTypes {
   user: UserInfoTypes;
 
   comment_posts: CommentPostsType[];
+
+  content_id: string;
+  content_type: string;
+  metadata: string;
+  name: string;
 }
 
 export type HomeActionResult = {

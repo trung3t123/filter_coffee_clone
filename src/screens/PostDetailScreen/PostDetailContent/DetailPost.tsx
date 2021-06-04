@@ -80,7 +80,8 @@ const DetailPost = ({
             </Text>
 
             <Text style={styles.textTime}>
-              @wtfishika • <Text>{onCalculateTimeAgo}</Text>
+              @wtfishika{'  •  '}
+              <Text>{onCalculateTimeAgo}</Text>
             </Text>
           </View>
         </View>
@@ -111,7 +112,7 @@ const DetailPost = ({
         <View style={styles.viewBottomPost}>
           <IconWithText
             styleContainerIcon={styles.viewComment}
-            iconColor={Colors.white}
+            iconColor={'rgba(252, 252, 252, 0.75)'}
             iconName={'eye'}
             textStyle={styles.opacity75}
             title={'23.67k'}
@@ -119,7 +120,7 @@ const DetailPost = ({
           />
 
           <IconWithText
-            styleContainerIcon={styles.viewLike}
+            styleContainerIcon={styles.viewComment}
             iconColor={Colors.red}
             iconName={'heart'}
             textStyle={styles.textLikeAndComment}

@@ -9,6 +9,7 @@ type OptionThemeType = {
   nameIcon: string;
   title: string;
   value: string;
+  isImage: boolean;
 };
 
 type ListOptionThemesType = {
@@ -26,6 +27,7 @@ const ListOptionThemes: React.FC<ListOptionThemesType> = ({
       return (
         <View key={key}>
           <OptionTheme
+            image={option.isImage}
             title={option.title}
             nameIcon={option.nameIcon}
             isActive={optionThemePicked.includes(option.value)}

@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import CommonHeights from 'theme/CommonHeights';
 import CommonFonts from 'theme/CommonFonts';
 import CommonWidths from 'theme/CommonWidths';
+import CommonStyles from 'theme/CommonStyles';
 
 export default StyleSheet.create({
   contentContainerStyleFlatList: {
@@ -31,20 +32,16 @@ export default StyleSheet.create({
 
   titleText: {
     marginTop: CommonHeights.res40,
-    fontSize: CommonFonts.res48,
-    fontWeight: '700',
-    textAlign: 'center',
+    ...CommonStyles.titleBanner,
+
     marginBottom: CommonHeights.res5,
-    color: Colors.white,
 
     position: 'relative',
     zIndex: 11,
   },
 
   subtitleText: {
-    fontSize: CommonFonts.res20,
-    color: Colors.white,
-    textAlign: 'center',
+    ...CommonStyles.subTitleBanner,
   },
 
   viewTitleIntroduce: {

@@ -15,6 +15,12 @@
 		6ED3B285E55259AE01E07BB4 /* libPods-FilterCoffee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E553BABBAFA999BBC78D6E17 /* libPods-FilterCoffee.a */; };
 		6FCDDB81D9586B1B871E8E7D /* libPods-FilterCoffee-FilterCoffeeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47E320B31E9C3CDB5B4FB0CB /* libPods-FilterCoffee-FilterCoffeeTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		E18108412669DDDB00ED60AF /* DMSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E181083B2669DDDA00ED60AF /* DMSans-MediumItalic.ttf */; };
+		E18108422669DDDB00ED60AF /* DMSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E181083C2669DDDA00ED60AF /* DMSans-Bold.ttf */; };
+		E18108432669DDDB00ED60AF /* DMSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E181083D2669DDDA00ED60AF /* DMSans-BoldItalic.ttf */; };
+		E18108442669DDDB00ED60AF /* DMSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E181083E2669DDDB00ED60AF /* DMSans-Italic.ttf */; };
+		E18108452669DDDB00ED60AF /* DMSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E181083F2669DDDB00ED60AF /* DMSans-Medium.ttf */; };
+		E18108462669DDDB00ED60AF /* DMSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E18108402669DDDB00ED60AF /* DMSans-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +50,12 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FilterCoffee/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96A595AA18406EFB9D02AD48 /* Pods-FilterCoffee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilterCoffee.release.xcconfig"; path = "Target Support Files/Pods-FilterCoffee/Pods-FilterCoffee.release.xcconfig"; sourceTree = "<group>"; };
 		BD96DC11EDE4256D21C88A86 /* Pods-FilterCoffee-FilterCoffeeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FilterCoffee-FilterCoffeeTests.debug.xcconfig"; path = "Target Support Files/Pods-FilterCoffee-FilterCoffeeTests/Pods-FilterCoffee-FilterCoffeeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E181083B2669DDDA00ED60AF /* DMSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DMSans-MediumItalic.ttf"; path = "../../../../Downloads/DM_Sans/DMSans-MediumItalic.ttf"; sourceTree = "<group>"; };
+		E181083C2669DDDA00ED60AF /* DMSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DMSans-Bold.ttf"; path = "../../../../Downloads/DM_Sans/DMSans-Bold.ttf"; sourceTree = "<group>"; };
+		E181083D2669DDDA00ED60AF /* DMSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DMSans-BoldItalic.ttf"; path = "../../../../Downloads/DM_Sans/DMSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		E181083E2669DDDB00ED60AF /* DMSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DMSans-Italic.ttf"; path = "../../../../Downloads/DM_Sans/DMSans-Italic.ttf"; sourceTree = "<group>"; };
+		E181083F2669DDDB00ED60AF /* DMSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DMSans-Medium.ttf"; path = "../../../../Downloads/DM_Sans/DMSans-Medium.ttf"; sourceTree = "<group>"; };
+		E18108402669DDDB00ED60AF /* DMSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "DMSans-Regular.ttf"; path = "../../../../Downloads/DM_Sans/DMSans-Regular.ttf"; sourceTree = "<group>"; };
 		E553BABBAFA999BBC78D6E17 /* libPods-FilterCoffee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FilterCoffee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -112,6 +124,12 @@
 		781CAE01B8DB462FB155E665 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E181083C2669DDDA00ED60AF /* DMSans-Bold.ttf */,
+				E181083D2669DDDA00ED60AF /* DMSans-BoldItalic.ttf */,
+				E181083E2669DDDB00ED60AF /* DMSans-Italic.ttf */,
+				E181083F2669DDDB00ED60AF /* DMSans-Medium.ttf */,
+				E181083B2669DDDA00ED60AF /* DMSans-MediumItalic.ttf */,
+				E18108402669DDDB00ED60AF /* DMSans-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -254,8 +272,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D51256B265FF34F0085E315 /* BootSplash.storyboard in Resources */,
+				E18108452669DDDB00ED60AF /* DMSans-Medium.ttf in Resources */,
+				E18108422669DDDB00ED60AF /* DMSans-Bold.ttf in Resources */,
+				E18108462669DDDB00ED60AF /* DMSans-Regular.ttf in Resources */,
+				E18108442669DDDB00ED60AF /* DMSans-Italic.ttf in Resources */,
+				E18108412669DDDB00ED60AF /* DMSans-MediumItalic.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E18108432669DDDB00ED60AF /* DMSans-BoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
