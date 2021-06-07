@@ -13,13 +13,14 @@ import PickThemesScreen from 'screens/PickThemesScreen';
 import SessionSelector from 'data/session/selectors';
 import { useSelector } from 'react-redux';
 import PostDetailScreen from 'screens/PostDetailScreen';
+import { PostTypes } from 'data/home/types';
 
 export interface RootStackParamsList extends ParamListBase {
-  LOGIN: undefined;
+  POST_DETAIL: { idPost: string; item: PostTypes };
   REGISTER: undefined;
 }
 
-const Stack = createNativeStackNavigator<Record<string, any>>();
+const Stack = createNativeStackNavigator<RootStackParamsList>();
 
 const RootStack = () => {
   const isAuthorized = useSelector(SessionSelector.isLoggedInSelector);

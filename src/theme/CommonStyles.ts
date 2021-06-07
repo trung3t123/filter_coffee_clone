@@ -8,6 +8,10 @@ const CommonStyles = {
 
   mainLinerGradientColor: [Colors.mainGradientStart, Colors.mainGradientEnd],
 
+  textColorContentPost: 'rgba(252, 252, 252, 0.75)',
+
+  iconColor: 'rgba(252, 252, 252, 0.75)',
+
   container: {
     flex: 1,
     backgroundColor: Colors.mainBackgroundColorContainer,

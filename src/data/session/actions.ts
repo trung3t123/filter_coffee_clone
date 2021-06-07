@@ -66,7 +66,7 @@ export const authorize = (newAccessToken?: string): AsyncAction => async (
     }
 
     if (token) {
-      SetupAPI.setHeaderToken(token, 'redux:action:authorize');
+      await SetupAPI.setHeaderToken(token, 'redux:action:authorize');
       dispatch(setSessionStatus(SESSION_STATUS.AUTHORIZED));
     } else {
       /**

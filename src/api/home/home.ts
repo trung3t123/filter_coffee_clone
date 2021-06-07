@@ -1,24 +1,23 @@
 import axios from 'axios';
 import {
   GetListPostsParameters,
-  ListPostsResponse,
   DetailPostParameter,
-  DetailPostResponse,
   PostReplyPostParameter,
+  ListPostsResponse,
+  DetailPostResponse,
   GetCommentOfPostResponse,
   PostCommentResponse,
 } from './home.types';
-import qs from 'qs';
+// import qs from 'qs';
 
 export function getListPostsApi(
   { offset, limit }: GetListPostsParameters = { offset: 0, limit: 10 },
 ) {
-  const parameterQueryListPosts = qs.parse({
-    offset: `${offset}`,
-    limit: `${limit}`,
-  });
-
-  return axios.get<ListPostsResponse>(`posts?${parameterQueryListPosts}`);
+  // const parameterQueryListPosts = qs.parse({
+  //   offset: `${offset}`,
+  //   limit: `${limit}`,
+  // });
+  return axios.get<ListPostsResponse>(`posts?offset=${offset}&limit=${limit}`);
 }
 
 export function getDetailPostWithIdApi({ id }: DetailPostParameter) {

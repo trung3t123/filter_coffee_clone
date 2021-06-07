@@ -22,7 +22,7 @@ interface PropTypes extends FlatListProps<never> {
     limit: number,
   ) => Promise<HomeActionResultListData>;
   emptyMessage?: string;
-  handleData?: (data: never[]) => never[];
+  handleData: (data: never[]) => never[];
   data: never[];
   getRefInfinityList?: (ref: any) => void;
 }
@@ -82,7 +82,7 @@ class InfinityList extends React.Component<PropTypes> {
     }
     if (error) {
       this.setState({
-        fetchStatus: FETCH_STATUS.ERROR,
+        fetchStatus: FETCH_STATUS.IDLE,
       });
     }
   };

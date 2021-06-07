@@ -69,7 +69,6 @@ class CustomInputMessage extends Component<CustomInputMessageProps> {
     const { submitEditing } = this.props;
     await submitEditing(valueInput);
     this.onClearTextInput();
-    // this.onBlurTextInput();
   };
 
   onSubmitEditing = (

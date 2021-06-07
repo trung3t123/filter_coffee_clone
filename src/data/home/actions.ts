@@ -42,30 +42,26 @@ export const onGetMediaPost = (
       offset,
       limit,
     });
-    if (data.status === API_STATUS.SUCCESS) {
-      result = {
-        data: data?.data?.data?.records || [],
-        pagination: {
-          total: data?.data?.data?.total,
-        },
-      };
+    result = {
+      data: data?.data?.data?.records || [],
+      pagination: {
+        total: data?.data?.data?.total,
+      },
+    };
 
-      return result;
-    }
-    result.error = 'error';
     return result;
   } catch (error) {
     dispatch(onRequestListPostFailed());
     ActionErrorHandler.handleFunction(error, 'authorize', {
       breadCrumb: true,
     });
-    return { error: error?.data?.response?.data?.message || '' };
+    return { error: error.message || '' };
   }
 };
 
 export const onGetListPosts = (
   offset: number,
-  limit?: number,
+  limit: number,
 ): AsyncAction<Promise<HomeActionResultListData>> => async dispatch => {
   let result: HomeActionResultListData = {
     data: [],
@@ -83,18 +79,12 @@ export const onGetListPosts = (
       limit,
     });
 
-    if (data.status === API_STATUS.SUCCESS) {
-      result = {
-        data: data?.data?.data?.records || [],
-        pagination: {
-          total: data?.data?.data?.total,
-        },
-      };
-
-      return result;
-    }
-
-    result.error = 'error';
+    result = {
+      data: data?.data?.data?.records || [],
+      pagination: {
+        total: data?.data?.data?.total,
+      },
+    };
 
     return result;
   } catch (error) {
@@ -102,7 +92,7 @@ export const onGetListPosts = (
     ActionErrorHandler.handleFunction(error, 'authorize', {
       breadCrumb: true,
     });
-    return { error: error?.data?.response?.data?.message || '' };
+    return { error: error.message || '' };
   }
 };
 
@@ -127,7 +117,7 @@ export const getDetailPost = async (id: string): Promise<HomeActionResult> => {
     ActionErrorHandler.handleFunction(error, 'getDetailPost', {
       breadCrumb: true,
     });
-    return { error: error?.data?.response?.data?.message || [] };
+    return { error: error.message };
   }
 };
 
@@ -160,7 +150,7 @@ export const onPostCommentPost = async ({
     ActionErrorHandler.handleFunction(error, 'getDetailPost', {
       breadCrumb: true,
     });
-    return { error: error?.data?.response?.data?.message || [] };
+    return { error: error.message };
   }
 };
 
@@ -206,6 +196,6 @@ export const onGetListCommentOfPost = async ({
     ActionErrorHandler.handleFunction(error, 'onGetListCommentOfPost', {
       breadCrumb: true,
     });
-    return { error: error?.data?.response?.data?.message || [] };
+    return { error: error.message };
   }
 };

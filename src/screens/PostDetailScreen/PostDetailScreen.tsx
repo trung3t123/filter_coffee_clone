@@ -1,30 +1,32 @@
 import React from 'react';
-import { View, LayoutAnimation } from 'react-native';
+import { View, LayoutAnimation, ScrollView } from 'react-native';
 
 import CommonStyles from 'theme/CommonStyles';
 import PostDetailContent from './PostDetailContent';
 import PostDetailHeader from './PostDetailHeader';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, RouteProp } from '@react-navigation/native';
+import { RootStackParamsList } from 'routes/stacks/RootStack';
+import DetailPost from './PostDetailContent/DetailPost';
 
-type RouteTypes = {
-  params: {
-    idPost?: string;
-    item: any;
-  };
-};
+LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
 
 const PostDetailScreen = () => {
-  LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+  const {
+    params: { idPost, item },
+  } = useRoute<RouteProp<RootStackParamsList, 'POST_DETAIL'>>();
 
-  const route: RouteTypes = useRoute();
+  const isPostTypePreminum = item.group_type === 'premium';
 
   return (
     <View style={CommonStyles.container}>
       <PostDetailHeader />
-      <PostDetailContent
-        item={route.params.item}
-        idPost={route?.params?.idPost || ''}
-      />
+      {!isPostTypePreminum ? (
+        <PostDetailContent item={item} idPost={idPost} />
+      ) : (
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <DetailPost isPostTypePreminum={isPostTypePreminum} item={item} />
+        </ScrollView>
+      )}
     </View>
   );
 };

@@ -1,26 +1,25 @@
-import { StyleSheet, TextStyle } from 'react-native';
-
+import { StyleSheet } from 'react-native';
 import CommonHeights from 'theme/CommonHeights';
+import Colors from 'utils/colors';
 import CommonWidths from 'theme/CommonWidths';
 import CommonFonts, { FontFamily } from 'theme/CommonFonts';
-import Colors from 'utils/colors';
 import CommonStyles from 'theme/CommonStyles';
 
 const styles = StyleSheet.create({
   containerItem: {
-    marginBottom: CommonHeights.res20,
-    borderBottomColor: Colors.borderColorItem,
+    paddingBottom: CommonHeights.res20,
+    marginBottom: CommonHeights.res10,
     borderBottomWidth: 1,
-    paddingHorizontal: CommonWidths.baseSpaceHorizontal,
-    paddingBottom: CommonHeights.res16,
-    minHeight: CommonHeights.res50,
+    borderColor: Colors.borderColorItem,
   },
-  viewInfoPost: { flexDirection: 'row', marginBottom: CommonHeights.res15 },
+  viewInfoPost: { flexDirection: 'row', marginBottom: CommonHeights.res10 },
   viewContentPost: {
-    paddingBottom: CommonHeights.res10,
+    paddingLeft: CommonWidths.res15,
+    paddingBottom: CommonHeights.res5,
   },
   viewBottomPost: {
     flexDirection: 'row',
+    paddingLeft: CommonWidths.res15,
   },
 
   avatar: {
@@ -34,20 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
     paddingVertical: 0,
-    lineHeight: 0,
     marginLeft: CommonWidths.res10,
-  },
-
-  viewBannerDetailPost: {
-    height: CommonHeights.res225,
-    borderRadius: 15,
-    marginBottom: CommonHeights.res30,
-    marginTop: CommonHeights.res20,
-  },
-
-  imageBanner: {
-    height: CommonHeights.res225,
-    borderRadius: 15,
   },
 
   textNameUserPost: {
@@ -70,9 +56,9 @@ const styles = StyleSheet.create({
   textLikeAndComment: {
     color: Colors.white,
     fontSize: CommonFonts.res15,
-    marginLeft: CommonWidths.res5,
-
+    // lineHeight: CommonFonts.res15,
     fontWeight: '500',
+    marginLeft: 5,
     fontFamily: FontFamily.DMSans.medium,
   },
 
@@ -80,10 +66,9 @@ const styles = StyleSheet.create({
     color: CommonStyles.textColorContentPost,
     fontSize: CommonFonts.res21,
     marginBottom: CommonHeights.res10,
-    fontFamily: FontFamily.DMSans.regular,
+    fontFamily: 'DMSans-Regular',
     fontWeight: '400',
-  } as TextStyle,
-
+  },
   viewIconCheck: {
     backgroundColor: Colors.verifiedUser,
     borderRadius: 50,
@@ -95,27 +80,16 @@ const styles = StyleSheet.create({
   viewLike: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginRight: CommonWidths.res25,
   },
 
   opacity75: {
     opacity: 0.75,
-    marginLeft: CommonWidths.res5,
+    marginLeft: 5,
   },
 
-  viewComment: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: CommonWidths.res15,
-  },
-
-  textTitlePost: {
-    fontSize: CommonFonts.res25,
-    fontWeight: '500',
-    color: 'white',
-    marginHorizontal: CommonWidths.baseSpaceHorizontal,
-    marginBottom: CommonHeights.res30,
-    overflow: 'hidden',
-  },
+  viewComment: { flexDirection: 'row', alignItems: 'center' },
+  paddingLeft0: { paddingLeft: 0 },
 });
 
 export default styles;

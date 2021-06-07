@@ -9,7 +9,5 @@ declare module 'dayjs' {
 }
 
 export const calculateTimeAgo = (time: string) => {
-  console.log(dayjs(time)?.fromNow());
-
   return dayjs(time)?.fromNow();
 };

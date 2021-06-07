@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -20,7 +20,7 @@ const HomeButtonCreatePost = () => {
   );
 };
 
-export default memo(HomeButtonCreatePost);
+export default HomeButtonCreatePost;
 
 const styles = StyleSheet.create({
   containerButton: {

@@ -7,6 +7,7 @@ import CommonStyles from 'theme/CommonStyles';
 import CacheImage from '../CacheImage';
 
 import styles from './styles';
+import Colors from 'utils/colors';
 
 type AvatarType = {
   uri?: string | null | undefined;
@@ -37,7 +38,11 @@ const Avatar = ({
         />
       )}
       {isLoading ? (
-        <ActivityIndicator style={avatarStyle} size="small" color="white" />
+        <ActivityIndicator
+          style={avatarStyle}
+          size="small"
+          color={Colors.white}
+        />
       ) : (
         <CacheImage uri={uri} imageStyle={avatarStyle} />
       )}

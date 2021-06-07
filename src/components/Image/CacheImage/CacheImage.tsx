@@ -19,7 +19,7 @@ type FastImageProp = {
 const CacheImage = ({
   imageStyle,
   uri,
-  resizeMode,
+  resizeMode = 'cover',
   loadingImage,
   source,
 }: FastImageProp) => {
@@ -40,7 +40,7 @@ const CacheImage = ({
   return (
     <View>
       <FastImage
-        resizeMode={resizeMode || 'cover'}
+        resizeMode={resizeMode}
         style={imageStyle}
         source={sourceImage}
         onLoadStart={onLoadImage}

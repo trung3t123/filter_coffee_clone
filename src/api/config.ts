@@ -93,6 +93,10 @@ const setHeaderToken = (newToken: string, from: string) => {
     });
 
   Axios.defaults.headers.Authorization = bearerToken;
+  console.log(
+    Axios.defaults.headers.Authorization,
+    'Axios.defaults.headers.Authorization',
+  );
 };
 
 const clearHeaderToken = () => {
@@ -158,11 +162,11 @@ const handleMessageErrorFromServer = (errorMess: string) => {
 
 const setupResponseAxios = (handleError: () => void) => {
   const onResponseSuccess = (response: AxiosResponse) => {
-    const authorization = response?.headers?.authorization ?? '';
-    if (authorization) {
-      setHeaderToken(authorization, `onReceivedToken:${response?.config.url}`);
-      // onReceivedToken(authorization);
-    }
+    // const authorization = response?.headers?.authorization ?? '';
+    // if (authorization) {
+    //   setHeaderToken(authorization, `onReceivedToken:${response?.config.url}`);
+    //   // onReceivedToken(authorization);
+    // }
     return response;
   };
 
