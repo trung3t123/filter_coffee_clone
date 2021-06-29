@@ -12,13 +12,15 @@ import BottomTabBar from '../tab/BottomTabBar';
 import PickThemesScreen from 'screens/PickThemesScreen';
 import SessionSelector from 'data/session/selectors';
 import { useSelector } from 'react-redux';
+import PostDetailScreen from 'screens/PostDetailScreen';
+import { PostTypes } from 'data/home/types';
 
 export interface RootStackParamsList extends ParamListBase {
-  LOGIN: undefined;
+  POST_DETAIL: { idPost: string; item: PostTypes };
   REGISTER: undefined;
 }
 
-const Stack = createNativeStackNavigator<Record<string, any>>();
+const Stack = createNativeStackNavigator<RootStackParamsList>();
 
 const RootStack = () => {
   const isAuthorized = useSelector(SessionSelector.isLoggedInSelector);
@@ -32,7 +34,13 @@ const RootStack = () => {
         gestureEnabled: true,
       }}>
       {isAuthorized ? (
-        <Stack.Screen name={ROUTES.BASE} component={BottomTabBar} />
+        <>
+          <Stack.Screen name={ROUTES.BASE} component={BottomTabBar} />
+          <Stack.Screen
+            name={ROUTES.POST_DETAIL}
+            component={PostDetailScreen}
+          />
+        </>
       ) : (
         <>
           <Stack.Screen name={ROUTES.LOGIN} component={LoginScreen} />

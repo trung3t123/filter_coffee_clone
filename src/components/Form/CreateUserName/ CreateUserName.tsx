@@ -48,6 +48,7 @@ const CreateUserName = () => {
         );
 
         if (error) {
+          setIsOnProgressUpdateUserName(false);
           throw new Error(error);
         }
 
@@ -55,7 +56,9 @@ const CreateUserName = () => {
           setIsOnProgressUpdateUserName(false);
           navigation.navigate(ROUTES.PICK_THEME);
         }
-      } catch (error) {}
+      } catch (error) {
+        setIsOnProgressUpdateUserName(false);
+      }
     },
     [navigation, dispatch, setIsOnProgressUpdateUserName],
   );

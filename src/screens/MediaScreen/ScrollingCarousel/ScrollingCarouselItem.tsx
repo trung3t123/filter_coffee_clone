@@ -4,7 +4,7 @@ import CacheImage from 'components/Image/CacheImage';
 import Colors from 'utils/colors';
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
-import CommonFonts from 'theme/CommonFonts';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 import { memo } from 'react';
 
 type PropsType = {
@@ -17,7 +17,7 @@ const ScrollingCarouselItem = ({ imageUrl, itemTitle }: PropsType) => {
     <View style={styles.centerItem}>
       <View style={styles.itemContainer}>
         <CacheImage
-          source={require('../../../../assets/Bitmap.png')}
+          source={{ uri: imageUrl }}
           imageStyle={styles.scrollImageStyle}
         />
         <Text style={styles.itemTitle}>{itemTitle}</Text>
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     fontSize: CommonFonts.res20,
     lineHeight: CommonFonts.res28,
     color: Colors.textInvertedWhiteColor,
+    fontFamily: FontFamily.DMSans.medium,
   },
   scrollImageStyle: {
     height: CommonHeights.res350,

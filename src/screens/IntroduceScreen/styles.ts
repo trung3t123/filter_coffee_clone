@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 import CommonHeights from 'theme/CommonHeights';
 import CommonFonts from 'theme/CommonFonts';
 import CommonWidths from 'theme/CommonWidths';
+import CommonStyles from 'theme/CommonStyles';
 
 export default StyleSheet.create({
   contentContainerStyleFlatList: {
     flex: 1,
     backgroundColor: Colors.mainBackgroundColorContainer,
-    paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     justifyContent: 'space-between',
   },
   viewButton: {
@@ -19,8 +19,7 @@ export default StyleSheet.create({
   },
   viewContent: {
     width: CommonWidths.res370,
-    height: CommonHeights.res500,
-    backgroundColor: Colors.mainBackgroundColorComponent,
+    height: CommonHeights.res400,
     borderRadius: 30,
   },
 
@@ -33,16 +32,22 @@ export default StyleSheet.create({
 
   titleText: {
     marginTop: CommonHeights.res40,
-    fontSize: CommonFonts.res48,
-    fontWeight: '700',
-    textAlign: 'center',
+    ...CommonStyles.titleBanner,
+
     marginBottom: CommonHeights.res5,
-    color: Colors.white,
+
+    position: 'relative',
+    zIndex: 11,
   },
 
   subtitleText: {
-    fontSize: CommonFonts.res20,
-    color: Colors.white,
-    textAlign: 'center',
+    ...CommonStyles.subTitleBanner,
+  },
+
+  viewTitleIntroduce: {
+    position: 'absolute',
+    bottom: CommonHeights.res245,
+    width: '100%',
+    alignItems: 'center',
   },
 });

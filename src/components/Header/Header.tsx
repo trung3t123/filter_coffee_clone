@@ -14,9 +14,15 @@ type PropTypes = {
   children?: any;
   isGoBack?: boolean;
   isAbsolute?: boolean;
+  isTransparent?: boolean;
 };
 
-const Header: React.FC<PropTypes> = ({ children, isGoBack, isAbsolute }) => {
+const Header: React.FC<PropTypes> = ({
+  children,
+  isGoBack,
+  isAbsolute,
+  isTransparent,
+}) => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
@@ -31,6 +37,7 @@ const Header: React.FC<PropTypes> = ({ children, isGoBack, isAbsolute }) => {
         {
           paddingTop: Math.max(insets.top, CommonHeights.res40),
         },
+        isTransparent && styles.transparentHeader,
         isAbsolute && styles.absoluteHeader,
       ]}>
       <StatusBar barStyle="light-content" />

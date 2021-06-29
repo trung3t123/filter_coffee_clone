@@ -50,13 +50,20 @@ const Login = () => {
     navigation.navigate(ROUTES.BASE);
   }, [navigation]);
 
+  const onNavigateToCreateName = useCallback(() => {
+    navigation.navigate(ROUTES.CREATE_USER_NAME);
+  }, [navigation]);
+
   const onSubmit = useCallback(
     async (values: LoginFormValues) => {
       try {
         const { email = '', password = '' } = values ?? {};
         const { error, success } = await dispatch(login({ email, password }));
 
-        console.log('------->result', error, success);
+        if (error === 'No Name') {
+          onNavigateToCreateName();
+          return;
+        }
 
         if (error) {
           throw new Error(error);
@@ -69,13 +76,14 @@ const Login = () => {
         console.warn('onSubmit LoginForm', { error });
       }
     },
-    [dispatch, onLoginSuccess],
+    [dispatch, onLoginSuccess, onNavigateToCreateName],
   );
 
   const formik = useFormik({
     validationSchema: FormSchema,
     initialValues: loginFormInitialValues,
     onSubmit,
+    validateOnBlur: false,
   });
 
   const {
@@ -85,7 +93,6 @@ const Login = () => {
     handleSubmit,
     errors,
     // isSubmitting,
-    isValid,
   } = formik;
 
   const onSubmitEditing = useCallback(() => {
@@ -158,7 +165,6 @@ const Login = () => {
             <View style={styles.viewButton}>
               <ActionButton
                 loading={loginLoading}
-                disabled={!isValid}
                 onPress={handleSubmit}
                 text={'Login'}
               />

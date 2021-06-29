@@ -12,6 +12,11 @@ const getLoginStatus = (state: RootStates) => getSession(state).login_status;
 const getRegisterStatus = (state: RootStates) =>
   getSession(state).register_status;
 
+const getUserInfo = (state: RootStates) => getSession(state).user;
+
+const getUserName = (state: RootStates) => getUserInfo(state)?.username;
+const getUserFullName = (state: RootStates) => getUserInfo(state)?.fullname;
+
 const isOnLoginProcessSelector = createSelector(
   getLoginStatus,
   loginStatus => loginStatus === ACTION_STATES.LOADING,
@@ -34,6 +39,8 @@ const SessionSelector = {
   getRegisterStatus,
   isOnLoginProcessSelector,
   isOnRegisterProcessSelector,
+  getUserName,
+  getUserFullName,
 };
 
 export default SessionSelector;

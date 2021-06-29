@@ -93,6 +93,10 @@ const setHeaderToken = (newToken: string, from: string) => {
     });
 
   Axios.defaults.headers.Authorization = bearerToken;
+  console.log(
+    Axios.defaults.headers.Authorization,
+    'Axios.defaults.headers.Authorization',
+  );
 };
 
 const clearHeaderToken = () => {
@@ -142,13 +146,27 @@ const getErrorMessagesFromServer = (
   return getUnhandledErrorMessage(error);
 };
 
+const handleMessageErrorFromServer = (errorMess: string) => {
+  const error: {
+    [key: string]: string;
+  } = {
+    EMAIL_ALREADY_EXISTS: 'Email already exists',
+    PASSWORD_INCORRECT: 'Password incorrect',
+    INVALID_CREDENTIALS: 'This account does not exist',
+  };
+  if (errorMess in error) {
+    return error[errorMess];
+  }
+  return 'Something wrong';
+};
+
 const setupResponseAxios = (handleError: () => void) => {
   const onResponseSuccess = (response: AxiosResponse) => {
-    const authorization = response?.headers?.authorization ?? '';
-    if (authorization) {
-      setHeaderToken(authorization, `onReceivedToken:${response?.config.url}`);
-      // onReceivedToken(authorization);
-    }
+    // const authorization = response?.headers?.authorization ?? '';
+    // if (authorization) {
+    //   setHeaderToken(authorization, `onReceivedToken:${response?.config.url}`);
+    //   // onReceivedToken(authorization);
+    // }
     return response;
   };
 
@@ -177,8 +195,6 @@ const setupResponseAxios = (handleError: () => void) => {
     } = error;
     const errorDataFromServer = data.message || {};
 
-    console.log(status, data, errorDataFromServer, 'datadatadata');
-
     /**
      * handle error by http error code
      */
@@ -197,6 +213,10 @@ const setupResponseAxios = (handleError: () => void) => {
 
       case HTTP_ERROR_CODES.BLACKLIST:
         // onBlacklist();
+        break;
+
+      case HTTP_ERROR_CODES.BAD_REQUEST:
+        alertMessage = handleMessageErrorFromServer(errorDataFromServer);
         break;
 
       default:

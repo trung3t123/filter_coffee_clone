@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
-import CommonFonts from 'theme/CommonFonts';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 import LinearBackground from '../LinearBackground';
 
 var styles = StyleSheet.create({
@@ -17,7 +17,9 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: CommonFonts.res17,
-    // fontFamily: 'Metropolis',
+
+    fontWeight: '500',
+    fontFamily: FontFamily.DMSans.medium,
     textAlign: 'center',
     color: '#ffffff',
     backgroundColor: 'transparent',

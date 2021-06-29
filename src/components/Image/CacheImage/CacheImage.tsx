@@ -4,11 +4,14 @@ import FastImage, { ImageStyle } from 'react-native-fast-image';
 
 import styles from './styles';
 import { doNothing } from 'constants/default-values';
+import Colors from 'utils/colors';
+
+declare type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center';
 
 type FastImageProp = {
   imageStyle: ImageStyle;
-  uri?: string;
-  resizeMode?: any;
+  uri?: string | null | undefined;
+  resizeMode?: ResizeMode;
   loadingImage?: boolean;
   source?: any;
 };
@@ -16,7 +19,7 @@ type FastImageProp = {
 const CacheImage = ({
   imageStyle,
   uri,
-  resizeMode,
+  resizeMode = 'cover',
   loadingImage,
   source,
 }: FastImageProp) => {
@@ -37,7 +40,7 @@ const CacheImage = ({
   return (
     <View>
       <FastImage
-        resizeMode={resizeMode || 'cover'}
+        resizeMode={resizeMode}
         style={imageStyle}
         source={sourceImage}
         onLoadStart={onLoadImage}
@@ -46,7 +49,7 @@ const CacheImage = ({
       {(isLoadingImage || loadingImage) && (
         <ActivityIndicator
           style={styles.positionAbsolute}
-          color="white"
+          color={Colors.white}
           size="large"
         />
       )}

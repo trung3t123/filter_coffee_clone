@@ -4,17 +4,18 @@ import CommonWidths from 'theme/CommonWidths';
 import CommonHeights from 'theme/CommonHeights';
 import Colors from 'utils/colors';
 import CacheImage from 'components/Image/CacheImage';
-import CommonFonts from 'theme/CommonFonts';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 
 type Props = {
   textItem: string;
+  imageUrl: string;
 };
-const ResearchItem = ({ textItem }: Props) => {
+const ResearchItem = ({ textItem, imageUrl }: Props) => {
   return (
     <View style={styles.container}>
       <CacheImage
         imageStyle={styles.itemImageContainer}
-        source={require('../../../assets/Bitmap.png')}
+        source={{ uri: imageUrl }}
       />
       <Text style={styles.itemText}>{textItem}</Text>
     </View>
@@ -30,6 +31,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.mainBackgroundColorComponent,
     marginBottom: CommonHeights.res10,
     borderRadius: 15,
+    marginHorizontal: CommonWidths.baseSpaceHorizontal,
   },
   itemImageContainer: {
     width: CommonHeights.res80,
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
     lineHeight: CommonFonts.res23,
     color: Colors.textInvertedWhiteColor,
     flex: 3,
+    fontFamily: FontFamily.DMSans.medium,
   },
 });
 

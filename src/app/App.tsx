@@ -9,7 +9,7 @@
  * Last modified  : 2021-05-11 15:35:15
  */
 
-import React, { useCallback, useLayoutEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -18,7 +18,7 @@ import RNBootSplash from 'react-native-bootsplash';
 import RootStack from '../routes/stacks/RootStack';
 import SetupAPI from 'api/config';
 import { useDispatch } from 'react-redux';
-import { logout } from 'data/session/actions';
+import { logout, authorize } from 'data/session/actions';
 import { ActionDispatcher } from 'data/types';
 
 const App = () => {
@@ -29,10 +29,16 @@ const App = () => {
     RNBootSplash.hide({ fade: true });
   }, []);
 
-  useLayoutEffect(() => {
-    SetupAPI.setupResponseAxios(() => {
+  const onCheckLogin = async () => {
+    await dispatch(authorize());
+
+    await SetupAPI.setupResponseAxios(() => {
       dispatch(logout());
     });
+  };
+
+  useEffect(() => {
+    onCheckLogin();
   }, []);
 
   return (

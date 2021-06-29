@@ -46,13 +46,13 @@ export const responsiveFontSize = (size: number, factor: number = 0.5) =>
 const headerTrueHeight = responsiveHeight(40);
 // const headerHeight = statusBarOffsetHeight + headerTrueHeight;
 // const safeTopPadding = safeArea.top + statusBarOffsetHeight;
-// const homeIndicatorHeight = Platform.hasNotch ? 34 : 0;
+const homeIndicatorHeight = Platform.hasNotch ? 34 : 0;
 
 const Screen = {
   // headerHeight,
   headerTrueHeight,
   height,
-  // homeIndicatorHeight,
+  homeIndicatorHeight,
   isLargeView,
   isTabletMode,
   keyBoardH: 216,

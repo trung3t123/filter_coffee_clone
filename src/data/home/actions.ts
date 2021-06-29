@@ -2,11 +2,15 @@ import * as homeReducerTypes from './action_reducer_types';
 import { AsyncAction } from 'data/types';
 import {
   // PostTypes,
-  ApiResultListData,
+  HomeActionResult,
+  HomeActionResultListData,
+  PostCommentActionResult,
 } from './types';
 import ActionErrorHandler from 'utils/error-handler/action';
 import HomeApi from 'api/home/home';
 import API_STATUS from 'constants/response-status';
+import { Alert } from 'react-native';
+import mediaPost from 'api/mediaPost/mediaPost';
 
 const onRequestListPosts = () => ({
   type: homeReducerTypes.REQUEST_LIST_POSTS,
@@ -21,11 +25,45 @@ const onRequestListPostFailed = () => ({
   type: homeReducerTypes.REQUEST_LIST_POSTS_FAILURE,
 });
 
-export const onGetListPosts = (
+export const onGetMediaPost = (
   offset: number,
   limit?: number,
-): AsyncAction<Promise<ApiResultListData>> => async dispatch => {
-  let result: ApiResultListData = {
+): AsyncAction<Promise<HomeActionResultListData>> => async dispatch => {
+  let result: HomeActionResultListData = {
+    data: [],
+    pagination: {
+      total: 0,
+    },
+    error: '',
+  };
+
+  try {
+    const data = await mediaPost.getListMediaPost({
+      offset,
+      limit,
+    });
+    result = {
+      data: data?.data?.data?.records || [],
+      pagination: {
+        total: data?.data?.data?.total,
+      },
+    };
+
+    return result;
+  } catch (error) {
+    dispatch(onRequestListPostFailed());
+    ActionErrorHandler.handleFunction(error, 'authorize', {
+      breadCrumb: true,
+    });
+    return { error: error.message || '' };
+  }
+};
+
+export const onGetListPosts = (
+  offset: number,
+  limit: number,
+): AsyncAction<Promise<HomeActionResultListData>> => async dispatch => {
+  let result: HomeActionResultListData = {
     data: [],
     pagination: {
       total: 0,
@@ -39,6 +77,104 @@ export const onGetListPosts = (
     const data = await HomeApi.getListPosts({
       offset,
       limit,
+    });
+
+    result = {
+      data: data?.data?.data?.records || [],
+      pagination: {
+        total: data?.data?.data?.total,
+      },
+    };
+
+    return result;
+  } catch (error) {
+    dispatch(onRequestListPostFailed());
+    ActionErrorHandler.handleFunction(error, 'authorize', {
+      breadCrumb: true,
+    });
+    return { error: error.message || '' };
+  }
+};
+
+export const getDetailPost = async (id: string): Promise<HomeActionResult> => {
+  let result: HomeActionResult = {
+    data: undefined,
+    success: false,
+    error: undefined,
+  };
+  try {
+    const {
+      data: { data },
+    } = await HomeApi.getDetailPost({
+      id,
+    });
+
+    result.data = data?.record;
+    result.success = true;
+
+    return result;
+  } catch (error) {
+    ActionErrorHandler.handleFunction(error, 'getDetailPost', {
+      breadCrumb: true,
+    });
+    return { error: error.message };
+  }
+};
+
+export const onPostCommentPost = async ({
+  idPost,
+  contentReply,
+}: {
+  idPost: string;
+  contentReply: string;
+}): Promise<PostCommentActionResult> => {
+  let result: PostCommentActionResult = {
+    commentResponse: undefined,
+    error: undefined,
+    success: false,
+  };
+  try {
+    const {
+      data: { data },
+    } = await HomeApi.postReplyPost({
+      text: contentReply,
+      post_id: idPost,
+    });
+
+    result.commentResponse = data?.record;
+
+    result.success = true;
+
+    return result;
+  } catch (error) {
+    ActionErrorHandler.handleFunction(error, 'getDetailPost', {
+      breadCrumb: true,
+    });
+    return { error: error.message };
+  }
+};
+
+export const onGetListCommentOfPost = async ({
+  idPost,
+  offset,
+  limit,
+}: {
+  idPost: string;
+  offset: number;
+  limit: number;
+}): Promise<HomeActionResultListData> => {
+  let result: HomeActionResultListData = {
+    data: [],
+    pagination: {
+      total: 0,
+    },
+    error: '',
+  };
+  try {
+    const data = await HomeApi.getCommentOfPost({
+      limit,
+      offset,
+      post_id: idPost,
     });
 
     if (data.status === API_STATUS.SUCCESS) {
@@ -56,10 +192,10 @@ export const onGetListPosts = (
 
     return result;
   } catch (error) {
-    dispatch(onRequestListPostFailed());
-    ActionErrorHandler.handleFunction(error, 'authorize', {
+    Alert.alert('Error', error.message);
+    ActionErrorHandler.handleFunction(error, 'onGetListCommentOfPost', {
       breadCrumb: true,
     });
-    return { error: error?.data?.response?.data?.message || '' };
+    return { error: error.message };
   }
 };

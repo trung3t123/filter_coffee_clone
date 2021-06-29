@@ -1,7 +1,8 @@
 import Colors from 'utils/colors';
 import { StyleSheet } from 'react-native';
-import CommonFonts from 'theme/CommonFonts';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 import CommonHeights from 'theme/CommonHeights';
+import CommonStyles from 'theme/CommonStyles';
 
 export default StyleSheet.create({
   container: {
@@ -28,9 +29,10 @@ export default StyleSheet.create({
   },
 
   titleText: {
+    fontFamily: FontFamily.DMSans.medium,
     fontSize: CommonFonts.res48,
     fontWeight: '600',
-    textAlign: 'left',
+    lineHeight: 48,
     color: Colors.white,
   },
 
@@ -70,6 +72,7 @@ export default StyleSheet.create({
     color: Colors.porpoise,
     fontSize: CommonFonts.res15,
     fontWeight: '400',
+    fontFamily: FontFamily.DMSans.medium,
   },
 
   viewGoLogin: {

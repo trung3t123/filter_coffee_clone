@@ -1,85 +1,71 @@
 import Header from 'components/Header';
 import GradientText from 'components/Text/LinearGradientText/LinearGradientText';
-import React, { memo, useRef } from 'react';
+import React, { memo, useRef, useEffect, useState } from 'react';
 import {
   Animated,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import ROUTES from 'routes/names';
-import CommonFonts from 'theme/CommonFonts';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
 import Colors from 'utils/colors';
 import Screen from 'utils/screen';
 import ResearchItem from './ResearchItem';
 import ScrollingCarouselItem from './ScrollingCarousel/ScrollingCarouselItem';
+import { useDispatch } from 'react-redux';
+import { onGetMediaPost } from 'data/home/actions';
+import { ActionDispatcher } from 'data/types';
+import { itemType } from './type';
+import InfinityList from 'components/List/InfinityList';
+import ROUTES from 'routes/names';
+import { useNavigation } from '@react-navigation/native';
 
 type PropTypes = {
   navigation: any;
 };
 
-const mockData = [
-  { id: '1', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '2', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '3', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '4', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '5', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '6', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-  { id: '7', url: '../../../assets/Bitmap.png', tittle: 'California Boi ' },
-];
-
-const researchData = [
-  {
-    id: '1',
-    url: '../../../assets/Bitmap.png',
-    tittle: 'Plant based milk company Oatly just IPO’ed at $10 billion',
-  },
-  {
-    id: '2',
-    url: '../../../assets/Bitmap.png',
-    tittle: '$150 billion media merger you should know about ✌️',
-  },
-  {
-    id: '3',
-    url: '../../../assets/Bitmap.png',
-    tittle: 'Adani gobbles SB Energy',
-  },
-  {
-    id: '4',
-    url: '../../../assets/Bitmap.png',
-    tittle: '$150 billion media merger you should know about ✌️',
-  },
-  {
-    id: '5',
-    url: '../../../assets/Bitmap.png',
-    tittle: 'Plant based milk company Oatly just IPO’ed at $10 billion',
-  },
-  {
-    id: '6',
-    url: '../../../assets/Bitmap.png',
-    tittle: 'Adani gobbles SB Energy',
-  },
-];
-
 const ITEM_SIZE = CommonWidths.p100;
 
-const MediaScreen: React.FC<PropTypes> = ({ navigation }) => {
+const MediaScreen: React.FC<PropTypes> = () => {
+  const navigation = useNavigation();
+  const dispatch: ActionDispatcher = useDispatch();
+  const [mediaList, setMediaList] = useState([]);
+
+  const fetchData = async () => {
+    const mediaPost = await dispatch(onGetMediaPost(0, 10));
+    setMediaList(mediaPost.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const onFetchListPosts = async (offset: number, limit: number) => {
+    const response = await dispatch(onGetMediaPost(offset, limit));
+    return response;
+  };
+
   const scrollX = useRef(new Animated.Value(0)).current;
 
-  function renderResearchList() {
-    return researchData.map((item, index) => (
-      <TouchableOpacity
-        key={item.id}
-        // onPress={() => navigation.navigate(ROUTES.BLOG_DETAIL)}
-      >
-        <ResearchItem textItem={item.tittle} key={item.id} />
-      </TouchableOpacity>
-    ));
-  }
+  const renderResearchList = ({ item }) => (
+    <TouchableOpacity
+      key={item.content.id}
+      onPress={() =>
+        navigation.navigate(ROUTES.POST_DETAIL, {
+          idPost: item.content.id,
+          item: item,
+        })
+      }>
+      <ResearchItem
+        imageUrl={item.content.image_urls[0]}
+        textItem={item.content.content}
+        key={item.content.id}
+      />
+    </TouchableOpacity>
+  );
 
   const renderItem = ({ item, index }) => {
     const inputRange = [
@@ -100,55 +86,78 @@ const MediaScreen: React.FC<PropTypes> = ({ navigation }) => {
       outputRange: [1200, 800, 1200],
     });
     return (
-      <Animated.View
-        style={{
-          transform: [{ scale }, { translateX: position }, { perspective }],
-        }}>
-        <ScrollingCarouselItem
-          key={index}
-          imageUrl={item.url}
-          itemTitle={item.tittle}
-        />
-      </Animated.View>
+      <TouchableOpacity
+        key={item.content.id}
+        onPress={() =>
+          navigation.navigate(ROUTES.POST_DETAIL, {
+            idPost: item.content.id,
+            item: item,
+          })
+        }>
+        <Animated.View
+          style={{
+            transform: [{ scale }, { translateX: position }, { perspective }],
+          }}>
+          <ScrollingCarouselItem
+            key={item.id}
+            imageUrl={item.content.image_urls[0]}
+            itemTitle={item.content.content}
+          />
+        </Animated.View>
+      </TouchableOpacity>
     );
   };
 
   const getKey = (item: { id: any }) => item.id;
 
+  const getKeyVerticalList = (item: { id: any }) => item.id;
+
+  const ListHeaderComponent = () => (
+    <View style={styles.flatlistContainer}>
+      <View>
+        <GradientText style={styles.subtitleText}>View all</GradientText>
+      </View>
+      <Animated.FlatList
+        contentContainerStyle={styles.alignItemCenter}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          {
+            useNativeDriver: true,
+          },
+        )}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        data={mediaList}
+        renderItem={renderItem}
+        keyExtractor={getKey}
+      />
+      <View style={styles.flexRowBetween}>
+        <Text style={styles.itemTitle}>Coffee research</Text>
+        <GradientText style={styles.subtitleText}>View all</GradientText>
+      </View>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
-      <Header isGoBack>
+      <Header isTransparent isGoBack>
         <View style={styles.flexRow}>
           <Text style={styles.textTitleActive}>Insights </Text>
           <Text style={styles.textTitle}> - </Text>
           <Text style={styles.textTitle}>Scoops </Text>
         </View>
+        <View style={{ width: CommonFonts.res23 }} />
       </Header>
-      <ScrollView style={styles.content}>
-        <View style={styles.flatlistContainer}>
-          <GradientText style={styles.subtitleText}>View all</GradientText>
-          <Animated.FlatList
-            contentContainerStyle={styles.alignItemCenter}
-            onScroll={Animated.event(
-              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-              {
-                useNativeDriver: true,
-              },
-            )}
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            data={mockData}
-            renderItem={renderItem}
-            keyExtractor={getKey}
-          />
-        </View>
-        <View style={styles.flexRowBetween}>
-          <Text style={styles.itemTitle}>Coffee research</Text>
-          <GradientText style={styles.subtitleText}>View all</GradientText>
-        </View>
-        <View style={styles.researchListContainer}>{renderResearchList()}</View>
-      </ScrollView>
+      <InfinityList
+        ListHeaderComponent={ListHeaderComponent}
+        renderItem={renderResearchList}
+        onEndReachedThreshold={0.2}
+        fetchData={onFetchListPosts}
+        style={styles.flatlistContainer}
+        keyExtractor={getKeyVerticalList}
+        emptyMessage="Not Found"
+      />
     </View>
   );
 };
@@ -166,9 +175,10 @@ const styles = StyleSheet.create({
   itemTitle: {
     fontWeight: '500',
     fontSize: CommonFonts.res20,
-    paddingHorizontal: CommonWidths.res23,
+    paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     lineHeight: CommonFonts.res28,
     color: Colors.textInvertedWhiteColor,
+    fontFamily: FontFamily.DMSans.medium,
   },
 
   flexRowBetween: {
@@ -179,19 +189,21 @@ const styles = StyleSheet.create({
 
   flexRow: {
     flexDirection: 'row',
+    paddingTop: CommonHeights.res10,
   },
-  alignItemCenter: { alignItems: 'center' },
+  alignItemCenter: { alignItems: 'center', marginBottom: CommonHeights.res65 },
 
   subtitleText: {
     textAlign: 'right',
     fontSize: CommonFonts.res15,
-    paddingHorizontal: CommonWidths.res23,
+    paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     fontWeight: '500',
     paddingBottom: CommonHeights.res20,
+    fontFamily: FontFamily.DMSans.medium,
   },
 
   researchListContainer: {
-    paddingHorizontal: CommonWidths.res23,
+    paddingHorizontal: CommonWidths.baseSpaceHorizontal,
     marginBottom: CommonHeights.p10,
   },
 
@@ -202,19 +214,21 @@ const styles = StyleSheet.create({
 
   textTitleActive: {
     color: Colors.textInvertedWhiteColor,
-    fontSize: CommonFonts.res22,
+    fontSize: CommonFonts.res20,
     fontWeight: '400',
+    fontFamily: FontFamily.DMSans.medium,
   },
 
   textTitle: {
     color: Colors.textInvertedWhiteColor,
     opacity: 0.5,
-    fontSize: CommonFonts.res22,
+    fontSize: CommonFonts.res20,
     fontWeight: '400',
+    fontFamily: FontFamily.DMSans.medium,
   },
 
   flatlistContainer: {
-    paddingBottom: CommonHeights.res60,
+    // paddingBottom: CommonHeights.res60,
   },
 
   imageBackground: {

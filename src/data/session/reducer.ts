@@ -14,6 +14,15 @@ const authInitialState: SessionStates = {
     created_at: '',
     expires_in: '',
   },
+  user: {
+    id: '',
+    username: null,
+    fullname: null,
+    image_url: null,
+    email: '',
+    verified: false,
+    createdAt: '',
+  },
   status: SESSION_STATUS.UNAUTHORIZED,
   register_status: ACTION_STATES.IDLE,
   login_status: ACTION_STATES.IDLE,
@@ -31,6 +40,7 @@ const authReducer = (
 
       case types.REGISTER_SUCCESS:
         draft.register_status = ACTION_STATES.COMPLETED;
+        draft.user = payload.userInfo;
         break;
 
       case types.REGISTER_FAILURE:
@@ -43,6 +53,7 @@ const authReducer = (
 
       case types.LOGIN_SUCCESS:
         draft.login_status = ACTION_STATES.COMPLETED;
+        draft.user = payload.userInfo;
         break;
 
       case types.LOGIN_FAILURE:
@@ -58,6 +69,10 @@ const authReducer = (
 
       case types.SET_SESSION_STATUS:
         draft.status = payload.status;
+        break;
+
+      case types.UPDATE_USER:
+        draft.user = payload.userInfo;
         break;
 
       case types.CLEAR:

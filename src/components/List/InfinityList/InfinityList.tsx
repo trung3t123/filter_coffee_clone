@@ -9,18 +9,22 @@ import {
 import config from './config';
 import NotFound from '../NotFound';
 import CommonStyles from 'theme/CommonStyles';
-import { ApiResultListData } from 'data/home/types';
+import { HomeActionResultListData } from 'data/home/types';
 import Colors from 'utils/colors';
 import CommonHeights from 'theme/CommonHeights';
 
 const { FETCH_STATUS, PAGE_LIMIT } = config;
 
 interface PropTypes extends FlatListProps<never> {
-  onEndReachedThreshold: number;
-  fetchData: (offset: number, limit?: number) => Promise<ApiResultListData>;
+  onEndReachedThreshold?: number;
+  fetchData: (
+    offset: number,
+    limit: number,
+  ) => Promise<HomeActionResultListData>;
   emptyMessage?: string;
   handleData: (data: never[]) => never[];
   data: never[];
+  getRefInfinityList?: (ref: any) => void;
 }
 
 class InfinityList extends React.Component<PropTypes> {
@@ -34,6 +38,8 @@ class InfinityList extends React.Component<PropTypes> {
   mounted = false;
 
   componentDidMount() {
+    const { getRefInfinityList } = this.props;
+    getRefInfinityList && getRefInfinityList(this);
     this.mounted = true;
     this.fetchNew();
   }
@@ -41,6 +47,13 @@ class InfinityList extends React.Component<PropTypes> {
   componentWillUnmount() {
     this.mounted = false;
   }
+
+  addNewData = (newData: never) => {
+    this.fetchedData = [newData, ...this.fetchedData];
+    this.setState({
+      data: this.fetchedData,
+    });
+  };
 
   fetchNew = async () => {
     const { fetchData, handleData } = this.props;
@@ -69,7 +82,7 @@ class InfinityList extends React.Component<PropTypes> {
     }
     if (error) {
       this.setState({
-        fetchStatus: FETCH_STATUS.ERROR,
+        fetchStatus: FETCH_STATUS.IDLE,
       });
     }
   };
@@ -152,7 +165,6 @@ class InfinityList extends React.Component<PropTypes> {
   render() {
     const { ...rest } = this.props;
     const { data, fetchStatus } = this.state;
-
     return (
       <FlatList
         {...rest}
@@ -176,6 +188,7 @@ class InfinityList extends React.Component<PropTypes> {
     onEndReachedThreshold: 0.2,
     emptyMessage: '',
     handleData: (data: never[]) => data,
+    getRefInfinityList: (): void => {},
     ListEmptyComponent: undefined,
     data: [],
   };

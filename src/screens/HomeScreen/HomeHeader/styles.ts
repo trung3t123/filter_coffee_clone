@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import CommonHeights from 'theme/CommonHeights';
-import CommonFonts from 'theme/CommonFonts';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 import Colors from 'utils/colors';
 
 const styles = StyleSheet.create({
@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
   title: {
     color: Colors.white,
     fontSize: CommonFonts.res28,
+    lineHeight: CommonFonts.res30,
+    fontFamily: FontFamily.DMSans.medium,
+    fontWeight: '700',
   },
 });
 

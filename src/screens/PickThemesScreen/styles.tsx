@@ -1,8 +1,8 @@
 import Colors from 'utils/colors';
 import { StyleSheet } from 'react-native';
-import CommonFonts from 'theme/CommonFonts';
 import CommonHeights from 'theme/CommonHeights';
 import CommonWidths from 'theme/CommonWidths';
+import CommonFonts, { FontFamily } from 'theme/CommonFonts';
 
 export default StyleSheet.create({
   container: {
@@ -26,9 +26,10 @@ export default StyleSheet.create({
   },
 
   textTitle: {
+    fontFamily: FontFamily.DMSans.bold,
     fontSize: CommonFonts.res48,
     fontWeight: '600',
-    textAlign: 'left',
+    lineHeight: 48,
     color: Colors.white,
   },
 

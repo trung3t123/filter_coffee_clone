@@ -1,13 +1,16 @@
 import { Platform as NativePlatform } from 'react-native';
-// import ReactNativeDeviceInfo from 'react-native-device-info';
+import ReactNativeDeviceInfo from 'react-native-device-info';
 
-// const hasNotch = ReactNativeDeviceInfo.hasNotch();
+const hasNotch = ReactNativeDeviceInfo.hasNotch();
 
 const OS = NativePlatform.OS;
 const isAndroid = OS === 'android';
 const isIos = OS === 'ios';
 const iosVersion = isIos ? NativePlatform.Version : 0;
-const KeyboardEvent = {
+const KeyboardEvent: {
+  Show: 'keyboardWillShow' | 'keyboardDidShow';
+  Hide: 'keyboardWillHide' | 'keyboardDidHide';
+} = {
   Show: isIos ? 'keyboardWillShow' : 'keyboardDidShow',
   Hide: isIos ? 'keyboardWillHide' : 'keyboardDidHide',
 };
@@ -29,7 +32,7 @@ const Platform = {
   KeyboardEvent,
   OS: OS,
   // isSupportTranslucentBar,
-  // hasNotch,
+  hasNotch,
   androidAPILevel,
 };
 
